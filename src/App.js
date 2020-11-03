@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import AddWord from './components/AddWord/AddWord';
+import Header from './components/Header/Header';
 
-function App() {
+import './App.css';
+import './icofont.min.css';
+import Modal from './components/Modal/Modal';
+
+const App = () => {
+
+  const [wordFormModalVisible, setWordFormModalVisible] = useState(false);
+
+  const showAddWordModal = () => setWordFormModalVisible(true);
+  const hideAddWordModal = () => setWordFormModalVisible(false);
+  
+  const startLearningMode = () => {
+    alert("Coming soon");
+    // confirmation
+    // start learning mode
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      
+      <div className='word-list'>
+        <button onClick={showAddWordModal}>Ajouter un mot</button>
+        <div className='words'>Votre liste ne contient aucun mot.</div>
+      </div>
+      
+      <Modal visible={wordFormModalVisible} handleClose={hideAddWordModal}>
+        <AddWord />
+      </Modal>
+
+      <button id='start-learning-mode' onClick={startLearningMode}>
+        <i className='icofont-dumbbell'></i>
+      </button>
+    </>
   );
 }
 

@@ -1,13 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
+import './index.css';
+
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import App from './App';
+import Welcome from './components/Welcome/Welcome';
+import NotFound from './components/NotFound/NotFound';
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Switch>
+        <Route exact path='/'>
+          <Welcome />
+        </Route>
+        <Route path='/app'>
+          <App />
+        </Route>
+        <Route><NotFound /></Route>
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
