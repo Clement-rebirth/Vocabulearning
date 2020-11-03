@@ -10,7 +10,7 @@ const Header = () => {
         <i className="icofont-ui-user"></i>
       </div>
     </header>
-  )
+  );
 }
 
 export default Header;
