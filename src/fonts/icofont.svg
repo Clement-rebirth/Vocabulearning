@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<defs>
+<font id="icofont" horiz-adv-x="1000" >
+<font-face font-family="IcoFont" font-weight="400" font-style="Regular" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="ui-user" horiz-adv-x="1000" unicode="&#xec8e;" d="M859 47c-230 139-469 144-700 11-82-47-134-109-159-176h1000c-22 64-69 122-141 165z m-359 771c163 0 294-130 295-292 1-162-131-295-293-297-164-1-295 131-296 296 0 163 130 293 294 293z" />
+<glyph glyph-name="dumbbell" horiz-adv-x="1000" unicode="&#xeb33;" d="M55 524c-31 0-55-26-55-59v-244c0-33 24-59 55-59s54 26 54 59v244c0 33-24 59-54 59z m756 50c-30 0-54-26-54-59v-127h-513v113c0 32-25 59-55 59-30 0-55-27-55-59v-316c0-33 25-59 55-59 30 0 55 26 55 59v141h513v-127c0-33 24-59 54-59 30 0 55 26 55 59v316c0 33-25 59-55 59z m134-36c-30 0-54-26-54-59v-244c0-33 24-59 54-59 31 0 55 26 55 59v244c0 33-24 59-55 59z" />
+</font>
+</defs>
+</svg>
