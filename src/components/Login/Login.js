@@ -43,7 +43,7 @@ const Login = () => {
 
       <button>Se connecter avec google</button>
     </>
-  )
+  );
 }
 
 export default Login;

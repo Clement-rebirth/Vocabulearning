@@ -17,7 +17,7 @@ const AddWord = () => {
         <button type='submit'>Ajouter</button>
       </form>
     </>
-  )
+  );
 }
 
 export default AddWord;

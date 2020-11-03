@@ -27,7 +27,7 @@ const Welcome = () => {
       { loginIsShow ? <Login /> : null }
       { registerIsShow ? <Register /> : null }
     </>
-  )
+  );
 }
 
 export default Welcome;

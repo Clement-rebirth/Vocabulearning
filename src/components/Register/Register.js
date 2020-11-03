@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import emailIsValid from '../../utils/emailIsValid';
 import firebaseApp from '../../firebase';
 import 'firebase/auth';
+import GoogleAuth from '../GoogleAuth/GoogleAuth';
 
 const Register = () => {
 
@@ -61,8 +62,8 @@ const Register = () => {
     firebaseApp
       .auth()
       .createUserWithEmailAndPassword(formData.email, formData.password)
-      .then(userData => {
-        console.log(userData);
+      .then(user => {
+        console.log(user);
         clearForm();
       }).catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -108,9 +109,9 @@ const Register = () => {
         <button>S'inscrire</button>
       </form>
 
-      <button>S'inscrire avec google</button>
+      <GoogleAuth />
     </>
-  )
+  );
 }
 
 export default Register;
