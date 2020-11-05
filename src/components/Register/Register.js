@@ -80,12 +80,12 @@ const Register = () => {
     <>
       <h2>Inscription</h2>
       <form onSubmit={handleRegister}>
-        <div className='form-group'>
+        <div>
           <label htmlFor='register-email'>Email :</label>
           <input 
             id='register-email'
             className={ registerFormData.emailError ? 'invalid' : null }
-            placeholder='email@example.com'
+            placeholder='user@example.com'
             required
             value={registerFormData.email}
             name='email'
@@ -98,7 +98,7 @@ const Register = () => {
           <input 
             id='register-password'
             className={ registerFormData.passwordError ? 'invalid' : null }
-            placeholder='mot de passe'
+            placeholder='Mot de passe'
             required
             value={registerFormData.password}
             name='password'
@@ -109,7 +109,7 @@ const Register = () => {
         <button>S'inscrire</button>
       </form>
 
-      <GoogleAuth />
+      <GoogleAuth text="S'inscrire avec Google" />
     </>
   );
 }

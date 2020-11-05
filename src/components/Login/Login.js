@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import firebaseApp from '../../firebase';
+import GoogleAuth from '../GoogleAuth/GoogleAuth';
 
 const Login = () => {
 
@@ -14,34 +16,46 @@ const Login = () => {
 
   const handleLogin = e => {
     e.preventDefault();
+    const { email, password } = loginFormData;
+
+    firebaseApp.auth().signInWithEmailAndPassword(email, password)
+      .catch(error => {
+        console.log('login errors :');
+        console.log(error);
+        alert('Email ou mot de passe incorrect');
+      });
   }
 
   return (
     <>
       <h2>Connexion</h2>
       <form onSubmit={handleLogin}>
-        <label>
-          Email :
+        <div>
+          <label htmlFor='login-email'>Email :</label>
           <input
+            id='login-email'
+            placeholder='user@example.com'
             required
             value={loginFormData.email}
             name='email'
             type='email'
             onChange={handleChange} />
-        </label>
-        <label>
-          Mot de passe :
+        </div>
+        <div>
+          <label htmlFor='login-password'>Mot de passe :</label>
           <input
+            id='login-password'
+            placeholder='Mot de passe'
             required
             value={loginFormData.password}
             name='password'
             type='password'
             onChange={handleChange} />
-        </label>
-        <button>S'inscrire</button>
+        </div>
+        <button>Se connecter</button>
       </form>
 
-      <button>Se connecter avec google</button>
+      <GoogleAuth text='Se connecter avec Google' />
     </>
   );
 }

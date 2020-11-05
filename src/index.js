@@ -10,20 +10,23 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from './App';
 import Welcome from './components/Welcome/Welcome';
 import NotFound from './components/NotFound/NotFound';
+import UserProvider from './providers/UserProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Switch>
-        <Route exact path='/'>
-          <Welcome />
-        </Route>
-        <Route path='/app'>
-          <App />
-        </Route>
-        <Route><NotFound /></Route>
-      </Switch>
-    </Router>
+    <UserProvider>
+      <Router>
+        <Switch>
+          <Route exact path='/'>
+            <Welcome />
+          </Route>
+          <Route path='/app'>
+            <App />
+          </Route>
+          <Route><NotFound /></Route>
+        </Switch>
+      </Router>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
