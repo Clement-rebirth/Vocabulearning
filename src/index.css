@@ -1,17 +1,100 @@
-body {
-  margin: 0;
-  background-color: #121212;
-  color: rgba(255, 255, 255, 0.87);
-  font-family: 'Nunito', sans-serif;
+/* CSS VARIABLES */
+
+:root {
+  --main-color: #ffc11e;
+
+  --text-size: 1.3rem;
+  --h1-size: 3.05rem;
+  --h2-size: 2.44rem;
+  --h3-size: 1.95rem;
+
+  --text-weight: 400;
+  --bold-text-weight: 700;
+  --title-weight: 700;
+
+  --text-font: 'Nunito', sans-serif;
+  --title-font: 'Nunito', sans-serif;
 }
 
-/*
+body.dark {
+  --main-bg-color: #121212;
+  --main-text-color: rgba(255, 255, 255, 0.87);
+  --dark-text-color: #121212;
+  --light-text-color: #fff;
+  --invalid-color: #c0392b;
+}
 
-1) #202124 & #313235
-2) #121212 & #1e1e1e/#1f1f1f (material)
-3) #212529 & #2d3136(lightest)/#2a2e32/#272b2f(darkest)
+body.light {
+  --main-bg-color: #fff;
+  --main-text-color: #1d1d1d;
+  --dark-text-color: #121212;
+  --light-text-color: #fff;
+  --invalid-color: #c0392b;
+}
 
-*/
+/* END CSS VARIABLES */
+
+/* Global styles */
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+}
+
+p, a, label, input, button, div {
+  font-family: var(--text-font);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--title-weight);
+  color: var(--main-text-color);
+  font-family: var(--title-font);
+}
+
+h1 {
+  font-size: var(--h1-size);
+}
+
+h2 {
+  font-size: var(--h2-size);
+}
+
+h3 {
+  font-size: var(--h3-size);
+}
+
+p {
+  font-size: var(--text-size);
+  font-weight: var(--text-weight);
+  color: var(--main-text-color);
+}
+
+.dark-text {
+  color: var(--dark-text-color);
+}
+
+.invalid-text {
+  color: var(--invalid-color);
+}
+
+b, strong {
+  font-weight: var(--bold-text-weight);
+}
+
+.btn {
+  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+}
+
+/* END global styles */
+
+/* form */
 
 .form-inline {
   display: flex;
@@ -26,9 +109,11 @@ form label {
 }
 
 .invalid-message {
-  color: #c0392b;
+  color: var(--invalid-color);
 }
 
 input.invalid {
-  border: 1px solid #c0392b;
+  border: 1px solid var(--invalid-color);
 }
+
+/* END form */
