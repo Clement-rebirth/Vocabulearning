@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import firebaseApp from '../../firebase';
 import GoogleAuth from '../GoogleAuth/GoogleAuth';
+import VerticalBar from '../VerticalBar/VerticalBar';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 
@@ -27,7 +29,8 @@ const Login = () => {
   }
 
   return (
-    <>
+    <div className='login'>
+      <Link to='/' className='back-home'>Retour (icon)</Link>
       <h2>Connexion</h2>
       <form onSubmit={handleLogin}>
         <div>
@@ -55,8 +58,12 @@ const Login = () => {
         <button>Se connecter</button>
       </form>
 
+      <VerticalBar text='OU' />
+
       <GoogleAuth text='Se connecter avec Google' />
-    </>
+
+      <p>Pas encore de compte ? <Link to='/register' id='register-link'>Inscrivez-vous gratuitement</Link></p>
+    </div>
   );
 }
 

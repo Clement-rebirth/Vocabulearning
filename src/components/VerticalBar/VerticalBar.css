@@ -1,0 +1,17 @@
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+.bar .left,
+.bar .right {
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.466);
+  flex-grow: 1;
+}
+
+.bar .text {
+  padding: 0 8px;
+}

@@ -8,7 +8,7 @@ import './index.css';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from './App';
-import Welcome from './components/Welcome/Welcome';
+import Home from './components/Home/Home';
 import NotFound from './components/NotFound/NotFound';
 import UserProvider from './providers/UserProvider';
 
@@ -17,8 +17,8 @@ ReactDOM.render(
     <UserProvider>
       <Router>
         <Switch>
-          <Route exact path='/'>
-            <Welcome />
+          <Route exact path={['/', '/login', '/register']}>
+            <Home />
           </Route>
           <Route path='/app'>
             <App />

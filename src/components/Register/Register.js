@@ -3,6 +3,8 @@ import emailIsValid from '../../utils/emailIsValid';
 import firebaseApp from '../../firebase';
 import 'firebase/auth';
 import GoogleAuth from '../GoogleAuth/GoogleAuth';
+import VerticalBar from '../VerticalBar/VerticalBar';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
 
@@ -37,12 +39,6 @@ const Register = () => {
 
     return errors;
   }
-    
-  const clearForm = () => {
-    let formData = { ...registerFormData };
-    for (let data in formData) formData[data] = '';
-    setRegisterFormData(formData);
-  }
 
   const handleRegister = e => {
     e.preventDefault();
@@ -64,7 +60,6 @@ const Register = () => {
       .createUserWithEmailAndPassword(formData.email, formData.password)
       .then(user => {
         console.log(user);
-        clearForm();
       }).catch(error => {
         if (error.code === 'auth/email-already-in-use') {
           setRegisterFormData({ ...registerFormData, emailError: 'Cet email est déjà utilisé' });
@@ -77,7 +72,8 @@ const Register = () => {
   }
 
   return (
-    <>
+    <div className='register'>
+      <Link to='/' className='back-home'>Retour (icon)</Link>
       <h2>Inscription</h2>
       <form onSubmit={handleRegister}>
         <div>
@@ -109,8 +105,12 @@ const Register = () => {
         <button>S'inscrire</button>
       </form>
 
+      <VerticalBar text='OU' />
+
       <GoogleAuth text="S'inscrire avec Google" />
-    </>
+
+      <p>Déjà inscrit ? <Link to='/login' id='login-link'>Connectez-vous</Link></p>
+    </div>
   );
 }
 
