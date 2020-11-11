@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import AddWord from './components/AddWord/AddWord';
 import Header from './components/Header/Header';
+import Modal from './components/Modal/Modal';
 
 import './App.css';
-import './icofont.min.css';
-import Modal from './components/Modal/Modal';
+import './icons-css/icofont.min.css';
 
 const App = () => {
 

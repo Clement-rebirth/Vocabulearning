@@ -10,14 +10,16 @@ const Modal = ({visible, handleClose, children}) => {
     // to close only when we click on the overlay, not the modal itself
     if (e.currentTarget === e.target) handleClose();
   }
-
+  
   let modal = null;
 
   if (visible) {
     modal = (
       <div onClick={e => {handleCloseModal(e)}} className='modal-overlay'>
         <div className='modal'>
-          <button onClick={handleClose} className="close-modal">X</button>
+          <button onClick={handleClose} className='close-modal'>
+            <i className='icon close-icon'></i>
+          </button>
           { children }
         </div>
       </div>

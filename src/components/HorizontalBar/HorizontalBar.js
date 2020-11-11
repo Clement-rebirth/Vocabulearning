@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './VerticalBar.css';
+import './HorizontalBar.css';
 
-const VerticalBar = ({ text }) => {
+const HorizontalBar = ({ text }) => {
   return (
     <div className='bar'>
       <div className='left'></div>
@@ -12,4 +12,4 @@ const VerticalBar = ({ text }) => {
   );
 };
 
-export default VerticalBar;
+export default HorizontalBar;

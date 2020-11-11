@@ -1,8 +1,5 @@
 .home {
   height: 100%;
-}
-
-body {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%), url('../../img/big-ben-1024.jpg') center/cover no-repeat;
 }
 
@@ -73,23 +70,110 @@ body {
 }
 
 .get-started .login a {
+  font-size: 1rem;
   color: var(--light-text-color);
 }
 
 @media all and (min-width: 425px) {
-  body {
+  .home {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%), url('../../img/big-ben-1440.jpg') center/cover no-repeat;
   }
 }
 
 @media all and (min-width: 768px) {
-  body {
+  .home {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%), url('../../img/big-ben-1920.jpg') center/cover no-repeat;
   }
 }
 
 @media all and (min-width: 1024px) {
-  body {
+  .home {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%), url('../../img/big-ben-2560.jpg') center/cover no-repeat;
   }
+}
+
+/* Register & Login */
+
+.register .link,
+.login .link {
+  font-size: 1rem;
+  text-align: center;
+}
+
+#register-link,
+#login-link {
+  color: var(--main-text-color);
+}
+
+.register form input,
+.login form input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background-color: var(--second-bg-color);
+  color: var(--main-text-color);
+}
+
+.register form > button,
+.login form > button {
+  border-radius: 8px;
+  padding: 8px 6px;
+  background-color: var(--main-color-dark, --main-color);
+}
+
+.login form > div:nth-child(1) {
+  margin-bottom: 15px;
+}
+
+.login form > div:nth-child(2) {
+  margin-bottom: 18px;
+}
+
+.register form > div {
+  margin-bottom: 8px;
+}
+
+.register ::placeholder,
+.login ::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.show-password {
+  position: relative;
+}
+
+.show-password .show-password-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  padding: 8px;
+}
+
+.show-password .icon {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+div.show-password input {
+  padding-right: 50px;
+}
+
+.google-sign-in {
+  border: none;
+  border-radius: 8px;
+  padding: 9px 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.google-sign-in .google-g-icon {
+  font-size: 23px;
+  margin-right: 6px;
 }
