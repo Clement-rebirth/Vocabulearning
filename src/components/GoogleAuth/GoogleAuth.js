@@ -28,7 +28,14 @@ const GoogleAuth = ({ text }) => {
       });
   }
 
-  return <button onClick={googleAuthenticate}>{ text }</button>;
+  return (
+    <button className='google-sign-in' onClick={googleAuthenticate}>
+      <span className='icon google-g-icon'>
+        <span className='path1' /><span className='path2' /><span className='path3' /><span className='path4' />
+      </span>
+      { text }
+    </button>
+  );
 }
 
 export default GoogleAuth;

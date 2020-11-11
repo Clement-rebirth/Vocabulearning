@@ -2,33 +2,52 @@
 
 :root {
   --main-color: #ffc11e;
+  --main-dark-color: #212529;
 
-  --text-size: 1.3rem;
+  --text-size: 1.1rem;
   --h1-size: 3.05rem;
   --h2-size: 2.44rem;
   --h3-size: 1.95rem;
 
   --text-weight: 400;
   --bold-text-weight: 700;
-  --title-weight: 700;
+  --big-title-weight: 700;
+  --title-weight: 600;
 
   --text-font: 'Nunito', sans-serif;
   --title-font: 'Nunito', sans-serif;
 }
 
 body.dark {
-  --main-bg-color: #121212;
-  --main-text-color: rgba(255, 255, 255, 0.87);
-  --dark-text-color: #121212;
+  --main-color-dark: #e1ab1d;
+
+  --main-bg-color: var(--main-dark-color);
+  --second-bg-color: #2c3034;
+  --third-bg-color: #313438;
+  /* --main-bg-color: #121212;
+  --second-bg-color: #1d1d1d;
+  --third-bg-color: #212121; */
+
+  --main-text-color: rgba(255, 255, 255, 0.87); /* High-emphasis text */
+  --secondary-text-color: rgba(255, 255, 255, 0.6); /* Medium-emphasis text */
+  --tertiary-text-color: rgba(255, 255, 255, 0.38); /* Disabled text */
+  --dark-text-color: var(--main-dark-color);
   --light-text-color: #fff;
+  
   --invalid-color: #c0392b;
 }
 
 body.light {
   --main-bg-color: #fff;
-  --main-text-color: #1d1d1d;
-  --dark-text-color: #121212;
+  --second-bg-color: #fff;
+  --third-bg-color: #fff;
+
+  --main-text-color: var(--main-dark-color);
+  --secondary-text-color: var(--main-dark-color);
+  --tertiary-text-color: var(--main-dark-color);
+  --dark-text-color: var(--main-dark-color);
   --light-text-color: #fff;
+
   --invalid-color: #c0392b;
 }
 
@@ -46,18 +65,21 @@ body {
   color: var(--main-text-color);
 }
 
-p, a, label, input, button, div {
+p, a, label, input, button, div, small {
   font-family: var(--text-font);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1 {
+  color: var(--main-text-color);
+  font-family: var(--title-font);
+  font-weight: var(--big-title-weight);
+  font-size: var(--h1-size);
+}
+
+h2, h3, h4, h5, h6 {
   font-weight: var(--title-weight);
   color: var(--main-text-color);
   font-family: var(--title-font);
-}
-
-h1 {
-  font-size: var(--h1-size);
 }
 
 h2 {
@@ -72,6 +94,11 @@ p {
   font-size: var(--text-size);
   font-weight: var(--text-weight);
   color: var(--main-text-color);
+}
+
+button {
+  font-size: 1.1rem;
+  cursor: pointer;
 }
 
 .dark-text {
@@ -90,6 +117,7 @@ b, strong {
   text-decoration: none;
   border: none;
   border-radius: 50px;
+  font-size: 1.15rem;
 }
 
 /* END global styles */
@@ -102,18 +130,50 @@ b, strong {
 
 .form-inline label {
   display: inline-block;
+  margin-bottom: 0;
+}
+
+input, button, textarea {
+  box-sizing: border-box;
+  outline: none;
+  border: 1px solid transparent;
+}
+
+form input:focus,
+form input.invalid:focus,
+textarea:focus {
+  border: 1px solid var(--main-color-dark, --main-color);
+}
+
+button:focus {
+  border: 1px solid var(--main-bg-color);
+}
+
+form input.invalid {
+  border: 1px solid var(--invalid-color);
+}
+
+form input {
+  font-size: 1rem;
+  width: 100%;
 }
 
 form label {
+  font-size: 1rem;
   display: block;
+  margin-bottom: 3px;
 }
 
-.invalid-message {
+form > button {
+  width: 100%;
+}
+
+form .invalid-message {
   color: var(--invalid-color);
-}
-
-input.invalid {
-  border: 1px solid var(--invalid-color);
+  display: block;
+  margin-top: 2px;
+  line-height: 1.2;
+  min-height: 1em;
 }
 
 /* END form */

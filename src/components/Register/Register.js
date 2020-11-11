@@ -3,7 +3,7 @@ import emailIsValid from '../../utils/emailIsValid';
 import firebaseApp from '../../firebase';
 import 'firebase/auth';
 import GoogleAuth from '../GoogleAuth/GoogleAuth';
-import VerticalBar from '../VerticalBar/VerticalBar';
+import HorizontalBar from '../HorizontalBar/HorizontalBar';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
@@ -14,6 +14,8 @@ const Register = () => {
     emailError: null,
     passwordError: null
   });
+
+  const [showPassword, setshowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -34,7 +36,7 @@ const Register = () => {
     
     if (formData.password.length < 6) {
       errors.empty = false;
-      errors.password = 'Le mot de passe doit contenir au moins 6 caractères';
+      errors.password = '6 caractères minimum';
     }
 
     return errors;
@@ -50,8 +52,11 @@ const Register = () => {
 
     const errors = validate(formData);
 
-    setRegisterFormData({ ...registerFormData, emailError: errors.email });
-    setRegisterFormData({ ...registerFormData, passwordError: errors.password });
+    setRegisterFormData({ 
+      ...registerFormData, 
+      emailError: errors.email,
+      passwordError: errors.password
+    });
 
     if (!errors.empty) return;
 
@@ -61,23 +66,30 @@ const Register = () => {
       .then(user => {
         console.log(user);
       }).catch(error => {
+        let emailError = '';
+
         if (error.code === 'auth/email-already-in-use') {
-          setRegisterFormData({ ...registerFormData, emailError: 'Cet email est déjà utilisé' });
+            emailError = 'Cet email est déjà utilisé';
         } else if (error.code === 'auth/invalid-email') {
-          setRegisterFormData({ ...registerFormData, emailError: 'Email incorrect' });
+          emailError = 'Email incorrect';
         }
-          
+
+        setRegisterFormData({ 
+          ...registerFormData,
+          passwordError: '',
+          emailError: emailError
+        });
+
         console.log(error);
       });
   }
 
   return (
     <div className='register'>
-      <Link to='/' className='back-home'>Retour (icon)</Link>
       <h2>Inscription</h2>
       <form onSubmit={handleRegister}>
         <div>
-          <label htmlFor='register-email'>Email :</label>
+          <label htmlFor='register-email'>Email</label>
           <input 
             id='register-email'
             className={ registerFormData.emailError ? 'invalid' : null }
@@ -87,29 +99,36 @@ const Register = () => {
             name='email'
             type='email'
             onChange={handleChange} />
-          <p className='invalid-message'>{ registerFormData.emailError }</p>  
+          <small className='invalid-message'>{ registerFormData.emailError }</small>  
         </div>
         <div>
-          <label htmlFor='register-password'>Mot de passe (6 caractères minimum) :</label>
-          <input 
-            id='register-password'
-            className={ registerFormData.passwordError ? 'invalid' : null }
-            placeholder='Mot de passe'
-            required
-            value={registerFormData.password}
-            name='password'
-            type='password'
-            onChange={handleChange} />
-            <p className='invalid-message'>{ registerFormData.passwordError }</p>
+          <label htmlFor='register-password'>Mot de passe (6 caractères minimum)</label>
+          <div className="show-password">
+            <input 
+              id='register-password'
+              className={ registerFormData.passwordError ? 'invalid' : null }
+              placeholder='Mot de passe'
+              required
+              value={registerFormData.password}
+              name='password'
+              type={ showPassword ? 'text' : 'password' }
+              onChange={handleChange} />
+            <div 
+              onClick={() => setshowPassword(!showPassword)}
+              className='show-password-btn'>
+              <i className={ showPassword ? 'icon visibility-icon' : 'icon visibility-off-icon' }></i>
+            </div>
+          </div>
+          <small className='invalid-message'>{ registerFormData.passwordError }</small>
         </div>
         <button>S'inscrire</button>
       </form>
 
-      <VerticalBar text='OU' />
+      <HorizontalBar text='OU' />
 
       <GoogleAuth text="S'inscrire avec Google" />
 
-      <p>Déjà inscrit ? <Link to='/login' id='login-link'>Connectez-vous</Link></p>
+      <p className='link'>Déjà inscrit ? <Link to='/login' id='login-link'>Connectez-vous</Link></p>
     </div>
   );
 }

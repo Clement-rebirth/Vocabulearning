@@ -2,13 +2,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 12px 0;
+  margin: 15px 0;
 }
 
 .bar .left,
 .bar .right {
-  height: 2px;
-  background-color: rgba(255, 255, 255, 0.466);
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.7);
   flex-grow: 1;
 }
 

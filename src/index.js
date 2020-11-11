@@ -5,6 +5,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
 import './index.css';
+import './icons-css/icomoon.css';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from './App';
