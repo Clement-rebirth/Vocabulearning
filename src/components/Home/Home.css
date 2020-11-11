@@ -1,6 +1,6 @@
 .home {
   height: 100%;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%), url('../../img/big-ben-1024.jpg') center/cover no-repeat;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%), url('../../img/big-ben-1440.jpg') center/cover no-repeat;
 }
 
 .get-started {
@@ -76,17 +76,11 @@
 
 @media all and (min-width: 425px) {
   .home {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%), url('../../img/big-ben-1440.jpg') center/cover no-repeat;
-  }
-}
-
-@media all and (min-width: 768px) {
-  .home {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%), url('../../img/big-ben-1920.jpg') center/cover no-repeat;
   }
 }
 
-@media all and (min-width: 1024px) {
+@media all and (min-width: 768px) {
   .home {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%), url('../../img/big-ben-2560.jpg') center/cover no-repeat;
   }
