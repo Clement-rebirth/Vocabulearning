@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import firebaseApp from '../../firebase';
 import GoogleAuth from '../GoogleAuth/GoogleAuth';
 import HorizontalBar from '../HorizontalBar/HorizontalBar';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Login = () => {
+
+  let history = useHistory();
 
   const [loginFormData, setLoginFormData] = useState({
     email: '',
@@ -23,6 +25,9 @@ const Login = () => {
     const { email, password } = loginFormData;
 
     firebaseApp.auth().signInWithEmailAndPassword(email, password)
+      .then(() => {
+        history.replace('/app');
+      })
       .catch(error => {
         console.log('login errors :');
         console.log(error);

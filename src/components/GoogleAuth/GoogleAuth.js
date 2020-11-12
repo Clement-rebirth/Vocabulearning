@@ -3,21 +3,18 @@ import React from 'react';
 import firebase from 'firebase/app';
 import firebaseApp from '../../firebase';
 import 'firebase/auth';
+import { useHistory } from 'react-router-dom';
 
 const GoogleAuth = ({ text }) => {
+
+  let history = useHistory();
 
   const googleAuthenticate = () => {
     let provider = new firebase.auth.GoogleAuthProvider();
     firebaseApp.auth().signInWithRedirect(provider);
     firebaseApp.auth().getRedirectResult()
-      .then(result => {
-        if (result.credential) {
-          // gives a Google Access Token that can be used to access the Google API.
-          const token = result.credential.accessToken;
-        }
-        // the signed-in user info
-        let user = result.user;
-        console.log(user);
+      .then(() => {
+        history.push('/app');
       }).catch(error => {
         console.log({
           code: error.code,

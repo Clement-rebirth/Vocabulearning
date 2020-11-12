@@ -15,8 +15,8 @@ import UserProvider from './providers/UserProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserProvider>
-      <Router>
+    <Router>
+      <UserProvider>
         <Switch>
           <Route exact path={['/', '/login', '/register']}>
             <Home />
@@ -26,8 +26,8 @@ ReactDOM.render(
           </Route>
           <Route><NotFound /></Route>
         </Switch>
-      </Router>
-    </UserProvider>
+      </UserProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
