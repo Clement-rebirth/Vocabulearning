@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 
 import AddWord from './components/AddWord/AddWord';
-import Header from './components/Header/Header';
 import Modal from './components/Modal/Modal';
+import Menu from './components/Menu/Menu';
 
 import './App.css';
 import './icons-css/icofont.min.css';
 
 const App = () => {
 
-  const [wordFormModalVisible, setWordFormModalVisible] = useState(false);
-
-  const showAddWordModal = () => setWordFormModalVisible(true);
-  const hideAddWordModal = () => setWordFormModalVisible(false);
+  const [showWordFormModal, setShowWordFormModal] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   
   const startLearningMode = () => {
     alert("Coming soon");
@@ -22,14 +20,22 @@ const App = () => {
 
   return (
     <>
-      <Header />
+      <header>
+        <button onClick={() => setShowMenu(true)} id='open-menu'>Menu</button>
+        <h1>VocabuLearning</h1>
+      </header>
+
+      <Menu isShow={showMenu} handleClose={() => setShowMenu(false)} />
       
       <div className='word-list'>
-        <button onClick={showAddWordModal}>Ajouter un mot</button>
+        <button onClick={() => setShowWordFormModal(true)}>Ajouter un mot</button>
         <div className='words'>Votre liste ne contient aucun mot.</div>
       </div>
       
-      <Modal visible={wordFormModalVisible} handleClose={hideAddWordModal}>
+      <Modal 
+        visible={showWordFormModal} 
+        handleClose={() => setShowWordFormModal(false)}
+      >
         <AddWord />
       </Modal>
 
