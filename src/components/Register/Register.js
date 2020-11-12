@@ -4,7 +4,7 @@ import firebaseApp from '../../firebase';
 import 'firebase/auth';
 import GoogleAuth from '../GoogleAuth/GoogleAuth';
 import HorizontalBar from '../HorizontalBar/HorizontalBar';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Register = () => {
 
@@ -16,6 +16,8 @@ const Register = () => {
   });
 
   const [showPassword, setshowPassword] = useState(false);
+
+  let history = useHistory();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -63,8 +65,8 @@ const Register = () => {
     firebaseApp
       .auth()
       .createUserWithEmailAndPassword(formData.email, formData.password)
-      .then(user => {
-        console.log(user);
+      .then(() => {
+        history.replace('/app');
       }).catch(error => {
         let emailError = '';
 
