@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { signUp } from '../../firebase/userMethods';
+
 import emailIsValid from '../../utils/emailIsValid';
-import firebaseApp from '../../firebase';
-import 'firebase/auth';
 import GoogleAuth from '../GoogleAuth/GoogleAuth';
 import HorizontalBar from '../HorizontalBar/HorizontalBar';
-import { Link, useHistory } from 'react-router-dom';
+
+import { ROUTES } from '../../constants';
 
 const Register = () => {
 
@@ -24,19 +26,19 @@ const Register = () => {
     setRegisterFormData({ ...registerFormData, [name]: value });
   }
 
-  const validate = (formData) => {
+  const validate = (email, password) => {
     const errors = {
       empty: true,
       email: '',
       password: ''
     };
 
-    if (!emailIsValid(formData.email)) {
+    if (!emailIsValid(email)) {
       errors.empty = false;
       errors.email = 'Email incorrect';
     }
     
-    if (formData.password.length < 6) {
+    if (password.length < 6) {
       errors.empty = false;
       errors.password = '6 caractères minimum';
     }
@@ -44,15 +46,12 @@ const Register = () => {
     return errors;
   }
 
-  const handleRegister = e => {
+  const handleSignUp = e => {
     e.preventDefault();
 
-    const formData = {
-      email: registerFormData.email,
-      password: registerFormData.password
-    };
-
-    const errors = validate(formData);
+    let email = registerFormData.email;
+    let password = registerFormData.password;
+    const errors = validate(email, password);
 
     setRegisterFormData({ 
       ...registerFormData, 
@@ -62,34 +61,31 @@ const Register = () => {
 
     if (!errors.empty) return;
 
-    firebaseApp
-      .auth()
-      .createUserWithEmailAndPassword(formData.email, formData.password)
-      .then(() => {
-        history.replace('/app');
-      }).catch(error => {
-        let emailError = '';
+    signUp(email, password, () => {
+      history.replace(ROUTES.HOME);
+    }, error => {
+      let emailError = '';
 
-        if (error.code === 'auth/email-already-in-use') {
-            emailError = 'Cet email est déjà utilisé';
-        } else if (error.code === 'auth/invalid-email') {
-          emailError = 'Email incorrect';
-        }
+      if (error.code === 'auth/email-already-in-use') {
+          emailError = 'Cet email est déjà utilisé';
+      } else if (error.code === 'auth/invalid-email') {
+        emailError = 'Email incorrect';
+      }
 
-        setRegisterFormData({ 
-          ...registerFormData,
-          passwordError: '',
-          emailError: emailError
-        });
-
-        console.log(error);
+      setRegisterFormData({ 
+        ...registerFormData,
+        passwordError: '',
+        emailError: emailError
       });
+
+      console.log(error);
+    });
   }
 
   return (
     <div className='register'>
       <h2>Inscription</h2>
-      <form onSubmit={handleRegister}>
+      <form onSubmit={handleSignUp}>
         <div>
           <label htmlFor='register-email'>Email</label>
           <input 
@@ -130,7 +126,7 @@ const Register = () => {
 
       <GoogleAuth text="S'inscrire avec Google" />
 
-      <p className='link'>Déjà inscrit ? <Link to='/login' id='login-link'>Connectez-vous</Link></p>
+      <p className='link'>Déjà inscrit ? <Link to={ROUTES.SIGN_IN} id='login-link'>Connectez-vous</Link></p>
     </div>
   );
 }

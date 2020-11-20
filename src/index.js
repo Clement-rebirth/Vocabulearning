@@ -4,27 +4,34 @@ import ReactDOM from 'react-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
-import './index.css';
-import './icons-css/icomoon.css';
-
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import App from './App';
-import Home from './components/Home/Home';
+import Landing from './components/Landing/Landing';
 import NotFound from './components/NotFound/NotFound';
 import UserProvider from './providers/UserProvider';
+
+import { ROUTES } from './constants';
+
+import './index.css';
+import './icons-css/icomoon.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <UserProvider>
         <Switch>
-          <Route exact path={['/', '/login', '/register']}>
-            <Home />
+          <Route exact path={[ROUTES.LANDING, ROUTES.SIGN_IN, ROUTES.SIGN_UP]}>
+            <Landing />
           </Route>
-          <Route path='/app'>
+          <Route path={ROUTES.HOME}>
             <App />
           </Route>
-          <Route><NotFound /></Route>
+          <Route path={ROUTES.NOT_FOUND}>
+            <NotFound />
+          </Route>
+          <Route>
+            <Redirect to={ROUTES.NOT_FOUND} />
+          </Route>
         </Switch>
       </UserProvider>
     </Router>

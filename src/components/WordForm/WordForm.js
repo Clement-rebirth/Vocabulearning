@@ -1,11 +1,11 @@
 import React from 'react';
 
-import './AddWord.css';
+import './WordForm.css';
 
-const AddWord = () => {
+const WordForm = () => {
   return (
     <>
-      <form className='add-word-form'>
+      <form className='word-form'>
         <label>
           Votre mot :
           <input type='text' />
@@ -20,4 +20,4 @@ const AddWord = () => {
   );
 }
 
-export default AddWord;
+export default WordForm;

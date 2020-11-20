@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import firebaseApp from '../../firebase';
+import { Link, useHistory } from 'react-router-dom';
+import { signIn } from '../../firebase/userMethods';
+
 import GoogleAuth from '../GoogleAuth/GoogleAuth';
 import HorizontalBar from '../HorizontalBar/HorizontalBar';
-import { Link, useHistory } from 'react-router-dom';
+
+import { ROUTES } from '../../constants';
 
 const Login = () => {
 
@@ -20,25 +23,23 @@ const Login = () => {
     setLoginFormData({ ...loginFormData, [name]: value });
   }
 
-  const handleLogin = e => {
+  const handleSignIn = e => {
     e.preventDefault();
     const { email, password } = loginFormData;
 
-    firebaseApp.auth().signInWithEmailAndPassword(email, password)
-      .then(() => {
-        history.replace('/app');
-      })
-      .catch(error => {
-        console.log('login errors :');
-        console.log(error);
-        alert('Email ou mot de passe incorrect');
-      });
+    signIn(email, password, () => {
+      history.replace(ROUTES.HOME);
+    }, error => {
+      console.log('login errors :');
+      console.log(error);
+      alert('Email ou mot de passe incorrect');
+    });
   }
 
   return (
     <div className='login'>
       <h2>Connexion</h2>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSignIn}>
         <div>
           <label htmlFor='login-email'>Email</label>
           <input
@@ -75,7 +76,7 @@ const Login = () => {
 
       <GoogleAuth text='Se connecter avec Google' />
 
-      <p className='link'>Pas encore inscrit ? <Link to='/register' id='register-link'>Inscrivez-vous</Link></p>
+      <p className='link'>Pas encore inscrit ? <Link to={ROUTES.SIGN_UP} id='register-link'>Inscrivez-vous</Link></p>
     </div>
   );
 }

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { signOut } from './firebase/userMethods';
 
-import AddWord from './components/AddWord/AddWord';
+import WordForm from './components/WordForm/WordForm';
 import Modal from './components/Modal/Modal';
 import Menu from './components/Menu/Menu';
+
+import { ROUTES } from './constants';
 
 import './App.css';
 import './icons-css/icofont.min.css';
@@ -12,6 +16,16 @@ const App = () => {
   const [showWordFormModal, setShowWordFormModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   
+  let history = useHistory();
+
+  const handleSignOut = () => {
+    signOut(() => {
+      history.replace(ROUTES.LANDING);
+    }, error => {
+      console.log('logout error : ', error);
+    });
+  };
+
   const startLearningMode = () => {
     alert("Coming soon");
     // confirmation
@@ -25,7 +39,11 @@ const App = () => {
         <h1>VocabuLearning</h1>
       </header>
 
-      <Menu isShow={showMenu} handleClose={() => setShowMenu(false)} />
+      <Menu 
+        isShow={showMenu} 
+        handleClose={() => setShowMenu(false)}
+        handleSignOut={handleSignOut} 
+      />
       
       <div className='word-list'>
         <button onClick={() => setShowWordFormModal(true)}>Ajouter un mot</button>
@@ -36,7 +54,7 @@ const App = () => {
         visible={showWordFormModal} 
         handleClose={() => setShowWordFormModal(false)}
       >
-        <AddWord />
+        <WordForm />
       </Modal>
 
       <button id='start-learning-mode' onClick={startLearningMode}>

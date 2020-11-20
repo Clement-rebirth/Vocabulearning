@@ -4,35 +4,37 @@ import Modal from '../Modal/Modal';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 
-import './Home.css';
+import { ROUTES } from '../../constants';
+
+import './Landing.css';
 
 const Home = () => {
     
   let history = useHistory();
   
-  const handleCloseLogin = () => history.push('/');
-  const handleCloseRegister = () => history.push('/');
+  const handleCloseLogin = () => history.push(ROUTES.LANDING);
+  const handleCloseRegister = () => history.push(ROUTES.LANDING);
 
   return (
-    <div className='home'>
+    <div className='landing'>
       <div className='get-started'>
         <h1>Vocabu<br />Learning</h1>
         <p>Apprendre du vocabulaire n'a jamais été aussi simple</p>
         <div className='auth'>
-          <Link className='btn register' to='/register'>S'inscrire</Link>
+          <Link className='btn register' to={ROUTES.SIGN_UP}>S'inscrire</Link>
           <p className='login'>
-            Déjà inscrit ? <Link to='/login'>Se connecter</Link>
+            Déjà inscrit ? <Link to={ROUTES.SIGN_IN}>Se connecter</Link>
           </p>
         </div>
       </div>
 
-      <Route path='/login'>
+      <Route path={ROUTES.SIGN_IN}>
         <Modal visible={true} handleClose={handleCloseLogin}>
           <Login />
         </Modal>
       </Route>
 
-      <Route path='/register'>
+      <Route path={ROUTES.SIGN_UP}>
         <Modal visible={true} handleClose={handleCloseRegister}>
           <Register />
         </Modal>
