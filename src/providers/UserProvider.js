@@ -1,37 +1,47 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import firebaseApp from '../firebase';
 
-export const UserContext = createContext({ user: 'initializing' });
+import { ROUTES } from '../constants';
+
+import firebase from '../firebase/firebase';
+import 'firebase/auth';
+
+export const UserContext = createContext({ user: null });
 
 const UserProvider = ({ children }) => {
 
-  const [user, setUser] = useState('initializing');
+  const [user, setUser] = useState(null);
+
   let location = useLocation();
   let history = useHistory();
 
-  const updateUser = (userData) => {
-    console.log('user : ', userData);
+  useEffect(() => {
+    // do not redirect when the user is on the NOT_FOUND page
+    if (location.pathname === ROUTES.NOT_FOUND) return;
 
-    if (userData) {
-      // User was signed out and is now signed in
-      if (user === null) history.replace('/app');
-
-      // User is signed in but have just started the app
-      // and wasn't already on the app page
-      if (user === 'initializing' && location.pathname !== '/app') history.replace('/app');
-      setUser(userData);
-    } else {
-      // User was signed in and is now signed out
-      // and isn't already on the home pages
-      let homePathsRegex = /(\/)|(\/login)|(\/register)/;
-      if (user !== null && homePathsRegex.test(location.pathname)) history.replace('/');
-      setUser(null);
+    // User is signed in but have just started the app
+    // and wasn't already on the home page
+    if (user && location.pathname !== ROUTES.HOME) history.replace(ROUTES.HOME);
+    
+    let landingPathsRegex = new RegExp(`^(${ROUTES.LANDING}|${ROUTES.SIGN_IN}|${ROUTES.SIGN_UP})$`);
+    
+    // User was signed in and is now signed out
+    // and isn't already on the landing pages
+    if (user === false && !landingPathsRegex.test(location.pathname)) {
+      history.replace('/');
     }
-  };
+  }, [user, location.pathname, history]);
 
   useEffect(() => {
-    firebaseApp.auth().onAuthStateChanged(updateUser);
+    firebase.auth().onAuthStateChanged(userData => {
+      console.log('user : ', userData);
+
+      if (userData) {
+        setUser(userData);
+      } else {
+        setUser(false);
+      }
+    });
   }, []);
 
   return (
