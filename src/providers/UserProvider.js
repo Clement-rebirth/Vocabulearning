@@ -33,8 +33,8 @@ const UserProvider = ({ children }) => {
   }, [user, location.pathname, history]);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(userData => {
-      console.log('user : ', userData);
+    let unsubscribe = firebase.auth().onAuthStateChanged(userData => {
+      // console.log('user : ', userData);
 
       if (userData) {
         setUser(userData);
@@ -42,6 +42,8 @@ const UserProvider = ({ children }) => {
         setUser(false);
       }
     });
+
+    return unsubscribe;
   }, []);
 
   return (
