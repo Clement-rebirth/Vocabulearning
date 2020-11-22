@@ -113,6 +113,8 @@ const App = () => {
         <WordForm />
       </Modal>
 
+      <button onClick={() => setShowWordFormModal(true)}>Ajouter un mot</button>
+
       <button id='start-learning-mode' onClick={startLearningMode}>
         <i className='icofont-dumbbell'></i>
       </button>
