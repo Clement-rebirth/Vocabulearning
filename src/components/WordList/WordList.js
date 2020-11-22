@@ -1,13 +1,24 @@
 import React from 'react';
+import Word from '../Word/Word';
 
 const WordList = ({id, name, words }) => {
   return (
-    <>
-      <h2>{ name }</h2>
-      <p>
-        { words ? 'Votre liste contient des mots' : 'Votre liste ne contient aucun mot' }
-      </p>
-    </>
+    <div className='word-list'>
+      {/* <h2>{ name }</h2> */}
+      <div className='words'>
+        { words &&
+          Object
+            .keys(words)
+            .map(key => (
+              <Word 
+                key={key}
+                id={key}
+                word={words[key].word}
+                translation={words[key].translation} />
+            ))
+        }
+      </div>
+    </div>
   );
 }
 
