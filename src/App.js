@@ -12,6 +12,7 @@ import Manager from './firebase/Manager';
 
 import './App.css';
 import './icons-css/icofont.min.css';
+import WordList from './components/WordList/WordList';
 
 const App = () => {
 
@@ -91,9 +92,18 @@ const App = () => {
         handleSignOut={handleSignOut} 
       />
       
-      <div className='word-list'>
-        <button onClick={() => setShowWordFormModal(true)}>Ajouter un mot</button>
-        <div className='words'>Votre liste ne contient aucun mot.</div>
+      <div className='word-lists'>
+        { wordLists &&
+          Object
+            .keys(wordLists)
+            .map(key => (
+              <WordList
+                key={key} 
+                id={key}
+                name={wordLists[key].name}
+                words={wordLists[key].words} />
+            ))
+        }
       </div>
       
       <Modal 
