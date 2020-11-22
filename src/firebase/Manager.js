@@ -71,7 +71,7 @@ export default class Manager {
    */
   update(values, onComplete = () => {}) {
     const onError = error => console.error(error);
-    return this.ref
+    this.ref
       .update(values)
       .then(onComplete)
       .catch(onError);
@@ -83,7 +83,7 @@ export default class Manager {
    */
   delete(onComplete = () => {}) {
     const onError = error => console.error(error);
-    return this.ref
+    this.ref
       .remove()
       .then(onComplete)
       .catch(onError);
