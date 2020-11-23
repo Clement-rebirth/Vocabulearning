@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { signUp } from '../../firebase/userMethods';
+import { emailIsValid } from '../../utils/utils';
 
-import emailIsValid from '../../utils/emailIsValid';
 import GoogleAuth from '../GoogleAuth/GoogleAuth';
 import HorizontalBar from '../HorizontalBar/HorizontalBar';
 

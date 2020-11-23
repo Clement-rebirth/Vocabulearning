@@ -1,7 +1,8 @@
 import React from 'react';
+
 import Word from '../Word/Word';
 
-const WordList = ({id, name, words }) => {
+const WordList = ({ name, words }) => {
   return (
     <div className='word-list'>
       {/* <h2>{ name }</h2> */}

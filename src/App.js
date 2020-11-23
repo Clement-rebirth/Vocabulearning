@@ -2,21 +2,23 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { signOut } from './firebase/userMethods';
 import { UserContext } from './providers/UserProvider';
+import Manager from './firebase/Manager';
+import firebase from './firebase/firebase';
+import { slugify } from './utils/utils';
 
 import WordForm from './components/WordForm/WordForm';
 import Modal from './components/Modal/Modal';
 import Menu from './components/Menu/Menu';
+import WordList from './components/WordList/WordList';
 
 import { ROUTES } from './constants';
-import Manager from './firebase/Manager';
 
 import './App.css';
 import './icons-css/icofont.min.css';
-import WordList from './components/WordList/WordList';
 
 const App = () => {
 
-  const [showWordFormModal, setShowWordFormModal] = useState(false);
+  const [showWordModal, setShowWordModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [wordLists, setWordLists] = useState(false);
   const [userData, setUserData] = useState(false);
@@ -31,9 +33,11 @@ const App = () => {
     if (userData === null) {
       // create default wordList
       let userWordListsManager = new Manager(`wordLists/${user.uid}`);
+      let defaultWordListName = 'Ma liste';
       userWordListsManager.add({
-        name: 'Par défaut',
-        words: false
+        name: defaultWordListName,
+        slug: slugify(defaultWordListName),
+        words: false, 
       });
 
       // create user
@@ -65,17 +69,23 @@ const App = () => {
     });
   }, [user]);
 
-  const startLearningMode = () => {
-    alert("Coming soon");
-    // confirmation
-    // start learning mode
-  }
+  const startLearningMode = () => alert('Coming soon !');
 
   const handleSignOut = () => {
     signOut(() => {
       history.replace(ROUTES.LANDING);
     }, error => {
       console.log('logout error : ', error);
+    });
+  };
+
+  const addWord = (word, wordListId, userId) => {
+    let wordsManager = new Manager(`wordLists/${userId}/${wordListId}/words`);
+    wordsManager.add({
+      word: word.word,
+      translation: word.translation,
+      lastRepetition: firebase.database.ServerValue.TIMESTAMP,
+      lvl: 0
     });
   };
 
@@ -101,23 +111,38 @@ const App = () => {
                 key={key} 
                 id={key}
                 name={wordLists[key].name}
-                words={wordLists[key].words} />
+                words={wordLists[key].words}
+              />
             ))
         }
       </div>
       
-      <Modal 
-        visible={showWordFormModal} 
-        handleClose={() => setShowWordFormModal(false)}
-      >
-        <WordForm />
-      </Modal>
+      { user && 
+        <Modal 
+          visible={showWordModal} 
+          handleClose={() => setShowWordModal(false)}
+        >
+          <WordForm
+            addWord={addWord}
+            wordListId={Object.keys(wordLists)[0]}
+            userId={user.uid}
+          />
+        </Modal>
+      }
 
-      <button onClick={() => setShowWordFormModal(true)}>Ajouter un mot</button>
+      <footer>
+        <nav>
+          <ul>
+            <li>Home</li>
+            <li onClick={startLearningMode}>
+              Learn
+              {/* <i className='icofont-dumbbell' /> */}
+            </li>
+          </ul>
+        </nav>
 
-      <button id='start-learning-mode' onClick={startLearningMode}>
-        <i className='icofont-dumbbell'></i>
-      </button>
+        <button onClick={() => setShowWordModal(true)}>Ajouter un mot</button>
+      </footer>
     </>
   );
 }
