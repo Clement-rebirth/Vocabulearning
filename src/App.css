@@ -1,19 +1,11 @@
-#start-learning-mode {
-  border: 1px solid rgb(161, 161, 161);
-  border-radius: 50%;
-  width: 65px;
-  height: 65px;
+footer nav ul li {
   padding: 8px;
   box-sizing: border-box;
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  outline: none;
 }
 
-#start-learning-mode .icofont-dumbbell {
-  font-size: 38px;
+footer nav li .icofont-dumbbell {
   display: block;
+  font-size: 38px;
   transform: rotateZ(-40deg);
 }
 

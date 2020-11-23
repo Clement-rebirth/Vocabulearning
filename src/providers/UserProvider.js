@@ -20,8 +20,8 @@ const UserProvider = ({ children }) => {
     if (location.pathname === ROUTES.NOT_FOUND) return;
 
     // User is signed in but have just started the app
-    // and wasn't already on the home page
-    if (user && location.pathname !== ROUTES.HOME) history.replace(ROUTES.HOME);
+    // and wasn't already on the home page or home_page/whatever
+    if (user && location.pathname.indexOf(ROUTES.HOME) !== 0) history.replace(ROUTES.HOME);
     
     let landingPathsRegex = new RegExp(`^(${ROUTES.LANDING}|${ROUTES.SIGN_IN}|${ROUTES.SIGN_UP})$`);
     
