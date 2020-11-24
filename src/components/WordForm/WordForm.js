@@ -2,14 +2,24 @@ import React, { useState } from 'react';
 
 import './WordForm.css';
 
-const WordForm = ({ addWord, wordListId, userId }) => {
+const WordForm = props => {
+
+  const { 
+    addWord,
+    updateWord, 
+    wordListId, 
+    userId, 
+    wordToUpdate,
+    closeModal } = props;
 
   const [wordFormData, setWordFormData] = useState({
-    word: '',
-    translation: '',
+    word: wordToUpdate ? wordToUpdate.word : '',
+    translation: wordToUpdate ? wordToUpdate.translation : '',
     wordError: null,
     translationError: null
   });
+
+  const [updateMode] = useState(!!wordToUpdate);
 
   const validate = (word, translation) => {
     let errors = {
@@ -36,6 +46,15 @@ const WordForm = ({ addWord, wordListId, userId }) => {
     setWordFormData({ ...wordFormData, [name]: value });
   };
 
+  const clear = () => {
+    setWordFormData({
+      word: '',
+      translation: '',
+      wordError: null,
+      translationError: null
+    });
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -50,7 +69,13 @@ const WordForm = ({ addWord, wordListId, userId }) => {
 
     if (!errors.emtpy) return;
 
-    addWord({ word, translation }, wordListId, userId);
+    if (updateMode) {
+      updateWord({ word, translation }, wordListId, userId, wordToUpdate.id);
+      closeModal();
+    } else {
+      addWord({ word, translation }, wordListId, userId);
+      clear()
+    }
   };
 
   return (
@@ -84,7 +109,7 @@ const WordForm = ({ addWord, wordListId, userId }) => {
           />
           <small className='invalid-message'>{ wordFormData.translationError }</small>
         </div>
-        <button type='submit'>Ajouter</button>
+        <button type='submit'>{ updateMode ? 'Modifier' : 'Ajouter' }</button>
       </form>
     </>
   );

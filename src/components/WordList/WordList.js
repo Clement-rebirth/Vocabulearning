@@ -2,7 +2,7 @@ import React from 'react';
 
 import Word from '../Word/Word';
 
-const WordList = ({ name, words }) => {
+const WordList = ({ name, words, openWordCard }) => {
   return (
     <div className='word-list'>
       {/* <h2>{ name }</h2> */}
@@ -14,8 +14,9 @@ const WordList = ({ name, words }) => {
               <Word 
                 key={key}
                 id={key}
-                word={words[key].word}
-                translation={words[key].translation} />
+                openWordCard={openWordCard}
+                {...words[key]}
+              />
             ))
         }
       </div>

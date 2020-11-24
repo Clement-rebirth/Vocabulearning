@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { signOut } from './firebase/userMethods';
 import { UserContext } from './providers/UserProvider';
 import Manager from './firebase/Manager';
-import firebase from './firebase/firebase';
+// import firebase from './firebase/firebase';
 import { slugify } from './utils/utils';
 
 import WordForm from './components/WordForm/WordForm';
@@ -15,13 +15,16 @@ import { ROUTES } from './constants';
 
 import './App.css';
 import './icons-css/icofont.min.css';
+import WordCard from './components/WordCard/WordCard';
 
 const App = () => {
 
-  const [showWordModal, setShowWordModal] = useState(false);
+  const [showWordCard, setShowWordCard] = useState(false);
+  const [showWordForm, setShowWordForm] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [wordLists, setWordLists] = useState(false);
   const [userData, setUserData] = useState(false);
+  const [currentWord, setCurrentWord] = useState(null);
   
   let history = useHistory();
   let user = useContext(UserContext);
@@ -46,27 +49,23 @@ const App = () => {
     }
   }, [userData, user]);
 
-  // fetch user's wordLists and add a listener on it
   useEffect(() => {
+    // if user hasn't been loaded
     if (!user) return;
 
+    // fetch user data
+    let userManager = new Manager(`users/${user.uid}`);
+    userManager.getAllOnce(snapshot => {
+      setUserData(snapshot.val());
+    });
+    
+    // fetch user's wordLists and add a listener on it
     let userWordListsManager = new Manager(`wordLists/${user.uid}`);
     userWordListsManager.getAll(snapshot => {
       setWordLists(snapshot.val());
     });
 
     return () => userWordListsManager.close();
-  }, [user]);
-
-  // fetch user data
-  useEffect(() => {
-    // if user has been loaded
-    if (!user) return;
-    
-    let userManager = new Manager(`users/${user.uid}`);
-    userManager.getAllOnce(snapshot => {
-      setUserData(snapshot.val());
-    });
   }, [user]);
 
   const startLearningMode = () => alert('Coming soon !');
@@ -84,9 +83,34 @@ const App = () => {
     wordsManager.add({
       word: word.word,
       translation: word.translation,
-      lastRepetition: firebase.database.ServerValue.TIMESTAMP,
+      lastRepetition: false,
       lvl: 0
     });
+  };
+
+  const updateWord = (newWord, wordListId, userId, wordId) => {
+    let wordManager = new Manager(`wordLists/${userId}/${wordListId}/words/${wordId}`);
+    wordManager.update({
+      word: newWord.word,
+      translation: newWord.translation
+    });
+  };
+
+  const handleClose = () => {
+    setShowWordCard(false);
+    setShowWordForm(false);
+    setCurrentWord(null);
+  };
+
+  const openWordCard = (word) => {
+    setCurrentWord(word);
+    setShowWordCard(true);
+    setShowWordForm(false);
+  };
+
+  const openWordForm = () => {
+    setShowWordForm(true);
+    setShowWordCard(false);
   };
 
   return (
@@ -112,6 +136,7 @@ const App = () => {
                 id={key}
                 name={wordLists[key].name}
                 words={wordLists[key].words}
+                openWordCard={openWordCard}
               />
             ))
         }
@@ -119,14 +144,25 @@ const App = () => {
       
       { user && 
         <Modal 
-          visible={showWordModal} 
-          handleClose={() => setShowWordModal(false)}
+          visible={showWordCard || showWordForm} 
+          handleClose={handleClose}
         >
-          <WordForm
-            addWord={addWord}
-            wordListId={Object.keys(wordLists)[0]}
-            userId={user.uid}
-          />
+          { showWordForm &&
+            <WordForm
+              addWord={addWord}
+              updateWord={updateWord}
+              wordListId={Object.keys(wordLists)[0]}
+              userId={user.uid}
+              wordToUpdate={currentWord}
+              closeModal={handleClose}
+            />
+          }
+          { showWordCard &&
+            <WordCard 
+              openWordForm={openWordForm}
+              {...currentWord}
+            />
+          }
         </Modal>
       }
 
@@ -141,7 +177,7 @@ const App = () => {
           </ul>
         </nav>
 
-        <button onClick={() => setShowWordModal(true)}>Ajouter un mot</button>
+        <button onClick={openWordForm}>Ajouter un mot</button>
       </footer>
     </>
   );
