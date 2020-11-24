@@ -96,6 +96,11 @@ const App = () => {
     });
   };
 
+  const deleteWord = (wordListId, userId, wordId, onComplete = () => {}) => {
+    let wordManager = new Manager(`wordLists/${userId}/${wordListId}/words/${wordId}`);
+    wordManager.delete(onComplete);
+  };
+
   const handleClose = () => {
     setShowWordCard(false);
     setShowWordForm(false);
@@ -160,7 +165,11 @@ const App = () => {
           { showWordCard &&
             <WordCard 
               openWordForm={openWordForm}
-              {...currentWord}
+              deleteWord={deleteWord}
+              wordListId={Object.keys(wordLists)[0]}
+              userId={user.uid}
+              currentWord={currentWord}
+              closeModal={handleClose}
             />
           }
         </Modal>
