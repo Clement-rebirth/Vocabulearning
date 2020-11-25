@@ -53,6 +53,22 @@ export default class Manager {
   }
 
   /**
+   * push a collection of data
+   * @param {object} values 
+   * @param {function} onComplete 
+   */
+  multipleAdd(values, onComplete = () => {}) {
+    let updates = {};
+
+    values.forEach(word => {
+      let newWordKey = this.ref.push().key;
+      updates['/' + newWordKey] = word;
+    });
+
+    this.update(updates, onComplete);
+  }
+
+  /**
    * @param {any} value 
    * @param {function} onComplete Callback called when write to server is complete.
    */
