@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Word from '../Word/Word';
+
+import { ROUTES } from '../../constants';
 
 const WordList = ({ name, words, openWordCard }) => {
 
@@ -8,13 +11,15 @@ const WordList = ({ name, words, openWordCard }) => {
 
   return (
     <div className='word-list'>
+      <Link to={ROUTES.HOME}>Retour</Link>
+      
       <h2>
         { name } 
-        <span className='nb-words'>({ nbWords } mot{ nbWords > 1 && 's' })</span>
+        <span className='nb-words'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
       </h2>
 
       <div className='words'>
-        { words &&
+        { words ?
           Object
             .keys(words)
             .map(key => (
@@ -25,6 +30,7 @@ const WordList = ({ name, words, openWordCard }) => {
                 {...words[key]}
               />
             ))
+          : <p className='no-word'>Votre liste ne contient aucun mot</p>
         }
       </div>
     </div>

@@ -1,11 +1,19 @@
-footer nav ul li {
+#start-learning-mode {
+  border: none;
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
   padding: 8px;
   box-sizing: border-box;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  outline: none;
 }
 
-footer nav li .icofont-dumbbell {
-  display: block;
+#start-learning-mode .icofont-dumbbell {
   font-size: 38px;
+  display: block;
   transform: rotateZ(-40deg);
 }
 
