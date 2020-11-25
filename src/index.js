@@ -23,7 +23,7 @@ ReactDOM.render(
           <Route exact path={[ROUTES.LANDING, ROUTES.SIGN_IN, ROUTES.SIGN_UP]}>
             <Landing />
           </Route>
-          <Route path={ROUTES.HOME}>
+          <Route path={[ROUTES.DISPLAY_ONE_LIST, ROUTES.HOME]}>
             <App />
           </Route>
           <Route path={ROUTES.NOT_FOUND}>

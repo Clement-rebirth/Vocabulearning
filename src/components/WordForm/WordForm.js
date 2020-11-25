@@ -7,7 +7,7 @@ const WordForm = props => {
   const { 
     addWord,
     updateWord, 
-    wordListId, 
+    currentWordListId, 
     userId, 
     wordToUpdate,
     closeModal,
@@ -116,7 +116,7 @@ const WordForm = props => {
     });
 
     if (!errors.empty) return;
-    addMultipleWords(words, wordListId, userId, () => closeModal());
+    addMultipleWords(words, currentWordListId, userId, closeModal);
   };
 
   const handleSubmit = e => {
@@ -134,10 +134,10 @@ const WordForm = props => {
     if (!errors.empty) return;
 
     if (updateMode) {
-      updateWord({ word, translation }, wordListId, userId, wordToUpdate.id);
+      updateWord({ word, translation }, currentWordListId, userId, wordToUpdate.id);
       closeModal();
     } else {
-      addWord({ word, translation }, wordListId, userId);
+      addWord({ word, translation }, currentWordListId, userId);
       clear();
     }
   };

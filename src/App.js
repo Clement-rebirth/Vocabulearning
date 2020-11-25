@@ -1,21 +1,25 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { signOut } from './firebase/userMethods';
 import { UserContext } from './providers/UserProvider';
 import Manager from './firebase/Manager';
-import firebase from './firebase/firebase';
+import { addMultipleWords, addWord, deleteWord, updateWord } from './firebase/WordMethods';
 import { slugify } from './utils/utils';
 
+import { Route } from 'react-router-dom';
 import WordForm from './components/WordForm/WordForm';
 import Modal from './components/Modal/Modal';
 import Menu from './components/Menu/Menu';
 import WordList from './components/WordList/WordList';
+import WordCard from './components/WordCard/WordCard';
+import SearchBar from './components/SearchBar/SearchBar';
+import WordListsInfo from './components/WordListsInfo/WordListsInfo';
 
 import { ROUTES } from './constants';
 
 import './App.css';
 import './icons-css/icofont.min.css';
-import WordCard from './components/WordCard/WordCard';
+import Loading from './components/Loading/Loading';
 
 const App = () => {
 
@@ -29,16 +33,25 @@ const App = () => {
   
   let history = useHistory();
   let user = useContext(UserContext);
+  let { slug } = useParams();
 
+  // to get the list the user wants to see
   useEffect(() => {
-    let wordListsIds = Object.keys(wordLists);
+    // if slug is missing or word lists hasn't been loaded
+    if (!slug || !wordLists) return;
+    
+    let currentWordListKey = Object
+      .keys(wordLists)
+      .filter(key => wordLists[key].slug === slug)[0];
 
-    // if the user has at least one word list
-    if (wordListsIds.length > 0) setCurrentWordList({
-      ...wordLists[wordListsIds[0]],
-      id: wordListsIds[0]
+    // no match : the list doesn't exist
+    if (!currentWordListKey) history.replace(ROUTES.HOME);
+
+    setCurrentWordList({
+      ...wordLists[currentWordListKey],
+      id: currentWordListKey
     });
-  }, [wordLists]);
+  }, [wordLists, slug, history]);
 
   useEffect(() => {
     if (!user) return;
@@ -89,43 +102,6 @@ const App = () => {
     });
   };
 
-  const addWord = (word, wordListId, userId) => {
-    let wordsManager = new Manager(`wordLists/${userId}/${wordListId}/words`);
-    wordsManager.add({
-      word: word.word,
-      translation: word.translation,
-      lastRepetition: false,
-      lvl: 0,
-      addedDate: firebase.database.ServerValue.TIMESTAMP
-    });
-  };
-  
-  const addMultipleWords = (words, wordListId, userId, onComplete = () => {}) => {
-    let wordsManager = new Manager(`wordLists/${userId}/${wordListId}/words`);
-
-    words = words.map(word => ({
-      ...word,
-      lastRepetition: false,
-      lvl: 0,
-      addedDate: firebase.database.ServerValue.TIMESTAMP
-    }));
-
-    wordsManager.multipleAdd(words, onComplete);
-  };
-
-  const updateWord = (newWord, wordListId, userId, wordId) => {
-    let wordManager = new Manager(`wordLists/${userId}/${wordListId}/words/${wordId}`);
-    wordManager.update({
-      word: newWord.word,
-      translation: newWord.translation
-    });
-  };
-
-  const deleteWord = (wordListId, userId, wordId, onComplete = () => {}) => {
-    let wordManager = new Manager(`wordLists/${userId}/${wordListId}/words/${wordId}`);
-    wordManager.delete(onComplete);
-  };
-
   const handleClose = () => {
     setShowWordCard(false);
     setShowWordForm(false);
@@ -143,77 +119,70 @@ const App = () => {
     setShowWordCard(false);
   };
 
+  const openWordList = slug => history.push(`${ROUTES.HOME}/${slug}`);
+
+  const onSearch = search => {};
+
   return (
     <>
-      <header>
-        <button onClick={() => setShowMenu(true)} id='open-menu'>Menu</button>
-        <h1>VocabuLearning</h1>
-      </header>
+      <SearchBar onSearch={onSearch} showMenu={() => setShowMenu(true)} />
 
       <Menu 
-        isShow={showMenu} 
+        isShow={showMenu}
         handleClose={() => setShowMenu(false)}
-        handleSignOut={handleSignOut} 
+        handleSignOut={handleSignOut}
       />
-      
-      <div className='word-lists'>
-        { wordLists &&
-          Object
-            .keys(wordLists)
-            .map(key => (
-              <WordList
-                key={key} 
-                id={key}
-                name={wordLists[key].name}
-                words={wordLists[key].words}
-                openWordCard={openWordCard}
-              />
-            ))
+
+      <Route exact path={ROUTES.HOME}>
+        { wordLists
+          ? <WordListsInfo wordLists={wordLists} openWordList={openWordList} />
+          : <Loading />
         }
-      </div>
-      
-      { user && 
-        <Modal 
-          visible={showWordCard || showWordForm} 
-          handleClose={handleClose}
-        >
-          { showWordForm &&
-            <WordForm
-              addWord={addWord}
-              updateWord={updateWord}
-              wordListId={currentWordList.id}
-              userId={user.uid}
-              wordToUpdate={currentWord}
-              closeModal={handleClose}
-              addMultipleWords={addMultipleWords}
-            />
-          }
-          { showWordCard &&
-            <WordCard 
-              openWordForm={openWordForm}
-              deleteWord={deleteWord}
-              wordListId={currentWordList.id}
-              userId={user.uid}
-              currentWord={currentWord}
-              closeModal={handleClose}
-            />
-          }
-        </Modal>
-      }
+      </Route>
 
-      <footer>
-        <nav>
-          <ul>
-            <li>Home</li>
-            <li onClick={startLearningMode}>
-              Learn
-              {/* <i className='icofont-dumbbell' /> */}
-            </li>
-          </ul>
-        </nav>
+      <Route exact path={ROUTES.DISPLAY_ONE_LIST}>
+        { currentWordList 
+          ? <WordList {...currentWordList} openWordCard={openWordCard} />
+          : <Loading />
+        }
 
-        <button onClick={openWordForm}>Ajouter un mot</button>
-      </footer>
+        { user && 
+          <Modal 
+            visible={showWordCard || showWordForm} 
+            handleClose={handleClose}
+          >
+            { showWordForm &&
+              <WordForm
+                addWord={addWord}
+                updateWord={updateWord}
+                currentWordListId={currentWordList.id}
+                userId={user.uid}
+                wordToUpdate={currentWord}
+                closeModal={handleClose}
+                addMultipleWords={addMultipleWords}
+              />
+            }
+            { showWordCard &&
+              <WordCard 
+                openWordForm={openWordForm}
+                deleteWord={deleteWord}
+                currentWordListId={currentWordList.id}
+                userId={user.uid}
+                currentWord={currentWord}
+                closeModal={handleClose}
+              />
+            }
+          </Modal>
+        }
+
+        <button id='start-learning-mode' onClick={startLearningMode}>
+          <i className='icofont-dumbbell' />
+        </button>
+
+        <footer>
+          <button onClick={openWordForm}>Ajouter un mot</button>
+        </footer>
+      </Route>
     </>
   );
 }
