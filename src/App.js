@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { signOut } from './firebase/userMethods';
 import { UserContext } from './providers/UserProvider';
 import Manager from './firebase/Manager';
-// import firebase from './firebase/firebase';
+import firebase from './firebase/firebase';
 import { slugify } from './utils/utils';
 
 import WordForm from './components/WordForm/WordForm';
@@ -25,9 +25,20 @@ const App = () => {
   const [wordLists, setWordLists] = useState(false);
   const [userData, setUserData] = useState(false);
   const [currentWord, setCurrentWord] = useState(null);
+  const [currentWordList, setCurrentWordList] = useState(null);
   
   let history = useHistory();
   let user = useContext(UserContext);
+
+  useEffect(() => {
+    let wordListsIds = Object.keys(wordLists);
+
+    // if the user has at least one word list
+    if (wordListsIds.length > 0) setCurrentWordList({
+      ...wordLists[wordListsIds[0]],
+      id: wordListsIds[0]
+    });
+  }, [wordLists]);
 
   useEffect(() => {
     if (!user) return;
@@ -84,8 +95,22 @@ const App = () => {
       word: word.word,
       translation: word.translation,
       lastRepetition: false,
-      lvl: 0
+      lvl: 0,
+      addedDate: firebase.database.ServerValue.TIMESTAMP
     });
+  };
+  
+  const addMultipleWords = (words, wordListId, userId, onComplete = () => {}) => {
+    let wordsManager = new Manager(`wordLists/${userId}/${wordListId}/words`);
+
+    words = words.map(word => ({
+      ...word,
+      lastRepetition: false,
+      lvl: 0,
+      addedDate: firebase.database.ServerValue.TIMESTAMP
+    }));
+
+    wordsManager.multipleAdd(words, onComplete);
   };
 
   const updateWord = (newWord, wordListId, userId, wordId) => {
@@ -99,11 +124,6 @@ const App = () => {
   const deleteWord = (wordListId, userId, wordId, onComplete = () => {}) => {
     let wordManager = new Manager(`wordLists/${userId}/${wordListId}/words/${wordId}`);
     wordManager.delete(onComplete);
-  };
-
-  const addMultipleWords = (words, wordListId, userId, onComplete = () => {}) => {
-    let wordsManager = new Manager(`wordLists/${userId}/${wordListId}/words`);
-    wordsManager.multipleAdd(words, onComplete);
   };
 
   const handleClose = () => {
@@ -161,7 +181,7 @@ const App = () => {
             <WordForm
               addWord={addWord}
               updateWord={updateWord}
-              wordListId={Object.keys(wordLists)[0]}
+              wordListId={currentWordList.id}
               userId={user.uid}
               wordToUpdate={currentWord}
               closeModal={handleClose}
@@ -172,7 +192,7 @@ const App = () => {
             <WordCard 
               openWordForm={openWordForm}
               deleteWord={deleteWord}
-              wordListId={Object.keys(wordLists)[0]}
+              wordListId={currentWordList.id}
               userId={user.uid}
               currentWord={currentWord}
               closeModal={handleClose}

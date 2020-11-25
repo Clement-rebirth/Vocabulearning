@@ -60,9 +60,9 @@ export default class Manager {
   multipleAdd(values, onComplete = () => {}) {
     let updates = {};
 
-    values.forEach(word => {
-      let newWordKey = this.ref.push().key;
-      updates['/' + newWordKey] = word;
+    values.forEach(item => {
+      let itemKey = this.ref.push().key;
+      updates['/' + itemKey] = item;
     });
 
     this.update(updates, onComplete);
