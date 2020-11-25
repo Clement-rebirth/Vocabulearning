@@ -101,6 +101,11 @@ const App = () => {
     wordManager.delete(onComplete);
   };
 
+  const addMultipleWords = (words, wordListId, userId, onComplete = () => {}) => {
+    let wordsManager = new Manager(`wordLists/${userId}/${wordListId}/words`);
+    wordsManager.multipleAdd(words, onComplete);
+  };
+
   const handleClose = () => {
     setShowWordCard(false);
     setShowWordForm(false);
@@ -160,6 +165,7 @@ const App = () => {
               userId={user.uid}
               wordToUpdate={currentWord}
               closeModal={handleClose}
+              addMultipleWords={addMultipleWords}
             />
           }
           { showWordCard &&
