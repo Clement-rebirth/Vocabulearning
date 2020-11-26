@@ -1,14 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
+import WordListForm from '../WordListForm/WordListForm';
 
-const WordListInfo = ({ wordList, openWordList }) =>  (
-  <div className='word-list-info' onClick={() => openWordList(wordList.slug)}>
-    <h2>{ wordList.name }</h2>
-    
-    <div className='actions'>
-      <button className='edit-word-list'>Modifier</button>
-      <button className='delete-word-list'>Supprimer</button>
-    </div>
-  </div>
-);
+const WordListInfo = props => {
+
+  const {
+    wordLists,
+    wordList,
+    openWordList,
+    deleteList,
+    userId,
+    updateList,
+    setCloseCurrentFormFunc
+  } = props;
+
+  const [showEditForm, setShowEditForm] = useState(false);
+  
+  const openEditForm = () => {
+    setShowEditForm(true);
+    setCloseCurrentFormFunc(() => setShowEditForm(false));
+  };
+
+  const closeEditForm = () => {
+    setShowEditForm(false);
+    setCloseCurrentFormFunc(false);
+  };
+
+  const handleDeleteList = () => {
+    let text;
+    let quit = false;
+    let wordToEnter = 'oui';
+
+    do {
+      text = prompt(`
+        Êtes-vous sûr de vouloir supprimer la liste "${wordList.name}" ?
+        (cette action est irréversible !)
+        Écrivez "${wordToEnter}" pour confirmer :
+      `);
+
+      if (text === null) quit = true; // user cliked "cancel" button
+      if (text === wordToEnter) deleteList(wordList.id, userId);
+    } while (!quit && text !== wordToEnter);
+  };
+
+  const handleOpenList = e => {
+    let listName = e.currentTarget.querySelector('h2');
+
+    // to avoid opening when we click on the action buttons
+    if (e.currentTarget === e.target || e.target === listName) {
+      openWordList(wordList.slug);
+    }
+  };
+
+  let nbWords = wordList.words ? Object.keys(wordList.words).length : 0;
+
+  return (
+    <>
+      { showEditForm
+        ? <WordListForm
+            wordLists={wordLists}
+            wordList={wordList}
+            closeForm={closeEditForm}
+            updateList={updateList}
+            userId={userId}
+          />
+        : (
+          <div className='word-list-info' onClick={handleOpenList}>
+            <h2>
+              { wordList.name }
+              <span className='nb-words'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
+            </h2>
+
+            <div className='actions'>
+              <button className='edit-word-list' onClick={openEditForm}>
+                Modifier
+              </button>
+              <button className='delete-word-list' onClick={handleDeleteList}>Supprimer</button>
+            </div>
+          </div>
+        )
+      }
+    </>
+  );
+}
 
 export default WordListInfo;

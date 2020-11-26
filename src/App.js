@@ -3,8 +3,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import { signOut } from './firebase/userMethods';
 import { UserContext } from './providers/UserProvider';
 import Manager from './firebase/Manager';
-import { addMultipleWords, addWord, deleteWord, updateWord } from './firebase/WordMethods';
-import { slugify } from './utils/utils';
+import { addMultipleWords, addWord, deleteWord, updateWord } from './firebase/wordMethods';
+import { updateWordList, deleteWordList, addWordList } from './firebase/wordListMethods';
 
 import { Route } from 'react-router-dom';
 import WordForm from './components/WordForm/WordForm';
@@ -29,7 +29,7 @@ const App = () => {
   const [wordLists, setWordLists] = useState(false);
   const [userData, setUserData] = useState(false);
   const [currentWord, setCurrentWord] = useState(null);
-  const [currentWordList, setCurrentWordList] = useState(null);
+  const [currentWordList, setCurrentWordList] = useState(false);
   
   let history = useHistory();
   let user = useContext(UserContext);
@@ -59,13 +59,7 @@ const App = () => {
     // first time the user log in
     if (userData === null) {
       // create default wordList
-      let userWordListsManager = new Manager(`wordLists/${user.uid}`);
-      let defaultWordListName = 'Ma liste';
-      userWordListsManager.add({
-        name: defaultWordListName,
-        slug: slugify(defaultWordListName),
-        words: false, 
-      });
+      addWordList({ name: 'Ma liste' }, user.uid);
 
       // create user
       let userManager = new Manager(`users/${user.uid}`);
@@ -134,16 +128,23 @@ const App = () => {
       />
 
       <Route exact path={ROUTES.HOME}>
-        { wordLists
-          ? <WordListsInfo wordLists={wordLists} openWordList={openWordList} />
-          : <Loading />
+        { wordLists === false || !user
+          ? <Loading />
+          : <WordListsInfo
+              deleteList={deleteWordList}
+              updateList={updateWordList}
+              addList={addWordList}
+              wordLists={wordLists}
+              openWordList={openWordList}
+              userId={user.uid}
+            />
         }
       </Route>
 
       <Route exact path={ROUTES.DISPLAY_ONE_LIST}>
-        { currentWordList 
-          ? <WordList {...currentWordList} openWordCard={openWordCard} />
-          : <Loading />
+        { currentWordList === false
+          ? <Loading />
+          : <WordList {...currentWordList} openWordCard={openWordCard} />
         }
 
         { user && 
