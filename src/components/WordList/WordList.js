@@ -7,7 +7,7 @@ import { ROUTES } from '../../constants';
 
 const WordList = ({ name, words, openWordCard }) => {
 
-  let nbWords = words && Object.keys(words).length;
+  let nbWords = words ? Object.keys(words).length : 0;
 
   return (
     <div className='word-list'>
