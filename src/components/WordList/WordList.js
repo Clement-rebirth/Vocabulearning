@@ -1,23 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import Word from '../Word/Word';
 
 import { ROUTES } from '../../constants';
 
-const WordList = ({ name, words, openWordCard }) => {
+const WordList = props => {
 
-  let nbWords = words ? Object.keys(words).length : 0;
+  const { 
+    name, 
+    words, 
+    openWordCard, 
+    nbWords, 
+    searchMode, 
+    history, 
+    disableSearchMode 
+  } = props;
+
+  const backHome = () => {
+    history.replace(ROUTES.HOME);
+    disableSearchMode();
+  };
 
   return (
     <div className='word-list'>
-      <Link to={ROUTES.HOME}>Retour</Link>
+      <button onClick={backHome}>Retour</button>
       
       <h2>
         { name } 
         <span className='nb-words'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
       </h2>
-
+  
       <div className='words'>
         { words ?
           Object
@@ -30,11 +42,13 @@ const WordList = ({ name, words, openWordCard }) => {
                 {...words[key]}
               />
             ))
-          : <p className='no-word'>Votre liste ne contient aucun mot</p>
+          : <p className='no-word'>
+              { searchMode ? 'Aucun résultat ne correspond à votre recherche' : 'Votre liste ne contient aucun mot' }
+            </p>
         }
       </div>
     </div>
-  );
-}
+  )
+};
 
 export default WordList;

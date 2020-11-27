@@ -42,15 +42,6 @@ const WordListInfo = props => {
     } while (!quit && text !== wordToEnter);
   };
 
-  const handleOpenList = e => {
-    let listName = e.currentTarget.querySelector('h2');
-
-    // to avoid opening when we click on the action buttons
-    if (e.currentTarget === e.target || e.target === listName) {
-      openWordList(wordList.slug);
-    }
-  };
-
   let nbWords = wordList.words ? Object.keys(wordList.words).length : 0;
 
   return (
@@ -64,8 +55,8 @@ const WordListInfo = props => {
             userId={userId}
           />
         : (
-          <div className='word-list-info' onClick={handleOpenList}>
-            <h2>
+          <div className='word-list-info'>
+            <h2 onClick={() => openWordList(wordList.slug)}>
               { wordList.name }
               <span className='nb-words'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
             </h2>

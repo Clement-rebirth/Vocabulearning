@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const SearchBar = ({ showMenu, onSearch }) => {
+const SearchBar = props => {
   
-  const [search, setSearch] = useState('');
+  const { 
+    showMenu,
+    search,
+    setSearch,
+    handleSearch,
+    disableSearchMode
+  } = props;
 
   const handleChange = e => {
-    let searchVal = e.target.value;
-    setSearch(searchVal);
-    onSearch(searchVal);
-  }
+    let strToSearch = e.target.value;
+    setSearch(strToSearch);
+    handleSearch(strToSearch);
+  };
+
+  const reset = () => {
+    setSearch('');
+    disableSearchMode();
+  };
 
   return (
     <div className='search-bar'>
@@ -22,7 +33,7 @@ const SearchBar = ({ showMenu, onSearch }) => {
         onChange={handleChange}
       />
 
-      <button onClick={() => setSearch('')}>clean</button>
+      <button onClick={reset}>clean</button>
     </div>
   );
 }
