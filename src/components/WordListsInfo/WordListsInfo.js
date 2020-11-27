@@ -10,7 +10,9 @@ const WordListsInfo = props => {
     wordLists,
     openWordList,
     deleteList,
-    userId
+    userId,
+    searchMode,
+    disableSearchMode
   } = props;
 
   const [addFormIsShow, setAddFormIsShow] = useState(false);
@@ -23,6 +25,7 @@ const WordListsInfo = props => {
   };
   
   const openAddForm = () => {
+    disableSearchMode();
     setAddFormIsShow(true);
     setCloseCurrentFormFunc(() => setAddFormIsShow(false));
   }
@@ -33,8 +36,9 @@ const WordListsInfo = props => {
   };
 
   let wordListsInfo = null;
+  let wordListsLength = wordLists && Object.keys(wordLists).length;
 
-  if (wordLists) {
+  if (wordLists && wordListsLength > 0) {
     wordListsInfo = Object.keys(wordLists).map(key => (
       <WordListInfo
         wordLists={wordLists}
@@ -51,9 +55,11 @@ const WordListsInfo = props => {
 
   return (
     <div className='word-lists'>
-      { wordListsInfo 
+      { wordListsInfo
         ? wordListsInfo
-        : <p className='no-list'>Vous n'avez aucune liste</p>
+        : <p className='no-list'>
+            { searchMode ? 'Aucun résultat trouvé' : `Vous n'avez aucune liste` }
+          </p>
       }
       
       { addFormIsShow 

@@ -22,3 +22,13 @@ export const slugify = str => {
 
   return str;
 };
+
+export const removeAccents = str => {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+};
+
+export const strContains = (str, strToContain) => {
+  str = removeAccents(str).toUpperCase();
+  strToContain = removeAccents(strToContain).toUpperCase();
+  return str.includes(strToContain);
+};
