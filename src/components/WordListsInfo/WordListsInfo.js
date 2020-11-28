@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
+
+import { deleteWordList } from '../../firebase/wordListMethods';
+
 import WordListForm from '../WordListForm/WordListForm';
 import WordListInfo from '../WordListInfo/WordListInfo';
 
 const WordListsInfo = props => {
 
   const { 
-    updateList,
-    addList,
     wordLists,
     openWordList,
-    deleteList,
     userId,
     searchMode,
     disableSearchMode
@@ -42,12 +42,11 @@ const WordListsInfo = props => {
     wordListsInfo = Object.keys(wordLists).map(key => (
       <WordListInfo
         wordLists={wordLists}
-        deleteList={deleteList}
-        updateList={updateList}
         key={key} 
         wordList={{...wordLists[key], id: key}} 
         openWordList={openWordList}
         userId={userId}
+        deleteList={deleteWordList}
         setCloseCurrentFormFunc={setCloseCurrentFormFunc}
       />
     ));
@@ -66,7 +65,6 @@ const WordListsInfo = props => {
         ? <WordListForm 
             wordLists={wordLists}
             userId={userId}
-            addList={addList} 
             closeForm={closeAddForm} />
         : <button className='add-list-btn' onClick={openAddForm}>
             + Ajouter une liste

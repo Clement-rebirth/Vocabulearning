@@ -1,14 +1,14 @@
 import React from 'react';
 
-const Word = ({ id, word, translation, lastRepetition, openWordCard }) => {
+const Word = ({ id, word, translation, lastRepetition, openWordCard, invertWordWithTrad }) => {
   return (
     <div 
       className='word-box'
-      onClick={() => openWordCard({ id, word, translation, lastRepetition })} 
+      onClick={() => openWordCard({ id, word, translation, lastRepetition })}
     >
-      <p className='word'>{ word }</p>
-      <div><span>-&#62;</span></div>
-      <p className='translation'>{ translation }</p>
+      <p className='word'>{ invertWordWithTrad ? translation : word }</p>
+      <div className='separator'><span>-&#62;</span></div>
+      <p className='translation'>{ invertWordWithTrad ? word : translation }</p>
     </div>
   );
 }

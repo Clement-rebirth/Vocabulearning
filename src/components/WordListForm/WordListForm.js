@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { slugify } from '../../utils/utils';
 
-const WordListForm = ({ closeForm, wordList, addList, updateList, userId, wordLists }) => {
+import { slugify } from '../../utils/utils';
+import { 
+  addWordList as addList, 
+  updateWordList as updateList
+} from '../../firebase/wordListMethods';
+
+const WordListForm = ({ closeForm, wordList, userId, wordLists }) => {
 
   const [listName, setListName] = useState(wordList ? wordList.name : '');
   const [listNameError, setListNameError] = useState(null);
@@ -35,7 +40,12 @@ const WordListForm = ({ closeForm, wordList, addList, updateList, userId, wordLi
 
     if (error) return;
 
-    updateList({ name: listName }, wordList.id, userId);
+    let propsToUpdate = {
+      name: listName, 
+      slug: slugify(listName)
+    };
+
+    updateList(propsToUpdate, wordList.id, userId);
     closeForm();
   };
 

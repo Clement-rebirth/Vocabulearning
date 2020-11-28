@@ -11,16 +11,14 @@ export const addWordList = (wordList, userId) => {
   wordListsManager.add({
     ...wordList,
     slug: slugify(wordList.name),
-    addedDate: firebase.database.ServerValue.TIMESTAMP
+    addedDate: firebase.database.ServerValue.TIMESTAMP,
+    order: 'asc'
   });
 };
 
-export const updateWordList = (newWordList, wordListId, userId) => {
+export const updateWordList = (propsToUpdate, wordListId, userId) => {
   let wordListManager = new Manager(`wordLists/${userId}/${wordListId}`);
-  wordListManager.update({
-    ...newWordList,
-    slug: slugify(newWordList.name)
-  });
+  wordListManager.update(propsToUpdate);
 };
 
 export const deleteWordList = (wordListId, userId, onComplete = () => {}) => {

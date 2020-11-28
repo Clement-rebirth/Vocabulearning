@@ -1,0 +1,41 @@
+.words {
+  display: flex;
+  flex-direction: column;
+}
+
+.words.reverse {
+  flex-direction: column-reverse;
+}
+
+.word-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.word-box > * {
+  display: flex;
+}
+
+.word-box .word {
+  flex: 2 2 0;
+}
+
+.word-box .separator {
+  flex: 1 1 0;
+  justify-content: center;
+}
+
+.word-box .translation {
+  flex: 3 3 0;
+  /* justify-content: flex-end; */
+  /* word-break: break-all; */
+}
+
+.words.invert {
+  
+}
+
+.words.hide-right-part {
+
+}

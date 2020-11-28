@@ -9,7 +9,6 @@ const WordListInfo = props => {
     openWordList,
     deleteList,
     userId,
-    updateList,
     setCloseCurrentFormFunc
   } = props;
 
@@ -51,7 +50,6 @@ const WordListInfo = props => {
             wordLists={wordLists}
             wordList={wordList}
             closeForm={closeEditForm}
-            updateList={updateList}
             userId={userId}
           />
         : (
