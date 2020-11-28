@@ -1,14 +1,16 @@
 import React from 'react';
 
+import { deleteWord } from '../../firebase/wordMethods';
+
 const WordCard = props => {
 
   const { 
     openWordForm, 
-    deleteWord, 
     currentWordListId, 
     currentWord,
     userId,
-    closeModal } = props;
+    closeModal 
+  } = props;
 
   let dateStr = null;
 

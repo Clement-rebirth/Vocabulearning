@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 
+import { addMultipleWords, addWord, updateWord } from '../../firebase/wordMethods';
+
 import './WordForm.css';
 
 const WordForm = props => {
 
-  const { 
-    addWord,
-    updateWord, 
+  const {
     currentWordListId, 
     userId, 
     wordToUpdate,
-    closeModal,
-    addMultipleWords } = props;
+    closeModal 
+  } = props;
 
   const [wordFormData, setWordFormData] = useState({
     word: wordToUpdate ? wordToUpdate.word : '',
