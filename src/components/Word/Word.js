@@ -1,14 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Word = ({ id, word, translation, lastRepetition, openWordCard, invertWordWithTrad }) => {
+const Word = props => {
+
+  const { 
+    id,
+    word,
+    translation,
+    lastRepetition,
+    openWordCard,
+    invertWordWithTrad,
+    showRightPart
+  } = props;
+
+  const [show, setShow] = useState(false);
+
+  const handleOpenWordCard = () => {
+    if (showRightPart) openWordCard({ id, word, translation, lastRepetition });
+  };
+
+  const handleClick = () => {
+    if (!showRightPart && !show) setShow(true);
+  };
+
+  useEffect(() => {
+    // if the user just toggled showRightPart
+    if (!showRightPart) setShow(false);
+  }, [showRightPart]);
+
+  let showClass = show ? 'show' : '';
+
   return (
     <div 
       className='word-box'
-      onClick={() => openWordCard({ id, word, translation, lastRepetition })}
+      onClick={handleOpenWordCard}
     >
-      <p className='word'>{ invertWordWithTrad ? translation : word }</p>
+      <div className='word'>
+        <p>{ invertWordWithTrad ? translation : word }</p>
+      </div>
       <div className='separator'><span>-&#62;</span></div>
-      <p className='translation'>{ invertWordWithTrad ? word : translation }</p>
+      <div className={`translation ${showClass}`}>
+        <p onClick={handleClick}>
+          <span>{ invertWordWithTrad ? word : translation }</span>
+        </p>
+      </div>
     </div>
   );
 }

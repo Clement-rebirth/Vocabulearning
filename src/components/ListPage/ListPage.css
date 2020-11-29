@@ -9,7 +9,7 @@
 
 .word-box {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -19,23 +19,29 @@
 
 .word-box .word {
   flex: 2 2 0;
+  justify-content: flex-end;
+}
+
+.word-box .word p,
+.word-box .translation p {
+  width: 100px;
+  overflow-wrap: break-word;
 }
 
 .word-box .separator {
-  flex: 1 1 0;
+  flex: 0 0 50px;
   justify-content: center;
 }
 
 .word-box .translation {
-  flex: 3 3 0;
-  /* justify-content: flex-end; */
-  /* word-break: break-all; */
+  flex: 2 2 0;
 }
 
-.words.invert {
-  
+.words.hide-right-part .word-box .translation:not(.show) p {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
 }
 
-.words.hide-right-part {
-
+.words.hide-right-part .word-box .translation:not(.show) p span {
+  opacity: 0;
 }

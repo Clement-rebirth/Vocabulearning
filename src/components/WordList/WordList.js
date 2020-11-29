@@ -55,6 +55,7 @@ const WordList = props => {
         { words 
           ? Object.keys(words).map(key => (
               <Word
+                showRightPart={showRightPart}
                 invertWordWithTrad={invertWordWithTrad}
                 key={key}
                 id={key}
