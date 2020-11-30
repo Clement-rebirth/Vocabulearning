@@ -88,6 +88,10 @@
 
 /* Register & Login */
 
+.auth-modal {
+  width: 100%;
+}
+
 .register .link,
 .login .link {
   font-size: 1rem;

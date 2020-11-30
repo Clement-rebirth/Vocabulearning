@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { signOut } from './firebase/userMethods';
+import { Redirect, useHistory, useLocation, useParams } from 'react-router-dom';
+import { signOut } from './firebase/authMethods';
 import { UserContext } from './providers/UserProvider';
 import Manager from './firebase/Manager';
 import { addWordList } from './firebase/wordListMethods';
@@ -31,9 +31,11 @@ const App = () => {
   const [executeSearch, setExecuteSearch] = useState(false);
   
   let history = useHistory();
-  let user = useContext(UserContext);
+  let { user, setUser } = useContext(UserContext);
   let { slug } = useParams();
-  
+  let location = useLocation();
+  let redirectAfterAuth = location.state && location.state.redirectAfterAuth;
+
   // to get the list the user wants to see
   const defineCurrentListFromSlug = useCallback(() => {
     // if word lists hasn't been loaded
@@ -63,6 +65,7 @@ const App = () => {
 
   const handleSignOut = () => {
     signOut(() => {
+      setUser(false);
       history.replace(ROUTES.LANDING);
     }, error => {
       console.log('logout error : ', error);
@@ -185,12 +188,13 @@ const App = () => {
     return () => userWordListsManager.close();
   }, [user]);
 
-  if (!user) {
-    return <Loading />;
-  }
+
+  if (user === false && !redirectAfterAuth) return <Redirect to={ROUTES.LANDING} />;
+  
+  if (user === null || wordListsToShow === false) return <Loading />;
 
   return (
-    <>
+    <div className='app'>
       <SearchBar
         handleSearch={handleSearch}
         search={search}
@@ -225,7 +229,7 @@ const App = () => {
           disableSearchMode={() => setSearchMode(false)}
         />
       </Route>
-    </>
+    </div>
   );
 }
 

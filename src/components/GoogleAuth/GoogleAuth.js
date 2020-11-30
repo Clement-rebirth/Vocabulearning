@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { googleSignIn } from '../../firebase/userMethods';
+import { googleSignIn } from '../../firebase/authMethods';
 
 import { ROUTES } from '../../constants';
 
@@ -10,7 +10,7 @@ const GoogleAuth = ({ text }) => {
 
   const handleGoogleSignIn = () => {
     googleSignIn(() => {
-      history.push(ROUTES.HOME);
+      history.replace(ROUTES.HOME, { redirectAfterAuth: true });
     }, error => {
       console.log({
         code: error.code,

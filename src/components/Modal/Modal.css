@@ -13,13 +13,10 @@
 
 .modal {
   background-color: var(--main-bg-color);
-  /* border-radius: 12px; */
+  box-sizing: border-box;
   padding: 8px 24px;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  border-radius: 6px;
 }
 
 .modal h2 {

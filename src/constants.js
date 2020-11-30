@@ -6,4 +6,4 @@ export const ROUTES = {
   HOME: '/app',
   DISPLAY_ONE_LIST: '/app/:slug',
   LEARN: '/app/learn'
-} ;
+};

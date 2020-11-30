@@ -40,6 +40,8 @@
 .words.hide-right-part .word-box .translation:not(.show) p {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .words.hide-right-part .word-box .translation:not(.show) p span {
