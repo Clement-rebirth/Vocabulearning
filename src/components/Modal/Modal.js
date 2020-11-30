@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Modal.css';
 
-const Modal = ({visible, handleClose, children}) => {
+const Modal = ({ visible, handleClose, className, children }) => {
 
   // add focus on the modal when open
 
@@ -16,7 +16,7 @@ const Modal = ({visible, handleClose, children}) => {
   if (visible) {
     modal = (
       <div onClick={e => {handleCloseModal(e)}} className='modal-overlay'>
-        <div className='modal'>
+        <div className={`modal ${className}`}>
           <button onClick={handleClose} className='close-modal'>
             <i className='icon close-icon'></i>
           </button>
