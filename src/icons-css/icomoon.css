@@ -25,9 +25,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.close-icon:before {
-  content: "\e900";
-}
 .google-g-icon .path1:before {
   content: "\e901";
   color: rgb(255, 193, 7);
@@ -46,10 +43,4 @@
   content: "\e904";
   margin-left: -1em;
   color: rgb(25, 118, 210);
-}
-.visibility-icon:before {
-  content: "\e905";
-}
-.visibility-off-icon:before {
-  content: "\e906";
 }

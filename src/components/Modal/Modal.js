@@ -18,7 +18,7 @@ const Modal = ({ visible, handleClose, className, children }) => {
       <div onClick={e => {handleCloseModal(e)}} className='modal-overlay'>
         <div className={`modal ${className}`}>
           <button onClick={handleClose} className='close-modal'>
-            <i className='icon close-icon'></i>
+            <i className='close-icon material-icons-round'>close</i>
           </button>
           { children }
         </div>

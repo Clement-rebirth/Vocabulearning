@@ -1,11 +1,16 @@
 import React from 'react';
 
-const Loading = () => {
-  return (
-    <div className='loading'>
-      Chargement...
+import './Loading.css';
+
+const Loading = () => (
+  <div className='loading'>
+    <div className="dots">
+      <div className="dot"></div>
+      <div className="dot"></div>
+      <div className="dot"></div>
     </div>
-  );
-}
+    <p>Chargement...</p>
+  </div>
+);
 
 export default Loading;
