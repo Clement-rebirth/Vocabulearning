@@ -23,7 +23,7 @@ const WordForm = props => {
   });
 
   const [updateMode] = useState(!!wordToUpdate);
-  const [multiAddMode, setMultiAddMode] = useState(false);
+  const [importListMode, setImportListMode] = useState(false);
 
   /**
    * creates and returns word objects from list
@@ -146,11 +146,11 @@ const WordForm = props => {
     <>
       <form 
         className='word-form'
-        onSubmit={ multiAddMode ? handleMultipleWordsSubmit : handleSubmit } 
+        onSubmit={ importListMode ? handleMultipleWordsSubmit : handleSubmit } 
       >
-        { multiAddMode && !updateMode ? (
+        { importListMode && !updateMode ? (
           <div>
-            <label htmlFor='multi-words'>Liste de mots (1 mot par ligne)</label>
+            <label htmlFor='multi-words'>Coller votre liste de mots (1 mot par ligne)</label>
             <textarea 
               name='words' 
               id='multi-words'
@@ -201,10 +201,10 @@ const WordForm = props => {
         ) }
         { !updateMode &&
           <button 
-            onClick={() => setMultiAddMode(!multiAddMode)} 
+            onClick={() => setImportListMode(!importListMode)} 
             type='button'
           >
-            Multi
+            Importer une liste
           </button>
         }
         <button onClick={closeModal} type='button'>Annuler</button>

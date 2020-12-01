@@ -139,6 +139,12 @@ input, button, textarea {
   border: 1px solid transparent;
 }
 
+input:focus,
+button:focus,
+textarea:focus {
+  border: 1px solid var(--main-color-dark, --main-color);
+}
+
 form input:focus,
 form input.invalid:focus,
 textarea:focus {

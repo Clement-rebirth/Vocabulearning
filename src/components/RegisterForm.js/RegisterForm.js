@@ -104,8 +104,11 @@ const RegisterForm = ({ history }) => {
             onChange={handleChange} />
           <div 
             onClick={() => setshowPassword(!showPassword)}
-            className='show-password-btn'>
-            <i className={ showPassword ? 'icon visibility-icon' : 'icon visibility-off-icon' }></i>
+            className='show-password-btn'
+          >
+            <i className='eye-icon material-icons-round'>
+              { showPassword ? 'visibility' : 'visibility_off' }
+            </i>
           </div>
         </div>
         <small className='invalid-message'>{ registerFormData.passwordError }</small>
