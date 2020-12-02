@@ -188,8 +188,6 @@ const App = () => {
     return () => userWordListsManager.close();
   }, [user]);
 
-  return <Loading />;
-
   if (user === false && !redirectAfterAuth) return <Redirect to={ROUTES.LANDING} />;
   
   if (user === null || wordListsToShow === false) return <Loading />;
