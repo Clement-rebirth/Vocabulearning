@@ -64,7 +64,8 @@ const WordListsInfo = props => {
             show={addFormIsShow}
             wordLists={wordLists}
             userId={userId}
-            closeForm={closeAddForm} />
+            closeForm={closeAddForm} 
+          />
           <button 
             className={`add-list-btn ${addFormIsShow ? 'd-none' : ''}`} 
             onClick={openAddForm}
@@ -77,19 +78,22 @@ const WordListsInfo = props => {
 
       { wordListsInfo }
 
-      <NothingToShow
-        className={!wordListsInfo && searchMode ? 'd-none' : 'no-list-to-show'}
-        message="Vous n'avez aucune liste"
-        src={emptyDataImg}
-        alt='empty'
-      /> 
+      { !wordListsInfo && !searchMode &&
+        <NothingToShow
+          className='no-list-to-show'
+          message="Vous n'avez aucune liste"
+          src={emptyDataImg}
+          alt='empty'
+        /> 
+      }
       
-      <NothingToShow
-        className={!wordListsInfo && !searchMode ? 'd-none' : ''}
-        message='Aucune liste ne contient le mot que vous recherchez'
-        src={noResultFoundImg}
-        alt='void'
-      />
+      { !wordListsInfo && searchMode &&
+        <NothingToShow
+          message='Aucune liste ne contient le mot que vous recherchez'
+          src={noResultFoundImg}
+          alt='void'
+        />
+      }
     </div>
   );
 }
