@@ -41,6 +41,10 @@ const WordListInfo = props => {
     } while (!quit && text !== wordToEnter);
   };
 
+  const handleOpenWordList = e => {
+    if (e.target.classList.contains('allow-click')) openWordList(wordList.slug);
+  };
+
   let nbWords = wordList.words ? Object.keys(wordList.words).length : 0;
 
   return (
@@ -55,12 +59,12 @@ const WordListInfo = props => {
             userId={userId}
           />
         : (
-          <div className='word-list-info'>
-            <h2 className='name' onClick={() => openWordList(wordList.slug)}>
+          <div className='word-list-info allow-click' onClick={handleOpenWordList}>
+            <h2 className='name allow-click'>
               { wordList.name }
             </h2>
 
-            <span className='nb-words'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
+            <span className='nb-words allow-click'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
 
             <div className='actions'>
               <button

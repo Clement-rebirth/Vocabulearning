@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { slugify } from '../../utils/utils';
 import { 
@@ -8,9 +8,16 @@ import {
 
 const WordListForm = ({ closeForm, wordList, userId, wordLists, className, show }) => {
 
-  const [listName, setListName] = useState(wordList ? wordList.name : '');
+  const initialValue = wordList ? wordList.name : '';
+
+  const [listName, setListName] = useState(initialValue);
   const [listNameError, setListNameError] = useState(null);
   const [updateMode] = useState(!!wordList);
+
+  useEffect(() => {
+    setListName(initialValue);
+    setListNameError(null);
+  }, [show, initialValue]);
 
   const validate = name => {
     let error;
