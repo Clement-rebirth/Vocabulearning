@@ -1,0 +1,40 @@
+.search-bar {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  left: 15px;
+}
+
+.search-bar input {
+  display: block;
+  width: 100%;
+  padding: 8px 50px 8px 50px;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: var(--main-text-color);
+  background-color: var(--third-bg-color);
+}
+
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.search-bar #open-menu,
+.search-bar .clear-search {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.search-bar #open-menu {
+  left: 6px;
+}
+
+.search-bar .clear-search {
+  right: 6px;
+}

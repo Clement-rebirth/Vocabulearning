@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 
 import { deleteWordList } from '../../firebase/wordListMethods';
 
+import NothingToShow from '../NothingToShow/NothingToShow';
 import WordListForm from '../WordListForm/WordListForm';
 import WordListInfo from '../WordListInfo/WordListInfo';
+
+import noResultFoundImg from '../../img/illustrations/undraw-void-dark-yellow.svg';
+import emptyDataImg from '../../img/illustrations/undraw-empty-dark-yellow.svg';
 
 const WordListsInfo = props => {
 
@@ -54,22 +58,38 @@ const WordListsInfo = props => {
 
   return (
     <div className='word-lists'>
-      { wordListsInfo
-        ? wordListsInfo
-        : <p className='no-list'>
-            { searchMode ? 'Aucun résultat trouvé' : `Vous n'avez aucune liste` }
-          </p>
-      }
-      
-      { addFormIsShow 
-        ? <WordListForm 
+      { !searchMode &&
+        <>
+          <WordListForm
+            show={addFormIsShow}
             wordLists={wordLists}
             userId={userId}
             closeForm={closeAddForm} />
-        : <button className='add-list-btn' onClick={openAddForm}>
-            + Ajouter une liste
+          <button 
+            className={`add-list-btn ${addFormIsShow ? 'd-none' : ''}`} 
+            onClick={openAddForm}
+          >
+            <span className='material-icons-round'>add</span> 
+            Ajouter une liste
           </button>
+        </>
       }
+
+      { wordListsInfo }
+
+      <NothingToShow
+        className={!wordListsInfo && searchMode ? 'd-none' : 'no-list-to-show'}
+        message="Vous n'avez aucune liste"
+        src={emptyDataImg}
+        alt='empty'
+      /> 
+      
+      <NothingToShow
+        className={!wordListsInfo && !searchMode ? 'd-none' : ''}
+        message='Aucune liste ne contient le mot que vous recherchez'
+        src={noResultFoundImg}
+        alt='void'
+      />
     </div>
   );
 }

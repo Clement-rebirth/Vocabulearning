@@ -38,8 +38,14 @@ const WordCard = props => {
 
       <div className='bottom'>
         <span className='time'>{ dateStr ? dateStr : 'Pas encore révisé' }</span>
-        <button className='edit' onClick={openWordForm}>Modifier</button>
-        <button onClick={handleDelete} className='supprimer'>Supprimer</button>
+        <button className='edit' onClick={openWordForm}>
+          Modifier
+          <span className='material-icons-round'>edit</span>
+        </button>
+        <button onClick={handleDelete} className='delete'>
+          Supprimer
+          <span className='material-icons-round'>delete</span>
+        </button>
       </div>
     </div>
   );

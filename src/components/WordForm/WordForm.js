@@ -199,11 +199,13 @@ const WordForm = props => {
             </div>
           </>
         ) }
-        { !updateMode &&
+        { !updateMode && !importListMode &&
           <button 
+            className='import-list'
             onClick={() => setImportListMode(!importListMode)} 
             type='button'
           >
+            <span className='material-icons-round'>system_update_alt</span>
             Importer une liste
           </button>
         }

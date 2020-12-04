@@ -5,6 +5,8 @@ import Loading from '../Loading/Loading';
 
 import { ROUTES } from '../../constants';
 
+import './AllListsPage.css';
+
 const AllListsPage = props => {
 
   const {

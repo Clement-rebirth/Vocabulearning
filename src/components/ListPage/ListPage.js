@@ -99,9 +99,25 @@ const ListPage = props => {
       </Modal>
 
       <footer>
-        <button onClick={toggleInvertWordWithTrad}>ordre</button>
-        <button onClick={openWordForm}>Ajouter un mot</button>
-        <button onClick={toggleShowRightPart}>Masquer</button>
+        <button 
+          className={`invert-word-with-trad ${invertWordWithTrad && 'enable'}`} 
+          onClick={toggleInvertWordWithTrad}
+        >
+          <span className='material-icons-round'>swap_horiz</span>
+        </button>
+
+        <button className='add-word' onClick={openWordForm}>
+          <span className='material-icons-round'>add</span>
+        </button>
+
+        <button 
+          className={`hide-right-part ${showRightPart && 'enable'}`} 
+          onClick={toggleShowRightPart}
+        >
+          <span className='material-icons-round'>
+            { showRightPart ? 'visibility' : 'visibility_off' }
+          </span>
+        </button>
       </footer>
 
       <button id='start-learning-mode' onClick={startLearningMode}>
