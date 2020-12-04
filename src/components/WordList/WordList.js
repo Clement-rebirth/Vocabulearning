@@ -34,7 +34,9 @@ const WordList = props => {
 
   return (
     <div className='word-list'>
-      <button onClick={backHome}>Retour</button>
+      <button aria-label='retour à la page d&#39;accueil' onClick={backHome}>
+        <span className='material-icons-round'>arrow_back</span>
+      </button>
       
       <h2>
         { name } 
@@ -44,11 +46,31 @@ const WordList = props => {
       <div className='options'>
         <button 
           onClick={() => toggleListOrder(order, wordList.id, userId)}
+          className='order'
         >
           ordre
+          <span className='material-icons-round'>
+            { order === 'asc' ? 'arrow_drop_down' : 'arrow_drop_up' }
+          </span>
         </button>
-        <button onClick={toggleInvertWordWithTrad}>en &lt;-&gt; fr</button>
-        <button onClick={toggleShowRightPart}>Masquer</button>
+
+        <button 
+          onClick={toggleInvertWordWithTrad}
+          className='invert-word-with-trad'
+        >
+          { invertWordWithTrad ? 'fr' : 'en' }
+          <span className='material-icons-round'>swap_horiz</span>
+          { invertWordWithTrad ? 'en' : 'fr' }
+        </button>
+
+        <button 
+          onClick={toggleShowRightPart}
+        >
+          Masquer
+          <span className='material-icons-round'>
+            { showRightPart ? 'visibility' : 'visibility_off' }
+          </span>
+        </button>
       </div>
 
       <div className={`words ${reverseClass} ${invertClass} ${hideRightPartClass}`}>
@@ -63,7 +85,7 @@ const WordList = props => {
                 {...words[key]}
               />
             ))
-          : <p className='no-word'>
+          : <p className={ searchMode ? 'no-result' : 'no-word' }>
               { searchMode ? 'Aucun résultat ne correspond à votre recherche' : 'Votre liste ne contient aucun mot' }
             </p>
         }

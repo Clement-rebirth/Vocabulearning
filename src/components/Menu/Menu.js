@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import './Menu.css';
 
 const Menu = ({ isShow, handleClose, handleSignOut }) => {
 
@@ -6,17 +8,30 @@ const Menu = ({ isShow, handleClose, handleSignOut }) => {
     if (e.currentTarget === e.target) handleClose();
   };
 
+  useEffect(() => {
+    let newValue = isShow ? 'hidden' : 'visible';
+    document.body.style.overflow = newValue;
+  }, [isShow]);
+
   let menu = null;
 
   if (isShow) {
     menu = (
       <>
-        <div onClick={handleOverlayClick} id='menu-overlay' className='overlay'></div>
+        <div onClick={handleOverlayClick} id='menu-overlay'></div>
         <aside className='menu'>
-          <button onClick={handleClose}>Fermer</button>
+          <div className='top'>
+            <button className='close-menu' onClick={handleClose}>
+              <span className='material-icons-round'>close</span>
+            </button>
+            <h1><span>VocabuLearning</span></h1>
+          </div>
           <nav>
             <ul>
-              <li><span onClick={handleSignOut}>Se déconnecter</span></li>
+              <li className='sign-out' onClick={handleSignOut}>
+                <span className='material-icons-round'>exit_to_app</span>
+                Se déconnecter
+              </li>
             </ul>
           </nav>
         </aside>

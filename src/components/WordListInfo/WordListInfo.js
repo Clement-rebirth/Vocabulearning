@@ -47,6 +47,8 @@ const WordListInfo = props => {
     <>
       { showEditForm
         ? <WordListForm
+            show={showEditForm}
+            className='edit-word-list'
             wordLists={wordLists}
             wordList={wordList}
             closeForm={closeEditForm}
@@ -54,16 +56,27 @@ const WordListInfo = props => {
           />
         : (
           <div className='word-list-info'>
-            <h2 onClick={() => openWordList(wordList.slug)}>
+            <h2 className='name' onClick={() => openWordList(wordList.slug)}>
               { wordList.name }
-              <span className='nb-words'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
             </h2>
 
+            <span className='nb-words'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
+
             <div className='actions'>
-              <button className='edit-word-list' onClick={openEditForm}>
-                Modifier
+              <button
+                aria-label='modifier la liste'
+                className='edit-word-list' 
+                onClick={openEditForm}
+              >
+                <span className='material-icons-round'>edit</span>
               </button>
-              <button className='delete-word-list' onClick={handleDeleteList}>Supprimer</button>
+              <button 
+                aria-label='supprimer la liste'
+                className='delete-word-list' 
+                onClick={handleDeleteList}
+              >
+                <span className='material-icons-round'>delete_outline</span>
+              </button>
             </div>
           </div>
         )

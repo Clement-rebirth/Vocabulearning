@@ -23,7 +23,8 @@ body.dark {
 
   --main-bg-color: var(--main-dark-color);
   --second-bg-color: #2c3034;
-  --third-bg-color: #313438;
+  --third-bg-color: #31353b;
+  /* --third-bg-color: #313438; */
   /* --main-bg-color: #121212;
   --second-bg-color: #1d1d1d;
   --third-bg-color: #212121; */
@@ -35,6 +36,7 @@ body.dark {
   --light-text-color: #fff;
   
   --invalid-color: #c0392b;
+  --danger-color: #c95959;
 }
 
 body.light {
@@ -49,6 +51,7 @@ body.light {
   --light-text-color: #fff;
 
   --invalid-color: #c0392b;
+  --danger-color: #e40000;
 }
 
 /* END CSS VARIABLES */
@@ -120,6 +123,10 @@ b, strong {
   font-size: 1.15rem;
 }
 
+.d-none {
+  display: none;
+}
+
 /* END global styles */
 
 /* form */
@@ -139,24 +146,36 @@ input, button, textarea {
   border: 1px solid transparent;
 }
 
+input.bd-bottom-only {
+  background-color: transparent;
+  color: var(--main-text-color);
+  border-width: 0 0 2px;
+  border-color: var(--third-bg-color);
+  transition-duration: 0.3s;
+}
+
+input.bd-bottom-only::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 input:focus,
 button:focus,
 textarea:focus {
-  border: 1px solid var(--main-color-dark, --main-color);
+  border-color: var(--main-color-dark, --main-color);
 }
 
-form input:focus,
+/* form input:focus,
 form input.invalid:focus,
 textarea:focus {
   border: 1px solid var(--main-color-dark, --main-color);
-}
+} */
 
-button:focus {
-  border: 1px solid var(--main-bg-color);
+input.bd-bottom-only:focus {
+  border-color: var(--main-color-dark, --main-color);
 }
 
 form input.invalid {
-  border: 1px solid var(--invalid-color);
+  border-color: var(--invalid-color);
 }
 
 form input {
