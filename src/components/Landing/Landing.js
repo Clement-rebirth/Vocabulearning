@@ -32,7 +32,7 @@ const Home = () => {
           <h1>Vocabu<br />Learning</h1>
           <p>Apprendre du vocabulaire n'a jamais été aussi simple</p>
           <div className='auth'>
-            <Link className='btn register' to={ROUTES.SIGN_UP}>S'inscrire</Link>
+            <Link className='register' to={ROUTES.SIGN_UP}>S'inscrire</Link>
             <p className='login'>
               Déjà inscrit ? <Link to={ROUTES.SIGN_IN}>Se connecter</Link>
             </p>

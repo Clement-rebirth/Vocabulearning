@@ -35,23 +35,23 @@
   margin-left: 15px;
 }
 
-.actions button {
+.word-list-info .actions button {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: transparent;
 }
 
-.actions .edit-word-list span,
-.actions .delete-word-list span {
+.word-list-info .actions .edit-word-list span,
+.word-list-info .actions .delete-word-list span {
   font-size: 1.4rem;
 }
 
-.actions .edit-word-list {
+.word-list-info .actions .edit-word-list {
   color: var(--main-color-dark, --main-color);
 }
 
-.actions .delete-word-list {
+.word-list-info .actions .delete-word-list {
   color: var(--danger-color);
 }
 
