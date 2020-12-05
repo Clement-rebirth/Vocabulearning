@@ -15,9 +15,11 @@
 .modal {
   background-color: var(--main-bg-color);
   box-sizing: border-box;
-  padding: 8px 24px;
+  padding: 8px 24px 16px;
   position: absolute;
   border-radius: 6px;
+  width: 100%;
+  max-width: 500px;
 }
 
 .modal h2 {

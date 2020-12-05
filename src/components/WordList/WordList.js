@@ -1,8 +1,12 @@
 import React from 'react';
 
 import Word from '../Word/Word';
+import NothingToShow from '../NothingToShow/NothingToShow';
 
 import { ROUTES } from '../../constants';
+
+import noResultFoundImg from '../../img/illustrations/undraw-void-dark-yellow.svg';
+import emptyDataImg from '../../img/illustrations/undraw-empty-dark-yellow.svg';
 
 const WordList = props => {
 
@@ -21,12 +25,25 @@ const WordList = props => {
     toggleInvertWordWithTrad
   } = props;
 
-  let { order, name, words } = wordList;
-
   const backHome = () => {
     history.replace(ROUTES.HOME);
     disableSearchMode();
   };
+
+  let { order, name, words = null } = wordList;
+
+  if (words) {
+    words = Object.keys(words).map(key => (
+      <Word
+        showRightPart={showRightPart}
+        invertWordWithTrad={invertWordWithTrad}
+        key={key}
+        id={key}
+        openWordCard={openWordCard}
+        {...words[key]}
+      />
+    ));
+  }
 
   let reverseClass = order === 'desc' ? 'reverse' : '';
   let invertClass = invertWordWithTrad ? 'invert' : '';
@@ -34,7 +51,11 @@ const WordList = props => {
 
   return (
     <div className='word-list'>
-      <button aria-label='retour à la page d&#39;accueil' onClick={backHome}>
+      <button 
+        className='back-home' 
+        aria-label='retour à la page d&#39;accueil' 
+        onClick={backHome}
+      >
         <span className='material-icons-round'>arrow_back</span>
       </button>
       
@@ -63,10 +84,11 @@ const WordList = props => {
           { invertWordWithTrad ? 'en' : 'fr' }
         </button>
 
-        <button 
+        <button
+          className='hide-right-part-btn'
           onClick={toggleShowRightPart}
         >
-          Masquer
+          cacher
           <span className='material-icons-round'>
             { showRightPart ? 'visibility' : 'visibility_off' }
           </span>
@@ -74,20 +96,24 @@ const WordList = props => {
       </div>
 
       <div className={`words ${reverseClass} ${invertClass} ${hideRightPartClass}`}>
-        { words 
-          ? Object.keys(words).map(key => (
-              <Word
-                showRightPart={showRightPart}
-                invertWordWithTrad={invertWordWithTrad}
-                key={key}
-                id={key}
-                openWordCard={openWordCard}
-                {...words[key]}
-              />
-            ))
-          : <p className={ searchMode ? 'no-result' : 'no-word' }>
-              { searchMode ? 'Aucun résultat ne correspond à votre recherche' : 'Votre liste ne contient aucun mot' }
-            </p>
+        
+        { words }
+
+        { !words && !searchMode &&
+          <NothingToShow
+            className='no-word'
+            message='Votre liste ne contient aucun mot'
+            src={emptyDataImg}
+            alt='empty'
+          /> 
+        }
+
+        { !words && searchMode &&
+          <NothingToShow
+            message='Aucun mot ne correspond à votre recherche'
+            src={noResultFoundImg}
+            alt='void'
+          />
         }
       </div>
     </div>

@@ -149,9 +149,10 @@ const WordForm = props => {
         onSubmit={ importListMode ? handleMultipleWordsSubmit : handleSubmit } 
       >
         { importListMode && !updateMode ? (
-          <div>
+          <div className='list-field'>
             <label htmlFor='multi-words'>Coller votre liste de mots (1 mot par ligne)</label>
-            <textarea 
+            <textarea
+              className='form-elt'
               name='words' 
               id='multi-words'
               required
@@ -159,7 +160,7 @@ const WordForm = props => {
               onChange={handleChange}
               placeholder='mot en anglais : traduction(s)'
             ></textarea>
-            <small className={ wordFormData.wordsError && 'invalid-message' }>
+            <small className={ wordFormData.wordsError ? 'invalid-message' : '' }>
               { wordFormData.wordsError && wordFormData.wordsError }
             </small>
             <ul className='info'>
@@ -169,11 +170,11 @@ const WordForm = props => {
           </div>
         ) : (
           <>
-            <div>
-              <label htmlFor='word'>Votre mot :</label>
+            <div className='word-field'>
+              {/* <label htmlFor='word'>Votre mot :</label> */}
               <input
                 id='word'
-                className={wordFormData.wordError && 'invalid'}
+                className={`bd-bottom-only ${wordFormData.wordError && 'invalid'}`}
                 type='text'
                 required
                 placeholder='En anglais'
@@ -183,11 +184,11 @@ const WordForm = props => {
               />
               <small className='invalid-message'>{ wordFormData.wordError }</small>
             </div>
-            <div>
-              <label htmlFor='translation'>Traduction(s) du mot :</label>
+            <div className='translation-field'>
+              {/* <label htmlFor='translation'>Traduction(s) du mot :</label> */}
               <input
                 id='translation'
-                className={wordFormData.translationError && 'invalid'}
+                className={`bd-bottom-only ${wordFormData.translationError && 'invalid'}`}
                 type='text'
                 required
                 placeholder='En français'
@@ -199,18 +200,24 @@ const WordForm = props => {
             </div>
           </>
         ) }
-        { !updateMode && !importListMode &&
-          <button 
-            className='import-list'
-            onClick={() => setImportListMode(!importListMode)} 
-            type='button'
-          >
-            <span className='material-icons-round'>system_update_alt</span>
-            Importer une liste
+        <div className='actions'>
+          { !updateMode && !importListMode &&
+            <button 
+              className='import-list bg-transparent text-primary'
+              onClick={() => setImportListMode(!importListMode)} 
+              type='button'
+            >
+              <span className='material-icons-round'>system_update_alt</span>
+              Importer
+            </button>
+          }
+          <button className='btn btn-text-primary' onClick={closeModal} type='button'>
+            Annuler
           </button>
-        }
-        <button onClick={closeModal} type='button'>Annuler</button>
-        <button type='submit'>{ updateMode ? 'Modifier' : 'Ajouter' }</button>
+          <button className='btn btn-primary' type='submit'>
+            { updateMode ? 'Modifier' : 'Ajouter' }
+          </button>
+        </div>
       </form>
     </>
   );

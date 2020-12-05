@@ -16,7 +16,7 @@ const Modal = ({ visible, handleClose, className, children }) => {
   if (visible) {
     modal = (
       <div onClick={e => {handleCloseModal(e)}} className='modal-overlay'>
-        <div className={`modal ${className}`}>
+        <div className={`modal ${className ? className : ''}`}>
           <button onClick={handleClose} className='close-modal'>
             <i className='close-icon material-icons-round'>close</i>
           </button>

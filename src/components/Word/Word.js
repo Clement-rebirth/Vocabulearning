@@ -37,7 +37,9 @@ const Word = props => {
       <div className='word'>
         <p>{ invertWordWithTrad ? translation : word }</p>
       </div>
-      <div className='separator'><span>-&#62;</span></div>
+      <div className='separator'>
+        <span className='material-icons-round'>east</span>
+      </div>
       <div className={`translation ${showClass}`}>
         <p onClick={handleClick}>
           <span>{ invertWordWithTrad ? word : translation }</span>

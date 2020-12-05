@@ -98,7 +98,7 @@ const ListPage = props => {
         />
       </Modal>
 
-      <footer>
+      <footer className='bottom-menu'>
         <button 
           className={`invert-word-with-trad ${invertWordWithTrad && 'enable'}`} 
           onClick={toggleInvertWordWithTrad}

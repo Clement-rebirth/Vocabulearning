@@ -1,5 +1,7 @@
 import React from 'react';
 
+import HorizontalBar from '../HorizontalBar/HorizontalBar';
+
 import { deleteWord } from '../../firebase/wordMethods';
 
 const WordCard = props => {
@@ -33,16 +35,19 @@ const WordCard = props => {
 
   return (
     <div className='word-card'>
-      <p className='word'>{ currentWord.word }</p>
-      <p className='translation'>{ currentWord.translation }</p>
-
+      <p className='word'>Anglais : { currentWord.word }</p>
+      <p className='translation'>Français : { currentWord.translation }</p>
+      
+      <HorizontalBar />
+      <p className='time'>{ dateStr ? dateStr : 'Pas encore révisé' }</p>
+      <HorizontalBar />
+      
       <div className='bottom'>
-        <span className='time'>{ dateStr ? dateStr : 'Pas encore révisé' }</span>
-        <button className='edit' onClick={openWordForm}>
+        <button className='edit btn btn-text-primary' onClick={openWordForm}>
           Modifier
           <span className='material-icons-round'>edit</span>
         </button>
-        <button onClick={handleDelete} className='delete'>
+        <button onClick={handleDelete} className='delete btn btn-text-danger'>
           Supprimer
           <span className='material-icons-round'>delete</span>
         </button>

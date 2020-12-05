@@ -1,10 +1,53 @@
+/* .word-list */
+
 .word-list {
   margin-top: 70px;
+  padding-bottom: 36px;
+}
+
+.word-list h2 {
+  font-size: 1.4rem;
+  margin: 15px 0 15px;
+}
+
+.word-list h2 .nb-words {
+  color: var(--secondary-text-color);
+  font-size: var(--text-size);
+}
+
+.word-list .options {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 6px;
+  background-color: var(--second-bg-color);
+  padding: 4px 5px;
+}
+
+.word-list .options button {
+  width: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background-color: transparent;
+  color: var(--secondary-text-color);
+  font-size: 1rem;
+}
+
+.word-list .options button.invert-word-with-trad span {
+  margin: 0 5px;
+}
+
+.word-list .options button.hide-right-part-btn span {
+  margin-left: 5px;
+  font-size: 20px;
 }
 
 .words {
   display: flex;
   flex-direction: column;
+  margin-top: 6px;
 }
 
 .words.reverse {
@@ -15,21 +58,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 6px;
+  background-color: var(--second-bg-color);
+  margin-bottom: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  overflow: auto;
 }
 
 .word-box > * {
   display: flex;
 }
 
-.word-box .word {
+.word-box .word,
+.word-box .translation {
   flex: 2 2 0;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
 }
 
 .word-box .word p,
 .word-box .translation p {
-  width: 100px;
-  overflow-wrap: break-word;
+  /* width: 100px; */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  display: inline;
+  margin: 0;
+  font-size: 1rem;
 }
 
 .word-box .separator {
@@ -37,8 +91,8 @@
   justify-content: center;
 }
 
-.word-box .translation {
-  flex: 2 2 0;
+.word-box .separator span {
+  font-size: 20px;
 }
 
 .words.hide-right-part .word-box .translation:not(.show) p {
@@ -50,4 +104,69 @@
 
 .words.hide-right-part .word-box .translation:not(.show) p span {
   opacity: 0;
+}
+
+/* .bottom-menu */
+
+.bottom-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(49, 53, 59, 0.9);
+  padding: 4px 15px;
+}
+
+.bottom-menu button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  color: var(--secondary-text-color);
+}
+
+.bottom-menu .add-word {
+  background-color: var(--main-color-dark, --main-color);
+  color: var(--main-dark-color);
+  padding: 1px;
+  border-radius: 6px;
+  margin: 0 20px;
+}
+
+/* .back-home */
+
+.back-home {
+  background-color: transparent;
+  color: var(--main-text-color);
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-home span {
+  font-size: 32px;
+}
+
+/* .word-card */
+
+.word-card .bottom {
+  display: flex;
+}
+
+.word-card .bottom .edit,
+.word-card .bottom .delete {
+  display: flex;
+  align-items: center;
+}
+
+.word-card .bottom .delete {
+  margin-left: 6px;
+}
+
+.word-card .word {
+  margin-top: 3px;
 }

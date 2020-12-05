@@ -68,7 +68,7 @@ body {
   color: var(--main-text-color);
 }
 
-p, a, label, input, button, div, small {
+p, a, label, input, button, div, small, textarea, input {
   font-family: var(--text-font);
 }
 
@@ -112,19 +112,67 @@ button {
   color: var(--invalid-color);
 }
 
+.text-danger {
+  color: var(--danger-color);
+}
+
+.text-primary {
+  color: var(--main-color-dark, --main-color);
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
 b, strong {
   font-weight: var(--bold-text-weight);
 }
 
-.btn {
-  text-decoration: none;
-  border: none;
-  border-radius: 50px;
-  font-size: 1.15rem;
-}
-
 .d-none {
   display: none;
+}
+
+.btn {
+  border-radius: 6px;
+  padding: 7px 6px;
+  transition-duration: 0.3s;
+}
+
+.btn-text-primary {
+  color: var(--main-color-dark, --main-color);
+  background-color: transparent;
+}
+
+.btn-text-danger {
+  color: var(--danger-color);
+  background-color: transparent;
+}
+
+.btn-primary {
+  background-color: var(--main-color-dark, --main-color);
+  color: var(--main-dark-color);
+}
+
+.btn-outline-primary {
+  color: var(--main-color-dark, --main-color);
+  background-color: transparent;
+  border: 1px solid var(--main-color-dark, --main-color);
+}
+
+.btn-text-danger:hover,
+.btn-text-danger:focus {
+  border: 1px solid var(--danger-color);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  border: 1px solid #000;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  color: var(--main-dark-color);
+  background-color: var(--main-color-dark, --main-color);
 }
 
 /* END global styles */
@@ -144,6 +192,17 @@ input, button, textarea {
   box-sizing: border-box;
   outline: none;
   border: 1px solid transparent;
+}
+
+.form-elt {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background-color: var(--second-bg-color);
+  color: var(--main-text-color);
+}
+
+.form-elt::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 input.bd-bottom-only {
@@ -178,7 +237,8 @@ form input.invalid {
   border-color: var(--invalid-color);
 }
 
-form input {
+form input,
+form textarea {
   font-size: 1rem;
   width: 100%;
 }
