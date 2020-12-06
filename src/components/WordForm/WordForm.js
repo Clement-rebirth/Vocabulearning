@@ -32,6 +32,7 @@ const WordForm = props => {
    */
   const generateWordsFromList = wordList => {
     wordList = wordList
+      .trim()
       .replace(/(\n|\r)+/g, '\n') // replaces multiple line breaks by one line break
       .split(/\n|\r/)
       .map(wordStr => {
@@ -166,6 +167,7 @@ const WordForm = props => {
             <ul className='info'>
               <li>les tirets sont acceptés en début de ligne</li>
               <li>plusieurs séparateurs sont acceptés (:, -&#62;, =)</li>
+              <li>Un seul séparateur par ligne</li>
             </ul>
           </div>
         ) : (
