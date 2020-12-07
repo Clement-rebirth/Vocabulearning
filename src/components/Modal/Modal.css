@@ -19,32 +19,16 @@
   position: absolute;
   border-radius: 6px;
   width: 100%;
-  max-width: 500px;
+  max-width: 420px;
 }
 
 .modal h2 {
   margin-top: 0;
-  position: relative;
-  /* text-align: center; */
-}
-
-.modal h2:after {
-  content: '';
-  position: absolute;
-  height: 3px;
-  background-color: var(--main-color-dark, --main-color);
-  left: 0;
-  bottom: 0;
-  width: 45%;
 }
 
 .close-modal {
-  /* position: absolute; */
-  /* top: 7px; */
-  /* right: 5px; */
   color: #fff;
   background-color: transparent;
-  /* z-index: 100; */
   display: flex;
   margin: 0 -18px 0 auto;
 }

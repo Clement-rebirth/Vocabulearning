@@ -13,7 +13,7 @@ const Login = () => {
 
   return (
     <div className='login'>
-      <h2>Connexion</h2>
+      <h2 className='underline-title'><span>Connexion</span></h2>
 
       <LoginForm history={history} />
       <HorizontalBar text='OU' />

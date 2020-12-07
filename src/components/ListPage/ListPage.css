@@ -106,9 +106,9 @@
   opacity: 0;
 }
 
-/* .bottom-menu */
+/* .options-bar */
 
-.bottom-menu {
+.options-bar {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -117,10 +117,10 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(49, 53, 59, 0.9);
-  padding: 4px 15px;
+  padding: 6px 15px;
 }
 
-.bottom-menu button {
+.options-bar button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -128,7 +128,7 @@
   color: var(--secondary-text-color);
 }
 
-.bottom-menu .add-word {
+.options-bar .add-word {
   background-color: var(--main-color-dark, --main-color);
   color: var(--main-dark-color);
   padding: 1px;

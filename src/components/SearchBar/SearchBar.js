@@ -34,22 +34,24 @@ const SearchBar = props => {
   );
 
   return (
-    <div className='search-bar'>
-      <button onClick={showMenu} id='open-menu' aria-label='ouvrir le menu'>
-        <span className='material-icons-round'>menu</span>
-      </button>
+    <div className='search-bar-container'>
+      <div className='search-bar'>
+        <button onClick={showMenu} id='open-menu' aria-label='ouvrir le menu'>
+          <span className='material-icons-round'>menu</span>
+        </button>
 
-      <input
-        name='search'
-        type='text'
-        autoComplete='off'
-        placeholder='Chercher un mot'
-        aria-label='Chercher un mot'
-        value={search}
-        onChange={handleChange}
-      />
+        <input
+          name='search'
+          type='text'
+          autoComplete='off'
+          placeholder='Chercher un mot'
+          aria-label='Chercher un mot'
+          value={search}
+          onChange={handleChange}
+        />
 
-      { search && clearBtn }
+        { search && clearBtn }
+      </div>
     </div>
   );
 }

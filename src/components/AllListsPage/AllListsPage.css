@@ -2,7 +2,6 @@
   margin-top: 75px;
 }
 
-
 /* .word-list-info */
 
 .word-list-info {
@@ -55,7 +54,6 @@
   color: var(--danger-color);
 }
 
-
 /* .add-list-btn */
 
 .add-list-btn {
@@ -78,7 +76,6 @@
   margin-right: 5px;
 }
 
-
 /* .word-list-form */
 
 .word-list-form {
@@ -92,6 +89,7 @@
 }
 
 .word-list-form form div {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -127,6 +125,10 @@
 
 .word-list-form.edit-word-list form input {
   border-color: rgba(255, 255, 255, 0.3);
+}
+
+.word-list-form.edit-word-list form input:focus {
+  border-color: var(--main-color-dark, --main-color);
 }
 
 .no-list-to-show {
