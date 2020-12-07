@@ -99,6 +99,20 @@ p {
   color: var(--main-text-color);
 }
 
+.underline-title span {
+  position: relative;
+}
+
+.underline-title span:after {
+  content: '';
+  position: absolute;
+  height: 3px;
+  background-color: var(--main-color-dark, --main-color);
+  left: 0;
+  bottom: 0;
+  width: 70%;
+}
+
 button {
   font-size: 1.1rem;
   cursor: pointer;
@@ -174,8 +188,6 @@ b, strong {
   color: var(--main-dark-color);
   background-color: var(--main-color-dark, --main-color);
 }
-
-/* END global styles */
 
 /* form */
 
@@ -260,5 +272,3 @@ form .invalid-message {
   line-height: 1.2;
   min-height: 1em;
 }
-
-/* END form */

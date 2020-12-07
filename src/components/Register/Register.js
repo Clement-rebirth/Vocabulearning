@@ -13,7 +13,7 @@ const Register = () => {
 
   return (
     <div className='register'>
-      <h2>Inscription</h2>
+      <h2 className='underline-title'><span>Inscription</span></h2>
 
       <RegisterForm history={history} />
       <HorizontalBar text='OU' />
