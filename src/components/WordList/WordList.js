@@ -22,7 +22,8 @@ const WordList = props => {
     invertWordWithTrad,
     toggleListOrder,
     toggleShowRightPart,
-    toggleInvertWordWithTrad
+    toggleInvertWordWithTrad,
+    openWordForm
   } = props;
 
   const backHome = () => {
@@ -51,7 +52,7 @@ const WordList = props => {
 
   return (
     <div className='word-list'>
-      <button 
+      <button
         className='back-home' 
         aria-label='retour à la page d&#39;accueil' 
         onClick={backHome}
@@ -59,10 +60,17 @@ const WordList = props => {
         <span className='material-icons-round'>arrow_back</span>
       </button>
       
-      <h2>
-        { name } 
-        <span className='nb-words'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
-      </h2>
+      <div className='list-header'>
+        <h2>
+          { name } 
+          <span className='nb-words'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
+        </h2>
+
+        <button className='btn btn-primary add-word' onClick={openWordForm}>
+          <span className='material-icons-round'>add</span>
+          <span className='btn-text'>Ajouter un mot</span>
+        </button>
+      </div>
   
       <div className='options'>
         <button 

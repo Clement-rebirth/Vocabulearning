@@ -34,7 +34,8 @@ const Home = () => {
           <div className='auth'>
             <Link className='register' to={ROUTES.SIGN_UP}>S'inscrire</Link>
             <p className='login'>
-              Déjà inscrit ? <Link to={ROUTES.SIGN_IN}>Se connecter</Link>
+              <span>Déjà inscrit ? </span>
+              <Link to={ROUTES.SIGN_IN}>Se connecter</Link>
             </p>
           </div>
         </div>
