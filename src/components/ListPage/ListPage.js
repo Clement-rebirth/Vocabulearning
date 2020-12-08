@@ -65,6 +65,7 @@ const ListPage = props => {
   return (
     <>
       <WordList
+        openWordForm={openWordForm}
         wordList={currentWordListToShow}
         userId={userId}
         searchMode={searchMode}

@@ -178,6 +178,11 @@ b, strong {
   border: 1px solid var(--danger-color);
 }
 
+.btn-text-primary:hover,
+.btn-text-primary:focus {
+  border: 1px solid var(--main-color-dark, --main-color);
+}
+
 .btn-primary:hover,
 .btn-primary:focus {
   border: 1px solid #000;
