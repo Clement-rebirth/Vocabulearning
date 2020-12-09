@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { slugify } from '../../utils/utils';
 import { 
@@ -13,6 +13,11 @@ const WordListForm = ({ closeForm, wordList, userId, wordLists, className, show 
   const [listName, setListName] = useState(initialValue);
   const [listNameError, setListNameError] = useState(null);
   const [updateMode] = useState(!!wordList);
+  let listNameInputRef = useRef(null);
+
+  useEffect(() => {
+    if (show) listNameInputRef.current.focus();
+  }, [show]);
 
   useEffect(() => {
     setListName(initialValue);
@@ -75,6 +80,7 @@ const WordListForm = ({ closeForm, wordList, userId, wordLists, className, show 
       <form onSubmit={updateMode ? handleSubmitUpdate : handleSubmit}>
         <div>
           <input
+            ref={listNameInputRef}
             value={listName}
             onChange={e => setListName(e.target.value)}
             className={`bd-bottom-only ${listNameError ? 'invalid' : ''}`}

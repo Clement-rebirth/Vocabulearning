@@ -62,6 +62,7 @@
   list-style-type: none;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .menu li .material-icons-round {

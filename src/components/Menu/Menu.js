@@ -28,7 +28,7 @@ const Menu = ({ isShow, handleClose, handleSignOut }) => {
           </div>
           <nav>
             <ul>
-              <li className='sign-out' onClick={handleSignOut}>
+              <li tabIndex='0' className='sign-out' onClick={handleSignOut}>
                 <span className='material-icons-round'>exit_to_app</span>
                 Se déconnecter
               </li>
