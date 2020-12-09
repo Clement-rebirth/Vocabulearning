@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { signUp } from '../../firebase/authMethods';
 import { emailIsValid } from '../../utils/utils';
 import { ROUTES } from '../../constants';
@@ -13,6 +13,11 @@ const RegisterForm = ({ history }) => {
   });
 
   const [showPassword, setshowPassword] = useState(false);
+  let emailInputRef = useRef(null);
+
+  useEffect(() => {
+    emailInputRef.current.focus();
+  }, []);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -79,7 +84,8 @@ const RegisterForm = ({ history }) => {
     <form onSubmit={handleSignUp}>
       <div>
         <label htmlFor='register-email'>Email</label>
-        <input 
+        <input
+          ref={emailInputRef}
           id='register-email'
           className={ registerFormData.emailError ? 'invalid' : null }
           placeholder='user@example.com'

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { addMultipleWords, addWord, updateWord } from '../../firebase/wordMethods';
 
@@ -24,6 +24,11 @@ const WordForm = props => {
 
   const [updateMode] = useState(!!wordToUpdate);
   const [importListMode, setImportListMode] = useState(false);
+  let wordFieldRef = useRef(null);
+
+  useEffect(() => {
+    wordFieldRef.current.focus();
+  }, [importListMode]);
 
   /**
    * creates and returns word objects from list
@@ -153,6 +158,7 @@ const WordForm = props => {
           <div className='list-field'>
             <label htmlFor='multi-words'>Coller votre liste de mots (1 mot par ligne)</label>
             <textarea
+              ref={wordFieldRef}
               className='form-elt'
               name='words' 
               id='multi-words'
@@ -175,6 +181,7 @@ const WordForm = props => {
             <div className='word-field'>
               {/* <label htmlFor='word'>Votre mot :</label> */}
               <input
+                ref={wordFieldRef}
                 id='word'
                 className={`bd-bottom-only ${wordFormData.wordError && 'invalid'}`}
                 type='text'

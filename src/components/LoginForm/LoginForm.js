@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { signIn } from '../../firebase/authMethods';
 import { ROUTES } from '../../constants';
 
@@ -10,6 +10,11 @@ const LoginForm = ({ history }) => {
   });
 
   const [showPassword, setshowPassword] = useState(false);
+  let emailInputRef = useRef(null);
+
+  useEffect(() => {
+    emailInputRef.current.focus();
+  }, []);
 
   const handleChange = e => {
     const { value, name } = e.target;
@@ -34,6 +39,7 @@ const LoginForm = ({ history }) => {
       <div>
         <label htmlFor='login-email'>Email</label>
         <input
+          ref={emailInputRef}
           id='login-email'
           placeholder='user@example.com'
           required
