@@ -9,6 +9,7 @@ export const addWord = (word, wordListId, userId) => {
 
   wordsManager.add({
     ...word,
+    nextRepetition: false,
     lastRepetition: false,
     lvl: 0,
     addedDate: firebase.database.ServerValue.TIMESTAMP
@@ -20,6 +21,7 @@ export const addMultipleWords = (words, wordListId, userId, onComplete = () => {
 
   words = words.map(word => ({
     ...word,
+    nextRepetition: false,
     lastRepetition: false,
     lvl: 0,
     addedDate: firebase.database.ServerValue.TIMESTAMP
