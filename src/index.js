@@ -9,6 +9,7 @@ import App from './App';
 import Landing from './components/Landing/Landing';
 import NotFound from './components/NotFound/NotFound';
 import UserProvider from './providers/UserProvider';
+import PopUpProvider from './providers/PopUpProvider';
 
 import { ROUTES } from './constants';
 
@@ -24,7 +25,9 @@ ReactDOM.render(
             <Landing />
           </Route>
           <Route path={[ROUTES.DISPLAY_ONE_LIST, ROUTES.HOME]}>
-            <App />
+            <PopUpProvider>
+              <App />
+            </PopUpProvider>
           </Route>
           <Route path={ROUTES.NOT_FOUND}>
             <NotFound />
