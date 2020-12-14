@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { PopUpContext } from '../../providers/PopUpProvider';
 
 import { addMultipleWords, addWord, updateWord } from '../../firebase/wordMethods';
 
@@ -24,6 +25,7 @@ const WordForm = props => {
 
   const [updateMode] = useState(!!wordToUpdate);
   const [importListMode, setImportListMode] = useState(false);
+  let { showPopUp } = useContext(PopUpContext);
   let wordFieldRef = useRef(null);
 
   useEffect(() => {
@@ -122,7 +124,10 @@ const WordForm = props => {
     });
 
     if (!errors.empty) return;
-    addMultipleWords(words, currentWordListId, userId, closeModal);
+    addMultipleWords(words, currentWordListId, userId, () => {
+      closeModal();
+      showPopUp('Tous les mots ont été ajoutés avec succès');
+    });
   };
 
   const handleSubmit = e => {
@@ -140,11 +145,16 @@ const WordForm = props => {
     if (!errors.empty) return;
 
     if (updateMode) {
-      updateWord({ word, translation }, currentWordListId, userId, wordToUpdate.id);
-      closeModal();
+      updateWord({ word, translation }, currentWordListId, userId, wordToUpdate.id, () => {
+        closeModal();
+        showPopUp('Le mot a bien été mis à jour');
+      });
     } else {
-      addWord({ word, translation }, currentWordListId, userId);
-      clear();
+      addWord({ word, translation }, currentWordListId, userId, () => {
+        clear();
+        wordFieldRef.current.focus();
+        showPopUp('Le mot a bien été ajouté');
+      });
     }
   };
 

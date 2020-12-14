@@ -1,7 +1,7 @@
 import Manager from './Manager';
 import firebase from './firebase';
 
-export const addWord = (word, wordListId, userId) => {
+export const addWord = (word, wordListId, userId, onComplete = () => {}) => {
   if (!word.word) throw new Error('word property must be define');
   if (!word.translation) throw new Error('translation property must be define');
   
@@ -13,7 +13,7 @@ export const addWord = (word, wordListId, userId) => {
     lastRepetition: false,
     lvl: 0,
     addedDate: firebase.database.ServerValue.TIMESTAMP
-  });
+  }, onComplete);
 };
 
 export const addMultipleWords = (words, wordListId, userId, onComplete = () => {}) => {
@@ -30,9 +30,9 @@ export const addMultipleWords = (words, wordListId, userId, onComplete = () => {
   wordsManager.multipleAdd(words, onComplete);
 };
 
-export const updateWord = (newWord, wordListId, userId, wordId) => {
+export const updateWord = (newWord, wordListId, userId, wordId, onComplete = () => {}) => {
   let wordManager = new Manager(`wordLists/${userId}/${wordListId}/words/${wordId}`);
-  wordManager.update(newWord);
+  wordManager.update(newWord, onComplete);
 };
 
 export const deleteWord = (wordListId, userId, wordId, onComplete = () => {}) => {

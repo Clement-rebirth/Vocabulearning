@@ -1,0 +1,89 @@
+.pop-ups-containers {
+  position: fixed;
+  z-index: 10000;
+  bottom: 15px;
+  left: 15px;
+  right: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.pop-up-message {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: rgb(17, 17, 17);
+  padding: 15px 12px;
+  margin-top: 6px;
+  pointer-events: auto;
+  max-width: 500px;
+  border-radius: 6px;
+  transform-origin: bottom;
+  overflow: hidden;
+}
+
+.pop-up-message .status {
+  font-size: 32px;
+}
+
+.pop-up-message.success .status {
+  color: var(--valid-color);
+}
+
+.pop-up-message.error .status {
+  color: var(--invalid-color);
+}
+
+.pop-up-message p {
+  margin: 0 15px 0 20px;
+}
+
+.pop-up-message .close-pop-up {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.pop-up-message .close-pop-up span {
+  font-size: 25px;
+  color: var(--main-text-color);
+}
+
+@media all and (max-width: 425px) {
+  .pop-ups-containers {
+    bottom: 5px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .pop-up-message {
+    padding: 8px 6px 8px 10px;
+  }
+
+  .pop-up-message .status {
+    font-size: 26px;
+  }
+
+  .pop-up-message p {
+    font-size: 0.9rem;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .pop-ups-containers {
+    bottom: 5px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .pop-up-message {
+    padding: 10px 6px 10px 10px;
+  }
+
+  .pop-up-message p {
+    font-size: 1rem;
+  }
+}

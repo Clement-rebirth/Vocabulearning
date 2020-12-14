@@ -37,6 +37,7 @@ body.dark {
   
   --invalid-color: #c0392b;
   --danger-color: #c95959;
+  --valid-color: #239B56;
 }
 
 body.light {
@@ -52,6 +53,7 @@ body.light {
 
   --invalid-color: #c0392b;
   --danger-color: #e40000;
+  --valid-color: #28B463;
 }
 
 /* END CSS VARIABLES */

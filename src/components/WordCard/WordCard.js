@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { PopUpContext } from '../../providers/PopUpProvider';
 
 import HorizontalBar from '../HorizontalBar/HorizontalBar';
 
@@ -14,6 +15,7 @@ const WordCard = props => {
     closeModal 
   } = props;
 
+  let { showPopUp } = useContext(PopUpContext);
   let dateStr = null;
 
   if (currentWord.lastRepetition) {
@@ -30,7 +32,11 @@ const WordCard = props => {
 
   const handleDelete = () => {
     if (!window.confirm('Êtes-vous sûr de vouloir supprimer ce mot ?')) return;
-    deleteWord(currentWordListId, userId, currentWord.id, closeModal);
+    
+    deleteWord(currentWordListId, userId, currentWord.id, () => {
+      closeModal();
+      showPopUp('Le mot a bien été supprimé');
+    });
   };
 
   return (
