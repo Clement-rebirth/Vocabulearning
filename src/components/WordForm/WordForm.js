@@ -199,7 +199,8 @@ const WordForm = props => {
                 placeholder='En anglais'
                 name='word'
                 value={wordFormData.word}
-                onChange={handleChange} 
+                onChange={handleChange}
+                autoComplete='off'
               />
               <small className='invalid-message'>{ wordFormData.wordError }</small>
             </div>
@@ -213,7 +214,8 @@ const WordForm = props => {
                 placeholder='En français'
                 name='translation'
                 value={wordFormData.translation}
-                onChange={handleChange} 
+                onChange={handleChange}
+                autoComplete='off'
               />
               <small className='invalid-message'>{ wordFormData.translationError }</small>
             </div>

@@ -43,11 +43,18 @@ const Home = () => {
 
       <Modal
         className='auth-modal'
-        visible={showLogin || showRegister} 
-        handleClose={() => history.replace(ROUTES.LANDING)}
+        isShow={showLogin} 
+        close={() => history.replace(ROUTES.LANDING)}
       >
-        { showLogin && <Login setUser={setUser} /> }
-        { showRegister && <Register setUser={setUser} /> }
+        <Login setUser={setUser} />
+      </Modal>
+
+      <Modal
+        className='auth-modal'
+        isShow={showRegister} 
+        close={() => history.replace(ROUTES.LANDING)}
+      >
+        <Register setUser={setUser} />
       </Modal>
     </>
   );
