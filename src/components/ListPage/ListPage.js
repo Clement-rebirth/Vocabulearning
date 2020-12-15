@@ -40,7 +40,6 @@ const ListPage = props => {
   const handleClose = () => {
     setShowWordCard(false);
     setShowWordForm(false);
-    setCurrentWord(null);
   };
 
   const openWordCard = (word) => {
@@ -80,7 +79,7 @@ const ListPage = props => {
         toggleInvertWordWithTrad={toggleInvertWordWithTrad}
       />
 
-      <Modal visible={showWordCard} handleClose={handleClose}>
+      <Modal isShow={showWordCard} close={handleClose}>
         <WordCard 
           openWordForm={openWordForm}
           currentWordListId={currentWordListToShow.id}
@@ -90,7 +89,7 @@ const ListPage = props => {
         />
       </Modal>
 
-      <Modal visible={showWordForm} handleClose={handleClose}>
+      <Modal isShow={showWordForm} close={handleClose}>
         <WordForm
           currentWordListId={currentWordListToShow.id}
           userId={userId}

@@ -70,27 +70,34 @@ body {
   color: var(--main-text-color);
 }
 
-body.dark::-webkit-scrollbar {
+body.dark::-webkit-scrollbar,
+body.dark .custom-scrollbar::-webkit-scrollbar {
   width: 0.8rem;
 }
  
-body.dark::-webkit-scrollbar-track {
+body.dark::-webkit-scrollbar-track,
+body.dark .custom-scrollbar::-webkit-scrollbar-track {
   background-color: #1c1f22;
 }
 
-body.dark::-webkit-scrollbar-thumb {
+body.dark::-webkit-scrollbar-thumb,
+body.dark .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: #383c41;
   border-radius: 20px;
   border: 2px solid #1c1f22;
 }
 
-body.dark::-webkit-scrollbar-thumb:hover {
+body.dark::-webkit-scrollbar-thumb:hover,
+body.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: #51565c;
 }
 
-body.dark::-webkit-scrollbar-thumb:active {
+body.dark::-webkit-scrollbar-thumb:active,
+body.dark .custom-scrollbar::-webkit-scrollbar-thumb:active {
   background-color: #656b72;
 }
+
+
 
 p, a, label, input, button, div, small, textarea, input {
   font-family: var(--text-font);

@@ -1,22 +1,13 @@
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  z-index: 1000;
+  padding: 20px;
 }
 
 .modal {
+  margin: auto;
   background-color: var(--main-bg-color);
   box-sizing: border-box;
   padding: 8px 24px 16px;
-  position: absolute;
   border-radius: 6px;
   width: 100%;
   max-width: 420px;
@@ -36,4 +27,10 @@
 .close-modal .close-icon {
   font-size: 32px;
   color: var(--main-text-color);
+}
+
+@media all and (max-width: 425px) {
+  .modal-overlay {
+    padding: 10px;
+  }
 }

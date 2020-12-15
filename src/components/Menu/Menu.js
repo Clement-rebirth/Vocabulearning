@@ -13,7 +13,7 @@ const Menu = ({ isShow, handleClose, handleSignOut }) => {
     document.body.style.overflow = isShow ? 'hidden' : 'visible';
   }, [isShow]);
 
-  const config = { tension: 360, friction: 50 };
+  const config = { tension: 360, friction: 42 };
 
   const overlayTransitions = useTransition(isShow, null, {
     from: { opacity: 0 },

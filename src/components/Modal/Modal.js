@@ -1,32 +1,31 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
+
+import Overlay from '../Overlay/Overlay';
+import ModalContent from '../ModalContent/ModalContent';
 
 import './Modal.css';
 
-const Modal = ({ visible, handleClose, className, children }) => {
+const Modal = ({ isShow, close, className, children }) => {
 
-  // add focus on the modal when open
+  const handleKeydown = useCallback(event => {
+    if (event.key === 'Escape') close();
+  }, [close]);
 
-  const handleCloseModal = e => {
-    // to close only when we click on the overlay, not the modal itself
-    if (e.currentTarget === e.target) handleClose();
-  }
-  
-  let modal = null;
+  useEffect(() => {
+    if (!isShow) return;
+    
+    document.addEventListener('keydown', handleKeydown);
 
-  if (visible) {
-    modal = (
-      <div onClick={e => {handleCloseModal(e)}} className='modal-overlay'>
-        <div className={`modal ${className ? className : ''}`}>
-          <button onClick={handleClose} className='close-modal'>
-            <i className='close-icon material-icons-round'>close</i>
-          </button>
-          { children }
-        </div>
-      </div>
-    );
-  }
+    return () => document.removeEventListener('keydown', handleKeydown);
+  }, [isShow, handleKeydown]);
 
-  return modal;
+  return (
+    <Overlay isShow={isShow} onClick={close} className='modal-overlay'>
+      <ModalContent close={close} isShow={isShow} className={className}>
+        { children }
+      </ModalContent>
+    </Overlay>
+  );
 }
 
 export default Modal;
