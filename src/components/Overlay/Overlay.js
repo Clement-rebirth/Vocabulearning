@@ -33,7 +33,7 @@ const Overlay = props => {
     item && 
     <animated.div
       onClick={handleOverlayClick}
-      className={`overlay ${className ? className : ''}`}
+      className={`overlay custom-scrollbar ${className ? className : ''}`}
       key={key}
       style={props} 
     >

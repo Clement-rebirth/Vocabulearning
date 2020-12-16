@@ -49,26 +49,21 @@
   justify-content: center;
 }
 
-.menu nav {
+.menu .menu-content {
   margin-top: 35px;
   padding-left: 20px;
 }
 
-.menu nav ul {
-  padding: 0;
-}
-
-.menu nav ul li {
-  list-style-type: none;
+.menu-item {
   display: flex;
   align-items: center;
-  cursor: pointer;
 }
 
-.menu li .material-icons-round {
+.menu-item:hover .text {
+  text-decoration: underline var(--danger-color);
+}
+
+.menu-item .material-icons-round {
   margin-right: 10px;
 }
 
-.menu .sign-out {
-  color: var(--danger-color);
-}
