@@ -97,8 +97,6 @@ body.dark .custom-scrollbar::-webkit-scrollbar-thumb:active {
   background-color: #656b72;
 }
 
-
-
 p, a, label, input, button, div, small, textarea, input {
   font-family: var(--text-font);
 }
@@ -181,6 +179,8 @@ b, strong {
   border-radius: 6px;
   padding: 7px 6px;
   transition-duration: 0.3s;
+  display: flex;
+  align-items: center;
 }
 
 .btn-text-primary {
