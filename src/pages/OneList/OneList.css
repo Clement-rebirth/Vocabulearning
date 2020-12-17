@@ -1,0 +1,311 @@
+/* .word-list */
+
+.word-list {
+  margin-top: 70px;
+  padding-bottom: 36px;
+}
+
+.word-list h2 {
+  font-size: 1.4rem;
+  margin: 15px 0 15px;
+}
+
+.word-list h2 .nb-words {
+  color: var(--secondary-text-color);
+  font-size: var(--text-size);
+}
+
+.word-list .list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.word-list .list-header .add-word {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px 7px 6px;
+  display: none;
+}
+
+.word-list .list-header .add-word .btn-text {
+  margin-left: 4px;
+}
+
+.word-list .options {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 6px;
+  background-color: var(--second-bg-color);
+  padding: 4px 5px;
+}
+
+.word-list .options button {
+  width: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background-color: transparent;
+  color: var(--secondary-text-color);
+  font-size: 1rem;
+}
+
+.word-list .options button.invert-word-with-trad span {
+  margin: 0 5px;
+}
+
+.word-list .options button.hide-right-part-btn span {
+  margin-left: 5px;
+  font-size: 20px;
+}
+
+.words {
+  display: flex;
+  flex-direction: column;
+  margin-top: 6px;
+}
+
+.words.reverse {
+  flex-direction: column-reverse;
+}
+
+.word-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background-color: var(--second-bg-color);
+  margin-bottom: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  overflow: auto;
+}
+
+.word-box > * {
+  display: flex;
+}
+
+.word-box .word,
+.word-box .translation {
+  flex: 2 2 0;
+}
+
+.word-box .word p,
+.word-box .translation p {
+  /* width: 100px; */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  display: inline;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.word-box .separator {
+  flex: 0 0 50px;
+  justify-content: center;
+}
+
+.word-box .separator span {
+  font-size: 20px;
+}
+
+.words.hide-right-part .word-box .translation:not(.show) p {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.words.hide-right-part .word-box .translation:not(.show) p span {
+  opacity: 0;
+}
+
+/* .options-bar */
+
+.options-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(49, 53, 59, 0.9);
+  padding: 6px 15px;
+}
+
+.options-bar button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  color: var(--secondary-text-color);
+}
+
+.options-bar .add-word {
+  background-color: var(--main-color-dark, --main-color);
+  color: var(--main-dark-color);
+  padding: 1px;
+  border-radius: 6px;
+  margin: 0 20px;
+}
+
+.options-bar .add-word:focus {
+  outline: auto;
+}
+
+/* .back-home */
+
+.back-home {
+  background-color: transparent;
+  color: var(--main-text-color);
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-home span {
+  font-size: 32px;
+}
+
+/* .word-card */
+
+.word-card .bottom {
+  display: flex;
+}
+
+.word-card .bottom .edit,
+.word-card .bottom .delete {
+  display: flex;
+  align-items: center;
+}
+
+.word-card .bottom .delete {
+  margin-left: 6px;
+}
+
+.word-card .word {
+  margin-top: 3px;
+}
+
+/* word form */
+
+.word-form input.bd-bottom-only {
+  padding: 3px 0;
+}
+
+.word-form .word-field {
+  margin-bottom: 8px;
+}
+
+.word-form .translation-field {
+  margin-bottom: 10px;
+}
+
+.word-form .actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.word-form .actions button:last-child {
+  margin-left: 5px;
+}
+
+.word-form .actions .import-list {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+  margin-right: auto;
+}
+
+.word-form .actions .import-list span {
+  margin-right: 3px;
+}
+
+.word-form .info {
+  padding-left: 20px;
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+
+.word-form #multi-words {
+  height: 100px;
+}
+
+/* learning mode btn */
+
+#start-learning-mode {
+  display: none;
+  border: none;
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  padding: 8px;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  outline: none;
+}
+
+#start-learning-mode .icofont-dumbbell {
+  font-size: 38px;
+  display: block;
+  transform: rotateZ(-40deg);
+}
+
+@media all and (min-width: 1024px) {
+  /* .word-list */
+
+  .word-list h2 {
+    font-size: 2rem;
+  }
+  
+  .word-list h2 .nb-words {
+    font-size: 1.7rem;
+  }
+
+  .word-list .list-header .add-word {
+    display: flex;
+  }
+
+  .word-list .options {
+    padding: 6px 10px;
+  }
+
+  .word-list .options button {
+    font-size: var(--text-size);
+  }
+
+  .word-box {
+    padding: 8px 15px;
+  }
+  
+  .word-box .word p,
+  .word-box .translation p {
+    font-size: var(--text-size);
+  }
+  
+  .word-box .separator {
+    flex: 0 0 65px;
+  }
+
+  /* .options-bar */
+
+  .options-bar {
+    display: none;
+  }
+
+  /* .back-home */
+
+  .back-home span {
+    font-size: 36px;
+    margin-left: -5px;
+  }
+}

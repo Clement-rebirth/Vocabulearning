@@ -6,20 +6,20 @@ import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import App from './App';
-import Landing from './components/Landing/Landing';
-import NotFound from './components/NotFound/NotFound';
+import Landing from './pages/Landing/Landing';
+import NotFound from './pages/NotFound/NotFound';
 import UserProvider from './providers/UserProvider';
 import PopUpProvider from './providers/PopUpProvider';
 
 import { ROUTES } from './constants';
 
 import './index.css';
-import './icons-css/icomoon.css';
+import './assets/icons-css/icomoon.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <UserProvider>
+    <UserProvider>
+      <Router>
         <Switch>
           <Route exact path={[ROUTES.LANDING, ROUTES.SIGN_IN, ROUTES.SIGN_UP]}>
             <Landing />
@@ -36,8 +36,8 @@ ReactDOM.render(
             <Redirect to={ROUTES.NOT_FOUND} />
           </Route>
         </Switch>
-      </UserProvider>
-    </Router>
+      </Router>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
