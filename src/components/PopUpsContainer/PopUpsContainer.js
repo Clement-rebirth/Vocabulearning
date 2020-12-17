@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PopUpMessage from '../PopUpMessage/PopUpMessage';
+import PopUpMessage from './PopUpMessage';
 
 import './PopUpsContainer.css';
 

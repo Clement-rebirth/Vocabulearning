@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 
 import Overlay from '../Overlay/Overlay';
-import ModalContent from '../ModalContent/ModalContent';
+import ModalContent from './ModalContent';
 
 import './Modal.css';
 

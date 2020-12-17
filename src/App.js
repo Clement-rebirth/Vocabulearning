@@ -1,22 +1,22 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Redirect, useHistory, useLocation, useParams } from 'react-router-dom';
-import { signOut } from './firebase/authMethods';
+import { signOut } from './services/firebase/authMethods';
 import { UserContext } from './providers/UserProvider';
-import Manager from './firebase/Manager';
-import { addWordList } from './firebase/wordListMethods';
+import Manager from './services/firebase/Manager';
+import { addWordList } from './services/firebase/wordListMethods';
 
 import { Route } from 'react-router-dom';
 import Menu from './components/Menu/Menu';
 import SearchBar from './components/SearchBar/SearchBar';
-import AllListsPage from './components/AllListsPage/AllListsPage';
-import ListPage from './components/ListPage/ListPage';
+import AllLists from './pages/AllLists/AllLists';
+import OneList from './pages/OneList/OneList';
 import Loading from './components/Loading/Loading';
 
 import { ROUTES } from './constants';
-import { strContains } from './utils/utils';
+import { strContains } from './services/strContains';
 
 import './App.css';
-import './icons-css/icofont.min.css';
+import './assets/icons-css/icofont.min.css';
 
 const App = () => {
   
@@ -209,7 +209,7 @@ const App = () => {
       />
 
       <Route exact path={ROUTES.HOME}>
-        <AllListsPage 
+        <AllLists 
           wordListsToShow={wordListsToShow}
           history={history}
           searchMode={searchMode}
@@ -219,7 +219,7 @@ const App = () => {
       </Route>
 
       <Route exact path={ROUTES.DISPLAY_ONE_LIST}>
-        <ListPage
+        <OneList
           currentWordListToShow={currentWordListToShow}
           currentWordListData={currentWordListData}
           userId={user.uid}
