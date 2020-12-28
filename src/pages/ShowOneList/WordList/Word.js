@@ -12,6 +12,8 @@ const Word = props => {
     showRightPart
   } = props;
 
+  // determine if the translation should be show if showRightPart is false
+  // and the user click on it or not
   const [show, setShow] = useState(false);
 
   const handleOpenWordCard = () => {

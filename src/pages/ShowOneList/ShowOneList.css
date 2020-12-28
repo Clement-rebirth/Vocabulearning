@@ -1,7 +1,12 @@
+/* .back-home */
+
+.back-home {
+  margin-top: 70px;
+}
+
 /* .word-list */
 
 .word-list {
-  margin-top: 70px;
   padding-bottom: 36px;
 }
 
@@ -157,21 +162,6 @@
   outline: auto;
 }
 
-/* .back-home */
-
-.back-home {
-  background-color: transparent;
-  color: var(--main-text-color);
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.back-home span {
-  font-size: 32px;
-}
-
 /* .word-card */
 
 .word-card .bottom {
@@ -300,12 +290,5 @@
 
   .options-bar {
     display: none;
-  }
-
-  /* .back-home */
-
-  .back-home span {
-    font-size: 36px;
-    margin-left: -5px;
   }
 }
