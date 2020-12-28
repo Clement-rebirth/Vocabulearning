@@ -1,0 +1,19 @@
+.back-home {
+  background-color: transparent;
+  color: var(--main-text-color);
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-home span {
+  font-size: 32px;
+}
+
+@media all and (min-width: 1024px) {
+  .back-home span {
+    font-size: 36px;
+    margin-left: -5px;
+  }
+}

@@ -8,8 +8,8 @@ import { addWordList } from './services/firebase/wordListMethods';
 import { Route } from 'react-router-dom';
 import Menu from './components/Menu/Menu';
 import SearchBar from './components/SearchBar/SearchBar';
-import AllLists from './pages/AllLists/AllLists';
-import OneList from './pages/OneList/OneList';
+import ShowAllLists from './pages/ShowAllLists/ShowAllLists';
+import ShowOneList from './pages/ShowOneList/ShowOneList';
 import Loading from './components/Loading/Loading';
 
 import { ROUTES } from './constants';
@@ -209,8 +209,8 @@ const App = () => {
       />
 
       <Route exact path={ROUTES.HOME}>
-        <AllLists 
-          wordListsToShow={wordListsToShow}
+        <ShowAllLists 
+          listsToShow={wordListsToShow}
           history={history}
           searchMode={searchMode}
           userId={user.uid}
@@ -219,7 +219,7 @@ const App = () => {
       </Route>
 
       <Route exact path={ROUTES.DISPLAY_ONE_LIST}>
-        <OneList
+        <ShowOneList
           currentWordListToShow={currentWordListToShow}
           currentWordListData={currentWordListData}
           userId={user.uid}

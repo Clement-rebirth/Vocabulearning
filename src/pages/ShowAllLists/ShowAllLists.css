@@ -1,10 +1,10 @@
-.word-lists {
+.all-lists-page {
   margin-top: 75px;
 }
 
-/* .word-list-info */
+/* .list-info */
 
-.word-list-info {
+.list-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -15,7 +15,7 @@
   cursor: pointer;
 }
 
-.word-list-info .name {
+.list-info .name {
   text-overflow: ellipsis;
   margin: 0;
   white-space: nowrap;
@@ -23,35 +23,35 @@
   font-size: var(--text-size);
 }
 
-.word-list-info .nb-words {
+.list-info .nb-words {
   flex-shrink: 0;
   margin: 0 auto 0 6px;
   color: var(--secondary-text-color);
 }
 
-.word-list-info .actions {
+.list-info .actions {
   flex-shrink: 0;
   display: flex;
   margin-left: 15px;
 }
 
-.word-list-info .actions button {
+.list-info .actions button {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: transparent;
 }
 
-.word-list-info .actions .edit-word-list span,
-.word-list-info .actions .delete-word-list span {
+.list-info .actions .edit-list span,
+.list-info .actions .delete-list span {
   font-size: 1.4rem;
 }
 
-.word-list-info .actions .edit-word-list {
+.list-info .actions .edit-list {
   color: var(--main-color-dark, --main-color);
 }
 
-.word-list-info .actions .delete-word-list {
+.list-info .actions .delete-list {
   color: var(--danger-color);
 }
 
@@ -77,31 +77,31 @@
   margin-right: 5px;
 }
 
-/* .word-list-form */
+/* .list-form */
 
-.word-list-form {
+.list-form {
   margin-bottom: 6px;
 }
 
-.word-list-form form {
+.list-form form {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.word-list-form form div {
+.list-form form div {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.word-list-form form input {
+.list-form form input {
   font-size: var(--text-size);
 }
 
-.word-list-form .close-list-form,
-.word-list-form [type='submit'] {
+.list-form .close-list-form,
+.list-form [type='submit'] {
   background-color: transparent;
   flex-basis: 0;
   display: flex;
@@ -110,25 +110,25 @@
   color: var(--main-text-color);
 }
 
-.word-list-form [type='submit'] {
+.list-form [type='submit'] {
   color: rgb(77, 148, 95);
 }
 
-.word-list-form .close-list-form {
+.list-form .close-list-form {
   color: var(--danger-color);
 }
 
-.word-list-form.edit-word-list {
+.list-form.edit-list {
   background-color: var(--second-bg-color);
   border-radius: 6px;
   padding: 8px 5px 8px 12px;
 }
 
-.word-list-form.edit-word-list form input {
+.list-form.edit-list form input {
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-.word-list-form.edit-word-list form input:focus {
+.list-form.edit-list form input:focus {
   border-color: var(--main-color-dark, --main-color);
 }
 

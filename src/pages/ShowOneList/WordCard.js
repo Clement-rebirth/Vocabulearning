@@ -1,16 +1,15 @@
 import React, { useContext } from 'react';
 import { PopUpContext } from '../../providers/PopUpProvider';
+import { deleteWord } from '../../services/firebase/wordMethods';
 
 import HorizontalBar from '../../components/HorizontalBar/HorizontalBar';
-
-import { deleteWord } from '../../services/firebase/wordMethods';
 
 const WordCard = props => {
 
   const { 
     openWordForm, 
     currentWordListId, 
-    currentWord,
+    wordToShow,
     userId,
     closeModal 
   } = props;
@@ -18,8 +17,8 @@ const WordCard = props => {
   let { showPopUp } = useContext(PopUpContext);
   let dateStr = null;
 
-  if (currentWord.lastRepetition) {
-    const date = new Date(currentWord.lastRepetition);
+  if (wordToShow.lastRepetition) {
+    const date = new Date(wordToShow.lastRepetition);
 
     let hours = date.getHours();
     if (hours < 10) hours = '0' + hours;
@@ -33,7 +32,7 @@ const WordCard = props => {
   const handleDelete = () => {
     if (!window.confirm('Êtes-vous sûr de vouloir supprimer ce mot ?')) return;
     
-    deleteWord(currentWordListId, userId, currentWord.id, () => {
+    deleteWord(currentWordListId, userId, wordToShow.id, () => {
       closeModal();
       showPopUp('Le mot a bien été supprimé');
     });
@@ -41,8 +40,8 @@ const WordCard = props => {
 
   return (
     <div className='word-card'>
-      <p className='word'>Anglais : { currentWord.word }</p>
-      <p className='translation'>Français : { currentWord.translation }</p>
+      <p className='word'>Anglais : { wordToShow.word }</p>
+      <p className='translation'>Français : { wordToShow.translation }</p>
       
       <HorizontalBar />
       <p className='time'>{ dateStr ? dateStr : 'Pas encore révisé' }</p>

@@ -1,13 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { ROUTES } from '../../constants';
 
+import NothingToShow from '../../components/NothingToShow/NothingToShow';
+
+import pageNotFoundImg from '../../assets/img/illustrations/undraw-page-not-found-yellow.svg';
+
+import './NotFound.css';
+
 const NotFound = () => (
-  <>
-    <h1>La page recherchée n'existe pas</h1>
-    <Link to={ROUTES.LANDING}>Accueil</Link>
-  </>
+  <NothingToShow
+    message={`La page recherchée n'existe pas`}
+    src={pageNotFoundImg}
+    alt='404 page not found illustration'
+    className='page-not-found'
+  >
+    <Link className='btn btn-outline-primary go-home' to={ROUTES.LANDING}>Page d'accueil</Link>
+  </NothingToShow>
 );
 
 export default NotFound;

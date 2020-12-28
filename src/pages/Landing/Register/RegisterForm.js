@@ -47,8 +47,7 @@ const RegisterForm = ({ history }) => {
   const handleSignUp = e => {
     e.preventDefault();
 
-    let email = registerFormData.email;
-    let password = registerFormData.password;
+    let { email, password } = registerFormData;
     const errors = validate(email, password);
 
     setRegisterFormData({ 
@@ -87,7 +86,7 @@ const RegisterForm = ({ history }) => {
         <input
           ref={emailInputRef}
           id='register-email'
-          className={ registerFormData.emailError ? 'invalid' : null }
+          className={ registerFormData.emailError ? 'invalid' : '' }
           placeholder='user@example.com'
           required
           value={registerFormData.email}
@@ -101,7 +100,7 @@ const RegisterForm = ({ history }) => {
         <div className="show-password">
           <input 
             id='register-password'
-            className={ registerFormData.passwordError ? 'invalid' : null }
+            className={ registerFormData.passwordError ? 'invalid' : '' }
             placeholder='Mot de passe'
             required
             value={registerFormData.password}
