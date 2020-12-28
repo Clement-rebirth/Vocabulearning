@@ -1,5 +1,5 @@
 import React from 'react';
-import { deleteWordList as deleteList } from '../../services/firebase/wordListMethods';
+import { deleteList } from '../../services/firebase/listMethods';
 
 const ListInfo = ({ list, openEditForm, openList, userId }) => {
 

@@ -3,7 +3,7 @@ import { addMultipleWords } from '../../services/firebase/wordMethods';
 import { generateWordObjectsFromString } from '../../services/words/generateWordObjectsFromString';
 import { validateWord } from '../../services/words/validateWord';
 
-const AddMultipleWordsForm = ({ currentWordListId, userId, closeModal, showPopUp }) => {
+const AddMultipleWordsForm = ({ currentListId, userId, closeModal, showPopUp }) => {
 
   const [words, setWords] = useState('');
   const [wordsError, setWordsError] = useState(null);
@@ -40,7 +40,7 @@ const AddMultipleWordsForm = ({ currentWordListId, userId, closeModal, showPopUp
       return;
     };
 
-    addMultipleWords(wordObjects, currentWordListId, userId, () => {
+    addMultipleWords(wordObjects, currentListId, userId, () => {
       closeModal();
       showPopUp('Tous les mots ont été ajoutés avec succès');
     });

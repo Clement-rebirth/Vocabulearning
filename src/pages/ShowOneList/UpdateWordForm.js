@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { updateWord } from '../../services/firebase/wordMethods';
 import { validateWord } from '../../services/words/validateWord';
 
-const UpdateWordForm = ({ wordToUpdate, currentWordListId, userId, closeModal, showPopUp }) => {
+const UpdateWordForm = ({ wordToUpdate, currentListId, userId, closeModal, showPopUp }) => {
 
   const [wordFormData, setWordFormData] = useState({
     word: wordToUpdate.word,
@@ -38,7 +38,7 @@ const UpdateWordForm = ({ wordToUpdate, currentWordListId, userId, closeModal, s
 
     if (!isErrorsEmpty) return;
 
-    updateWord({ word, translation }, currentWordListId, userId, wordToUpdate.id, () => {
+    updateWord({ word, translation }, currentListId, userId, wordToUpdate.id, () => {
       closeModal();
       showPopUp('Le mot a bien été mis à jour');
     });

@@ -17,7 +17,7 @@ const AllLists = props => {
   let noSearchResult = !lists && searchMode;
 
   return (
-    <div className='word-lists'>
+    <div className='lists'>
       {lists && Object.keys(lists).map(key => (
         <ListContainer
           key={key}

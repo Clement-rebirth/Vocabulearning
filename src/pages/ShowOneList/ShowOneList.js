@@ -13,8 +13,8 @@ import './ShowOneList.css';
 const ShowOneList = props => {
 
   const {
-    currentWordListToShow,
-    currentWordListData,
+    currentListToShow,
+    currentListData,
     userId,
     history,
     searchMode,
@@ -43,11 +43,11 @@ const ShowOneList = props => {
     setShowWordForm(true);
   };
 
-  if (currentWordListToShow === false || !userId) {
+  if (currentListToShow === false || !userId) {
     return <Loading />;
   }
 
-  let words = currentWordListData && currentWordListData.words;
+  let words = currentListData && currentListData.words;
   let nbWords = words ? Object.keys(words).length : 0;
 
   return (
@@ -56,7 +56,7 @@ const ShowOneList = props => {
 
       <WordList
         openWordForm={openWordForm}
-        wordList={currentWordListToShow}
+        wordList={currentListToShow}
         userId={userId}
         searchMode={searchMode}
         openWordCard={openWordCard}
@@ -70,7 +70,7 @@ const ShowOneList = props => {
       <Modal isShow={!!wordToShow} close={handleClose}>
         <WordCard 
           openWordForm={openWordForm}
-          currentWordListId={currentWordListToShow.id}
+          currentListId={currentListToShow.id}
           userId={userId}
           wordToShow={wordToShow}
           closeModal={handleClose}
@@ -80,7 +80,7 @@ const ShowOneList = props => {
       <Modal isShow={showWordForm} close={handleClose}>
         <WordForms
           showPopUp={showPopUp}
-          currentWordListId={currentWordListToShow.id}
+          currentListId={currentListToShow.id}
           userId={userId}
           wordToUpdate={wordToShow}
           closeModal={handleClose}
