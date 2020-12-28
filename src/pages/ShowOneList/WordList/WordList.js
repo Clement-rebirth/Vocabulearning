@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { updateWordList } from '../../../services/firebase/wordListMethods';
+import { updateList } from '../../../services/firebase/listMethods';
 
 import OptionsBar from './OptionsBar';
 import AllWords from './AllWords';
@@ -22,7 +22,7 @@ const WordList = props => {
 
   const toggleListOrder = (currentOrder, wordListId, userId) => {
     let newOrder = currentOrder === 'asc' ? 'desc' : 'asc';
-    updateWordList({ order: newOrder }, wordListId, userId);
+    updateList({ order: newOrder }, wordListId, userId);
   };
 
   const toggleShowRightPart = () => setShowRightPart(!showRightPart);
@@ -35,7 +35,7 @@ const WordList = props => {
   let hideRightPartClass = showRightPart ? '' : 'hide-right-part';
 
   return (
-    <div className='word-list'>
+    <div className='list'>
       <WordListHeader name={name} nbWords={nbWords} openWordForm={openWordForm} />
   
       <WordListOptions

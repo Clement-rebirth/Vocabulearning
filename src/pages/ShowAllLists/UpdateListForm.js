@@ -1,5 +1,5 @@
 import React from 'react';
-import { updateWordList } from '../../services/firebase/wordListMethods';
+import { updateList } from '../../services/firebase/listMethods';
 import { validateList } from '../../services/lists/validateList';
 import { slugify } from '../../services/slugify';
 
@@ -26,7 +26,7 @@ const UpdateListForm = ({ closeForm, listToUpdate, userId, existingLists, show }
       slug: slugify(listName)
     };
 
-    updateWordList(propsToUpdate, listToUpdate.id, userId);
+    updateList(propsToUpdate, listToUpdate.id, userId);
     closeForm();
   };
 

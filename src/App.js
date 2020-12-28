@@ -3,7 +3,7 @@ import { Redirect, useHistory, useLocation, useParams } from 'react-router-dom';
 import { signOut } from './services/firebase/authMethods';
 import { UserContext } from './providers/UserProvider';
 import Manager from './services/firebase/Manager';
-import { addWordList } from './services/firebase/wordListMethods';
+import { addList } from './services/firebase/listMethods';
 
 import { Route } from 'react-router-dom';
 import Menu from './components/Menu/Menu';
@@ -21,11 +21,11 @@ import './assets/icons-css/icofont.min.css';
 const App = () => {
   
   const [showMenu, setShowMenu] = useState(false);
-  const [wordListsData, setWordListsData] = useState(false);
-  const [wordListsToShow, setWordListsToShow] = useState(false);
+  const [listsData, setListsData] = useState(false);
+  const [listsToShow, setListsToShow] = useState(false);
   const [userData, setUserData] = useState(false);
-  const [currentWordListData, setCurrentWordListData] = useState(false);
-  const [currentWordListToShow, setCurrentWordListToShow] = useState(false);
+  const [currentListData, setCurrentListData] = useState(false);
+  const [currentListToShow, setCurrentListToShow] = useState(false);
   const [searchMode, setSearchMode] = useState(false);
   const [search, setSearch] = useState('');
   const [executeSearch, setExecuteSearch] = useState(false);
@@ -39,29 +39,29 @@ const App = () => {
   // to get the list the user wants to see
   const defineCurrentListFromSlug = useCallback(() => {
     // if word lists hasn't been loaded
-    if (!wordListsData) return;
+    if (!listsData) return;
 
     if (!slug) {
-      setCurrentWordListData(false);
+      setCurrentListData(false);
       return;
     }
 
     let currentWordListKey = Object
-      .keys(wordListsData)
-      .filter(key => wordListsData[key].slug === slug)[0];
+      .keys(listsData)
+      .filter(key => listsData[key].slug === slug)[0];
 
     // no match : the list doesn't exist
     if (!currentWordListKey) history.replace(ROUTES.HOME);
 
     let currentWordList = {
-      ...wordListsData[currentWordListKey],
+      ...listsData[currentWordListKey],
       id: currentWordListKey
     };
 
-    setCurrentWordListData(currentWordList);
-    setCurrentWordListToShow(currentWordList);
+    setCurrentListData(currentWordList);
+    setCurrentListToShow(currentWordList);
     setExecuteSearch(true);
-  }, [wordListsData, slug, history]);
+  }, [listsData, slug, history]);
 
   const handleSignOut = () => {
     signOut(() => {
@@ -115,39 +115,39 @@ const App = () => {
     setSearchMode(!!strToSearch);
 
     // show the matching words
-    if (currentWordListData) {
-      let matchingWords = getMatchingWords(strToSearch, currentWordListData);
-      setCurrentWordListToShow({
-        ...currentWordListData,
+    if (currentListData) {
+      let matchingWords = getMatchingWords(strToSearch, currentListData);
+      setCurrentListToShow({
+        ...currentListData,
         words: matchingWords
       });
       return;
     }
     
     // show the matching lists
-    if (wordListsToShow !== false) {
-      let matchingLists = getMatchingLists(strToSearch, wordListsData);
-      setWordListsToShow(matchingLists);
+    if (listsToShow !== false) {
+      let matchingLists = getMatchingLists(strToSearch, listsData);
+      setListsToShow(matchingLists);
     }
-  }, [currentWordListData, getMatchingLists, getMatchingWords, wordListsData, wordListsToShow]);
+  }, [currentListData, getMatchingLists, getMatchingWords, listsData, listsToShow]);
 
   // if user quit the search (by cleaning, deleting...) the default data are set
   useEffect(() => {
     if (!searchMode) {
       setSearch('');
-      setWordListsToShow(wordListsData);
-      setCurrentWordListToShow(currentWordListData);
+      setListsToShow(listsData);
+      setCurrentListToShow(currentListData);
     }
-  }, [searchMode, wordListsData, currentWordListData]);
+  }, [searchMode, listsData, currentListData]);
 
   useEffect(() => {
     // if the page to show a list is shown
     // execute only once the search in case there is something to search
-    if (executeSearch && currentWordListData && currentWordListToShow) {
+    if (executeSearch && currentListData && currentListToShow) {
       handleSearch(search);
       setExecuteSearch(false);
     }
-  }, [currentWordListData, currentWordListToShow, executeSearch, search, handleSearch]);
+  }, [currentListData, currentListToShow, executeSearch, search, handleSearch]);
 
   useEffect(() => {
     defineCurrentListFromSlug();
@@ -160,7 +160,7 @@ const App = () => {
     if (userData !== null) return;
 
     // create default wordList
-    addWordList({ name: 'Ma liste' }, user.uid);
+    addList({ name: 'Ma liste' }, user.uid);
 
     // create default user
     let userManager = new Manager(`users/${user.uid}`);
@@ -181,8 +181,8 @@ const App = () => {
     let userWordListsManager = new Manager(`wordLists/${user.uid}`);
     userWordListsManager.getAll(snapshot => {
       let data = snapshot.val();
-      setWordListsData(data);
-      setWordListsToShow(data);
+      setListsData(data);
+      setListsToShow(data);
     });
 
     return () => userWordListsManager.close();
@@ -190,7 +190,7 @@ const App = () => {
 
   if (user === false && !redirectAfterAuth) return <Redirect to={ROUTES.LANDING} />;
   
-  if (user === null || wordListsToShow === false) return <Loading />;
+  if (user === null || listsToShow === false) return <Loading />;
 
   return (
     <div className='app'>
@@ -210,7 +210,7 @@ const App = () => {
 
       <Route exact path={ROUTES.HOME}>
         <ShowAllLists 
-          listsToShow={wordListsToShow}
+          listsToShow={listsToShow}
           history={history}
           searchMode={searchMode}
           userId={user.uid}
@@ -220,8 +220,8 @@ const App = () => {
 
       <Route exact path={ROUTES.DISPLAY_ONE_LIST}>
         <ShowOneList
-          currentWordListToShow={currentWordListToShow}
-          currentWordListData={currentWordListData}
+          currentListToShow={currentListToShow}
+          currentListData={currentListData}
           userId={user.uid}
           history={history}
           searchMode={searchMode}

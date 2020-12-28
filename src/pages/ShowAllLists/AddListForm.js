@@ -1,5 +1,5 @@
 import React from 'react';
-import { addWordList } from '../../services/firebase/wordListMethods';
+import { addList } from '../../services/firebase/listMethods';
 import { validateList } from '../../services/lists/validateList';
 
 import ListForm from './ListForm';
@@ -14,7 +14,7 @@ const AddListForm = ({ closeForm, userId, existingLists, show }) => {
 
     if (error) return;
       
-    addWordList({ name: listName }, userId);
+    addList({ name: listName }, userId);
     closeForm();
   };
 

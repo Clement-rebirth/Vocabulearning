@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { addWord } from '../../services/firebase/wordMethods';
 import { validateWord } from '../../services/words/validateWord';
 
-const AddWordForm = ({ currentWordListId, userId, setAddMultipleWordsMode, closeModal, showPopUp }) => {
+const AddWordForm = ({ currentListId, userId, setAddMultipleWordsMode, closeModal, showPopUp }) => {
 
   const DEFAULT_FORM_DATA = {
     word: '',
@@ -37,7 +37,7 @@ const AddWordForm = ({ currentWordListId, userId, setAddMultipleWordsMode, close
     
     if (!isErrorsEmpty) return;
 
-    addWord({ word, translation }, currentWordListId, userId, () => {
+    addWord({ word, translation }, currentListId, userId, () => {
       clear();
       wordFieldRef.current.focus();
       showPopUp('Le mot a bien été ajouté');
