@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WordListOptions = props => {
+const ListOptions = props => {
 
   const {
     toggleCurrentListOrder,
@@ -45,4 +45,4 @@ const WordListOptions = props => {
   );
 }
  
-export default WordListOptions;
+export default ListOptions;

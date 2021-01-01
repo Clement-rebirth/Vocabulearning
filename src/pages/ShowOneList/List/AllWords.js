@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { SearchContext } from '../../../providers/SearchProvider';
 
 import NoWordsToShow from './NoWordsToShow';
 import Word from './Word';
@@ -14,19 +15,22 @@ const AllWords = props => {
     className = '' 
   } = props;
 
-  let noSearchResult = !words && searchMode;
+  let { matchingWords } = useContext(SearchContext);
+
   let noWordsInList = !words && !searchMode;
+  let noSearchResult = !matchingWords && searchMode;
+
+  let wordsToShow = searchMode ? matchingWords : words;
 
   return (
     <div className={`words ${className}`}>
-      {words && Object.keys(words).map(key => (
+      {wordsToShow && Object.keys(wordsToShow).map(key => (
         <Word
+          key={key}
           showRightPart={showRightPart}
           invertWordWithTrad={invertWordWithTrad}
-          key={key}
-          id={key}
           openWordCard={openWordCard}
-          {...words[key]}
+          wordObject={{ ...wordsToShow[key], id: key }}
         />
       ))}
 

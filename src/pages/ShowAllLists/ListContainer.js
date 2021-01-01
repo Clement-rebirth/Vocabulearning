@@ -6,7 +6,7 @@ import UpdateListForm from './UpdateListForm';
 const ListContainer = props => {
 
   const {
-    allLists,
+    existingLists,
     list,
     openList,
     userId,
@@ -28,7 +28,7 @@ const ListContainer = props => {
   if (showEditForm) return (
     <UpdateListForm
       show={showEditForm}
-      existingLists={allLists}
+      existingLists={existingLists}
       listToUpdate={list}
       closeForm={closeEditForm}
       userId={userId}

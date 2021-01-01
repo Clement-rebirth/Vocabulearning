@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-const Word = props => {
-
-  const { 
-    id,
-    word,
-    translation,
-    lastRepetition,
-    openWordCard,
-    invertWordWithTrad,
-    showRightPart
-  } = props;
+const Word = ({ wordObject, openWordCard, invertWordWithTrad, showRightPart }) => {
 
   // determine if the translation should be show if showRightPart is false
   // and the user click on it or not
   const [show, setShow] = useState(false);
+
+  let { id, word, translation, lastRepetition } = wordObject;
 
   const handleOpenWordCard = () => {
     if (showRightPart) openWordCard({ id, word, translation, lastRepetition });
@@ -28,7 +20,7 @@ const Word = props => {
     // if the user just toggled showRightPart
     if (!showRightPart) setShow(false);
   }, [showRightPart]);
-
+  
   let showClass = show ? 'show' : '';
 
   return (

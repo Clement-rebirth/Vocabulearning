@@ -8,7 +8,7 @@ const WordCard = props => {
 
   const { 
     openWordForm, 
-    currentListId, 
+    listId, 
     wordToShow,
     userId,
     closeModal 
@@ -32,7 +32,7 @@ const WordCard = props => {
   const handleDelete = () => {
     if (!window.confirm('Êtes-vous sûr de vouloir supprimer ce mot ?')) return;
     
-    deleteWord(currentListId, userId, wordToShow.id, () => {
+    deleteWord(listId, userId, wordToShow.id, () => {
       closeModal();
       showPopUp('Le mot a bien été supprimé');
     });

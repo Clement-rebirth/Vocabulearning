@@ -3,16 +3,16 @@ import { updateList } from '../../../services/firebase/listMethods';
 
 import OptionsBar from './OptionsBar';
 import AllWords from './AllWords';
-import WordListHeader from './WordListHeader';
-import WordListOptions from './WordListOptions';
+import ListHeader from './ListHeader';
+import ListOptions from './ListOptions';
 
-const WordList = props => {
+const List = props => {
 
   const {
-    wordList,
+    list,
     userId,
-    openWordCard, 
-    nbWords, 
+    openWordCard,
+    nbWords,
     searchMode,
     openWordForm
   } = props;
@@ -20,15 +20,15 @@ const WordList = props => {
   const [showRightPart, setShowRightPart] = useState(true);
   const [invertWordWithTrad, setInvertWordWithTrad] = useState(false);
 
-  const toggleListOrder = (currentOrder, wordListId, userId) => {
+  const toggleListOrder = (currentOrder, listId, userId) => {
     let newOrder = currentOrder === 'asc' ? 'desc' : 'asc';
-    updateList({ order: newOrder }, wordListId, userId);
+    updateList({ order: newOrder }, listId, userId);
   };
 
   const toggleShowRightPart = () => setShowRightPart(!showRightPart);
   const toggleInvertWordWithTrad = () => setInvertWordWithTrad(!invertWordWithTrad);
 
-  let { order, name, words = null } = wordList;
+  let { order, name, words = null } = list;
 
   let reverseClass = order === 'desc' ? 'reverse' : '';
   let invertClass = invertWordWithTrad ? 'invert' : '';
@@ -36,10 +36,10 @@ const WordList = props => {
 
   return (
     <div className='list'>
-      <WordListHeader name={name} nbWords={nbWords} openWordForm={openWordForm} />
+      <ListHeader name={name} nbWords={nbWords} openWordForm={openWordForm} />
   
-      <WordListOptions
-        toggleCurrentListOrder={() => toggleListOrder(order, wordList.id, userId)}
+      <ListOptions
+        toggleCurrentListOrder={() => toggleListOrder(order, list.id, userId)}
         order={order}
         toggleInvertWordWithTrad={toggleInvertWordWithTrad}
         invertWordWithTrad={invertWordWithTrad}
@@ -67,4 +67,4 @@ const WordList = props => {
   )
 };
 
-export default WordList;
+export default List;

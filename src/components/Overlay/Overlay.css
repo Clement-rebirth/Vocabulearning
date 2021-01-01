@@ -8,4 +8,5 @@
   background-color: rgba(0, 0, 0, 0.6);
   overflow-x: hidden;
   overflow-y: auto;
+  z-index: 10;
 }
