@@ -8,14 +8,12 @@ const SearchBar = props => {
     showMenu,
     search,
     setSearch,
-    handleSearch,
     disableSearchMode
   } = props;
 
   const handleChange = e => {
-    let strToSearch = e.target.value;
-    setSearch(strToSearch);
-    handleSearch(strToSearch);
+    let wordToSearch = e.target.value;
+    setSearch(wordToSearch);
   };
 
   const reset = () => {

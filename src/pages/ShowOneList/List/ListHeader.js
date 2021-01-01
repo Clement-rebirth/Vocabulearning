@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WordListHeader = ({ name, nbWords, openWordForm }) => (
+const ListHeader = ({ name, nbWords, openWordForm }) => (
   <div className='list-header'>
     <h2>
       { name } 
@@ -14,4 +14,4 @@ const WordListHeader = ({ name, nbWords, openWordForm }) => (
   </div>
 );
  
-export default WordListHeader;
+export default ListHeader;

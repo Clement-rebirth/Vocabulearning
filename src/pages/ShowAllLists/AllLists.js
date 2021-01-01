@@ -7,6 +7,7 @@ const AllLists = props => {
 
   const {
     lists,
+    listsWithMatchingWords,
     openList,
     userId,
     searchMode,
@@ -14,15 +15,17 @@ const AllLists = props => {
   } = props;
 
   let noLists = !lists && !searchMode;
-  let noSearchResult = !lists && searchMode;
+  let noSearchResult = !listsWithMatchingWords && searchMode;
+
+  let listsToShow = searchMode ? listsWithMatchingWords : lists;
 
   return (
     <div className='lists'>
-      {lists && Object.keys(lists).map(key => (
+      {listsToShow && Object.keys(listsToShow).map(key => (
         <ListContainer
           key={key}
-          allLists={lists}
-          list={{...lists[key], id: key}} 
+          existingLists={lists}
+          list={{...listsToShow[key], id: key}} 
           openList={openList}
           userId={userId}
           setCloseCurrentFormFunc={setCloseCurrentFormFunc}

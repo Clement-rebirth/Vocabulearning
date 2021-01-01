@@ -4,14 +4,14 @@ import AddMultipleWordsForm from './AddMultipleWordsForm';
 import AddWordForm from './AddWordForm';
 import UpdateWordForm from './UpdateWordForm';
 
-const WordForms = ({ currentListId, userId, wordToUpdate, closeModal, showPopUp }) => {
+const WordForms = ({ listId, userId, wordToUpdate, closeModal, showPopUp }) => {
 
   const [addMultipleWordsMode, setAddMultipleWordsMode] = useState(false);
 
   if (wordToUpdate) return (
     <UpdateWordForm
       wordToUpdate={wordToUpdate}
-      currentListId={currentListId}
+      listId={listId}
       userId={userId}
       closeModal={closeModal}
       showPopUp={showPopUp}
@@ -20,7 +20,7 @@ const WordForms = ({ currentListId, userId, wordToUpdate, closeModal, showPopUp 
 
   if (addMultipleWordsMode) return (
     <AddMultipleWordsForm
-      currentListId={currentListId}
+      listId={listId}
       userId={userId}
       closeModal={closeModal}
       showPopUp={showPopUp}
@@ -29,7 +29,7 @@ const WordForms = ({ currentListId, userId, wordToUpdate, closeModal, showPopUp 
 
   return (
     <AddWordForm
-      currentListId={currentListId}
+      listId={listId}
       userId={userId}
       setAddMultipleWordsMode={setAddMultipleWordsMode}
       closeModal={closeModal}
