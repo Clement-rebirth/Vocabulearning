@@ -1,10 +1,12 @@
 /**
  * get the list that match with the provided slug
- * @param {*} slug 
- * @param {*} lists 
+ * @param {string} slug 
+ * @param {object} lists 
  * @return return either the matching list or null if no list matched
  */
 export const getMatchingListWithSlug = (slug, lists) => {
+
+  if (!lists) return null;
 
   let listKey = Object
     .keys(lists)

@@ -48,7 +48,7 @@ const ShowOneList = ({ user, history }) => {
   // to get the list the user wants to see
   useEffect(() => {
     // if word lists hasn't been loaded
-    if (!lists) return;
+    if (lists === false) return;
 
     let list = getMatchingListWithSlug(slug, lists);
 

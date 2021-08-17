@@ -28,7 +28,7 @@ const ShowAllLists = ({ user, history }) => {
 
   useEffect(() => setCurrentList(null), [setCurrentList]);
 
-  if (!user || !lists) return <Loading />;
+  if (!user || lists === false) return <Loading />;
 
   return (
     <div className='all-lists-page'>
