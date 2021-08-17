@@ -8,6 +8,9 @@ export const ListsContext = createContext({
 
 const ListsProvider = ({ children }) => {
 
+  // null = user has no list
+  // false = loading
+  // object = lists
   const [lists, setLists] = useState(false);
 
   let { user } = useContext(UserContext);
