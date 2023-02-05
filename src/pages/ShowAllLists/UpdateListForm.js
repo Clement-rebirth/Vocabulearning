@@ -1,7 +1,7 @@
 import React from 'react';
-import { updateList } from '../../services/firebase/listMethods';
-import { validateList } from '../../services/lists/validateList';
-import { slugify } from '../../services/slugify';
+import { updateList } from '../../utils/firebase/listMethods';
+import { validateList } from '../../utils/lists/validateList';
+import { slugify } from '../../utils/slugify';
 
 import ListForm from './ListForm';
 
@@ -22,7 +22,7 @@ const UpdateListForm = ({ closeForm, listToUpdate, userId, existingLists, show }
     if (error) return;
 
     let propsToUpdate = {
-      name: listName, 
+      name: listName,
       slug: slugify(listName)
     };
 
@@ -42,5 +42,5 @@ const UpdateListForm = ({ closeForm, listToUpdate, userId, existingLists, show }
     </div>
   );
 }
- 
+
 export default UpdateListForm;

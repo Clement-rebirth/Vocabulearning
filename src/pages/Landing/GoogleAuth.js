@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { googleSignIn } from '../../services/firebase/authMethods';
+import { googleSignIn } from '../../utils/firebase/authMethods';
 
 import { ROUTES } from '../../constants';
 

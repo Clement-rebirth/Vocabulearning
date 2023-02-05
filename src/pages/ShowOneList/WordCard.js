@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 import { PopUpContext } from '../../providers/PopUpProvider';
-import { deleteWord } from '../../services/firebase/wordMethods';
+import { deleteWord } from '../../utils/firebase/wordMethods';
 
 import HorizontalBar from '../../components/HorizontalBar/HorizontalBar';
 
 const WordCard = props => {
 
-  const { 
-    openWordForm, 
-    listId, 
+  const {
+    openWordForm,
+    listId,
     wordToShow,
     userId,
-    closeModal 
+    closeModal
   } = props;
 
   let { showPopUp } = useContext(PopUpContext);
@@ -31,7 +31,7 @@ const WordCard = props => {
 
   const handleDelete = () => {
     if (!window.confirm('Êtes-vous sûr de vouloir supprimer ce mot ?')) return;
-    
+
     deleteWord(listId, userId, wordToShow.id, () => {
       closeModal();
       showPopUp('Le mot a bien été supprimé');
@@ -42,11 +42,11 @@ const WordCard = props => {
     <div className='word-card'>
       <p className='word'>Anglais : { wordToShow.word }</p>
       <p className='translation'>Français : { wordToShow.translation }</p>
-      
+
       <HorizontalBar />
       <p className='time'>{ dateStr ? dateStr : 'Pas encore révisé' }</p>
       <HorizontalBar />
-      
+
       <div className='bottom'>
         <button className='edit btn btn-text-primary' onClick={openWordForm}>
           Modifier

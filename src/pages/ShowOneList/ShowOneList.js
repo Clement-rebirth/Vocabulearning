@@ -4,7 +4,7 @@ import { PopUpContext } from '../../providers/PopUpProvider';
 import { SearchContext } from '../../providers/SearchProvider';
 import { ListsContext } from '../../providers/ListsProvider';
 import { ROUTES } from '../../constants';
-import { getMatchingListWithSlug } from '../../services/lists/getMatchingListWithSlug';
+import { getMatchingListWithSlug } from '../../utils/lists/getMatchingListWithSlug';
 
 import Modal from '../../components/Modal/Modal';
 import Loading from '../../components/Loading/Loading';
@@ -86,7 +86,7 @@ const ShowOneList = ({ user, history }) => {
       </button>
 
       <Modal isShow={!!wordToShow} close={handleClose}>
-        <WordCard 
+        <WordCard
           openWordForm={openWordForm}
           listId={list.id}
           userId={userId}

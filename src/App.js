@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { UserContext } from './providers/UserProvider';
 import { ROUTES } from './constants';
-import { signOut } from './services/firebase/authMethods';
+import { signOut } from './utils/firebase/authMethods';
 
 import { Route } from 'react-router-dom';
 import Menu from './components/Menu/Menu';
@@ -15,9 +15,9 @@ import './App.css';
 import './assets/icons-css/icofont.min.css';
 
 const App = () => {
-  
+
   const [showMenu, setShowMenu] = useState(false);
-  
+
   let history = useHistory();
   let { user, setUser } = useContext(UserContext);
 
@@ -33,11 +33,13 @@ const App = () => {
     });
   };
 
+  // if the user is not connected and hasn't just been redirected after loged in
+  // meaning that if the user is false because the user just loged in (so it's loading) we don't redirect
   if (user === false && !redirectAfterAuth) return <Redirect to={ROUTES.LANDING} />;
 
   return (
     <div className='app'>
-      <Menu 
+      <Menu
         isShow={showMenu}
         handleClose={() => setShowMenu(false)}
         handleSignOut={handleSignOut}
@@ -46,7 +48,7 @@ const App = () => {
       <ListsProvider>
         <SearchProvider showMenu={() => setShowMenu(true)}>
           <Route exact path={ROUTES.HOME}>
-            <ShowAllLists 
+            <ShowAllLists
               history={history}
               user={user}
             />

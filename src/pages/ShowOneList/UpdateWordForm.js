@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { updateWord } from '../../services/firebase/wordMethods';
-import { validateWord } from '../../services/words/validateWord';
+import { updateWord } from '../../utils/firebase/wordMethods';
+import { validateWord } from '../../utils/words/validateWord';
 
 const UpdateWordForm = ({ wordToUpdate, listId, userId, closeModal, showPopUp }) => {
 
   const [wordFormData, setWordFormData] = useState({
     word: wordToUpdate.word,
     translation: wordToUpdate.translation,
-    wordError: null, 
+    wordError: null,
     translationError: null,
   });
 
@@ -45,9 +45,9 @@ const UpdateWordForm = ({ wordToUpdate, listId, userId, closeModal, showPopUp })
   };
 
   return (
-    <form 
+    <form
       className='word-form'
-      onSubmit={handleSubmit} 
+      onSubmit={handleSubmit}
     >
       <div className='word-field'>
         {/* <label htmlFor='word'>Votre mot :</label> */}
@@ -92,5 +92,5 @@ const UpdateWordForm = ({ wordToUpdate, listId, userId, closeModal, showPopUp })
     </form>
   );
 }
- 
+
 export default UpdateWordForm;

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import Manager from '../services/firebase/Manager';
+import Manager from '../utils/firebase/Manager';
 import { UserContext } from './UserProvider';
 
 export const ListsContext = createContext({
@@ -18,7 +18,7 @@ const ListsProvider = ({ children }) => {
   useEffect(() => {
     // if user hasn't been loaded
     if (!user) return;
-    
+
     // fetch user's wordLists and add a listener on it
     let userListsManager = new Manager(`wordLists/${user.uid}`);
     userListsManager.getAll(snapshot => {
@@ -28,12 +28,12 @@ const ListsProvider = ({ children }) => {
 
     return () => userListsManager.close();
   }, [user]);
-  
+
   return (
     <ListsContext.Provider value={{ lists }}>
       { children }
     </ListsContext.Provider>
   );
 }
- 
-export default ListsProvider;
+
+export default ListsProvider;;
