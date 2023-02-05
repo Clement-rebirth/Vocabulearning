@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { addWord } from '../../services/firebase/wordMethods';
-import { validateWord } from '../../services/words/validateWord';
+import { addWord } from '../../utils/firebase/wordMethods';
+import { validateWord } from '../../utils/words/validateWord';
 
 const AddWordForm = ({ listId, userId, setAddMultipleWordsMode, closeModal, showPopUp }) => {
 
   const DEFAULT_FORM_DATA = {
     word: '',
     translation: '',
-    wordError: null, 
+    wordError: null,
     translationError: null,
   };
 
@@ -26,15 +26,15 @@ const AddWordForm = ({ listId, userId, setAddMultipleWordsMode, closeModal, show
 
     let { word, translation } = wordFormData;
     const errors = validateWord({ word, translation });
-    
+
     setWordFormData({
       ...wordFormData,
       wordError: errors.word ? errors.word : null,
       translationError: errors.translation ? errors.translation : null
     });
-    
+
     let isErrorsEmpty = Object.keys(errors).length === 0;
-    
+
     if (!isErrorsEmpty) return;
 
     addWord({ word, translation }, listId, userId, () => {
@@ -51,9 +51,9 @@ const AddWordForm = ({ listId, userId, setAddMultipleWordsMode, closeModal, show
   };
 
   return (
-    <form 
+    <form
       className='word-form'
-      onSubmit={handleSubmit} 
+      onSubmit={handleSubmit}
     >
       <div className='word-field'>
         {/* <label htmlFor='word'>Votre mot :</label> */}
@@ -88,9 +88,9 @@ const AddWordForm = ({ listId, userId, setAddMultipleWordsMode, closeModal, show
       </div>
 
       <div className='actions'>
-        <button 
+        <button
           className='import-list bg-transparent text-primary'
-          onClick={() => setAddMultipleWordsMode(true)} 
+          onClick={() => setAddMultipleWordsMode(true)}
           type='button'
         >
           <span className='material-icons-round'>system_update_alt</span>
@@ -107,5 +107,5 @@ const AddWordForm = ({ listId, userId, setAddMultipleWordsMode, closeModal, show
     </form>
   );
 }
- 
+
 export default AddWordForm;

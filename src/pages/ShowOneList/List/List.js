@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { updateList } from '../../../services/firebase/listMethods';
+import { updateList } from '../../../utils/firebase/listMethods';
 
 import OptionsBar from './OptionsBar';
 import AllWords from './AllWords';
@@ -37,7 +37,7 @@ const List = props => {
   return (
     <div className='list'>
       <ListHeader name={name} nbWords={nbWords} openWordForm={openWordForm} />
-  
+
       <ListOptions
         toggleCurrentListOrder={() => toggleListOrder(order, list.id, userId)}
         order={order}

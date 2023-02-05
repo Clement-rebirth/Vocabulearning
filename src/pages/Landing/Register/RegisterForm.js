@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { signUp } from '../../../services/firebase/authMethods';
-import { emailIsValid } from '../../../services/emailIsValid';
+import { signUp } from '../../../utils/firebase/authMethods';
+import { emailIsValid } from '../../../utils/emailIsValid';
 import { ROUTES } from '../../../constants';
 
 const RegisterForm = ({ history }) => {
@@ -35,7 +35,7 @@ const RegisterForm = ({ history }) => {
       errors.empty = false;
       errors.email = 'Email incorrect';
     }
-    
+
     if (password.length < 6) {
       errors.empty = false;
       errors.password = '6 caractères minimum';
@@ -50,8 +50,8 @@ const RegisterForm = ({ history }) => {
     let { email, password } = registerFormData;
     const errors = validate(email, password);
 
-    setRegisterFormData({ 
-      ...registerFormData, 
+    setRegisterFormData({
+      ...registerFormData,
       emailError: errors.email,
       passwordError: errors.password
     });
@@ -69,7 +69,7 @@ const RegisterForm = ({ history }) => {
         emailError = 'Email incorrect';
       }
 
-      setRegisterFormData({ 
+      setRegisterFormData({
         ...registerFormData,
         passwordError: '',
         emailError: emailError
@@ -93,12 +93,12 @@ const RegisterForm = ({ history }) => {
           name='email'
           type='email'
           onChange={handleChange} />
-        <small className='invalid-message'>{ registerFormData.emailError }</small>  
+        <small className='invalid-message'>{ registerFormData.emailError }</small>
       </div>
       <div>
         <label htmlFor='register-password'>Mot de passe (6 caractères minimum)</label>
         <div className="show-password">
-          <input 
+          <input
             id='register-password'
             className={ registerFormData.passwordError ? 'invalid' : '' }
             placeholder='Mot de passe'
@@ -107,7 +107,7 @@ const RegisterForm = ({ history }) => {
             name='password'
             type={ showPassword ? 'text' : 'password' }
             onChange={handleChange} />
-          <div 
+          <div
             onClick={() => setshowPassword(!showPassword)}
             className='show-password-btn'
           >

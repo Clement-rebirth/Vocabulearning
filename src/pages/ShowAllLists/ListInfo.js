@@ -1,5 +1,5 @@
 import React from 'react';
-import { deleteList } from '../../services/firebase/listMethods';
+import { deleteList } from '../../utils/firebase/listMethods';
 
 const ListInfo = ({ list, openEditForm, openList, userId }) => {
 
@@ -37,14 +37,14 @@ const ListInfo = ({ list, openEditForm, openList, userId }) => {
       <div className='actions'>
         <button
           aria-label='modifier la liste'
-          className='edit-list' 
+          className='edit-list'
           onClick={openEditForm}
         >
           <span className='material-icons-round'>edit</span>
         </button>
-        <button 
+        <button
           aria-label='supprimer la liste'
-          className='delete-list' 
+          className='delete-list'
           onClick={handleDeleteList}
         >
           <span className='material-icons-round'>delete_outline</span>
@@ -53,5 +53,5 @@ const ListInfo = ({ list, openEditForm, openList, userId }) => {
     </div>
   );
 }
- 
+
 export default ListInfo;

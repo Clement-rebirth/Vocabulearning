@@ -1,6 +1,6 @@
 import React from 'react';
-import { addList } from '../../services/firebase/listMethods';
-import { validateList } from '../../services/lists/validateList';
+import { addList } from '../../utils/firebase/listMethods';
+import { validateList } from '../../utils/lists/validateList';
 
 import ListForm from './ListForm';
 
@@ -13,7 +13,7 @@ const AddListForm = ({ closeForm, userId, existingLists, show }) => {
     setListNameError(error);
 
     if (error) return;
-      
+
     addList({ name: listName }, userId);
     closeForm();
   };
@@ -26,5 +26,5 @@ const AddListForm = ({ closeForm, userId, existingLists, show }) => {
     </div>
   );
 }
- 
+
 export default AddListForm;

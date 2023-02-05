@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { signIn } from '../../../services/firebase/authMethods';
+import { signIn } from '../../../utils/firebase/authMethods';
 import { ROUTES } from '../../../constants';
 
 const LoginForm = ({ history }) => {
@@ -59,7 +59,7 @@ const LoginForm = ({ history }) => {
             name='password'
             type={ showPassword ? 'text' : 'password' }
             onChange={handleChange} />
-          <div 
+          <div
             onClick={() => setshowPassword(!showPassword)}
             className='show-password-btn'
           >

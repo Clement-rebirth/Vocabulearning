@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { ListsContext } from './ListsProvider';
-import { getMatchingWords } from '../services/lists/getMatchingWords';
-import { getListsWithMatchingWords } from '../services/lists/getListsWithMatchingWords';
+import { getMatchingWords } from '../utils/lists/getMatchingWords';
+import { getListsWithMatchingWords } from '../utils/lists/getListsWithMatchingWords';
 
 import SearchBar from '../components/SearchBar/SearchBar';
 
@@ -47,12 +47,12 @@ const SearchProvider = ({ showMenu, children }) => {
 
   const handleSearch = useCallback(() => {
     setSearchMode(!!search);
-    
+
     if (currentList) {
       searchWordInOneList(search, currentList);
       return;
     }
-    
+
     searchWordInAllLists(search, lists);
   }, [search, currentList, lists]);
 
@@ -81,5 +81,5 @@ const SearchProvider = ({ showMenu, children }) => {
     </SearchContext.Provider>
   );
 }
- 
+
 export default SearchProvider;

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { addMultipleWords } from '../../services/firebase/wordMethods';
-import { generateWordObjectsFromString } from '../../services/words/generateWordObjectsFromString';
-import { validateWord } from '../../services/words/validateWord';
+import { addMultipleWords } from '../../utils/firebase/wordMethods';
+import { generateWordObjectsFromString } from '../../utils/words/generateWordObjectsFromString';
+import { validateWord } from '../../utils/words/validateWord';
 
 const AddMultipleWordsForm = ({ listId, userId, closeModal, showPopUp }) => {
 
@@ -31,10 +31,10 @@ const AddMultipleWordsForm = ({ listId, userId, closeModal, showPopUp }) => {
     for (const wordObj of wordObjects) {
       errors = validateWord(wordObj);
       isErrorsEmpty = Object.keys(errors).length === 0;
-      
+
       if (!isErrorsEmpty) break;
     }
-    
+
     if (!isErrorsEmpty) {
       setWordsError('Les mots et les traductions doivent contenir entre 1 et 1000 caractères');
       return;
@@ -83,5 +83,5 @@ const AddMultipleWordsForm = ({ listId, userId, closeModal, showPopUp }) => {
     </form>
   );
 }
- 
+
 export default AddMultipleWordsForm;
