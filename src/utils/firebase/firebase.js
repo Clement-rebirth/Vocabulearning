@@ -11,11 +11,9 @@ const firebaseConfig = {
   storageBucket: "vocabulearning.appspot.com",
   messagingSenderId: "479135033103",
   appId: "1:479135033103:web:721f44e82b7477d9f1007a",
-  measurementId: "G-ZBBM8XV56C"
 };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
 
 export default firebase;
