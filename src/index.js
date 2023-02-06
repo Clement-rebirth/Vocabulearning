@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import App from './App';
 import Landing from './pages/Landing/Landing';
 import NotFound from './pages/NotFound/NotFound';
@@ -19,24 +19,19 @@ import './assets/icons-css/icomoon.css';
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
-      <Router>
-        <Switch>
-          <Route exact path={[ROUTES.LANDING, ROUTES.SIGN_IN, ROUTES.SIGN_UP]}>
-            <Landing />
-          </Route>
-          <Route path={[ROUTES.DISPLAY_ONE_LIST, ROUTES.HOME]}>
-            <PopUpProvider>
-              <App />
-            </PopUpProvider>
-          </Route>
-          <Route path={ROUTES.NOT_FOUND}>
-            <NotFound />
-          </Route>
-          <Route>
-            <Redirect to={ROUTES.NOT_FOUND} />
-          </Route>
-        </Switch>
-      </Router>
+      <PopUpProvider>
+        <Router>
+          <Routes>
+            <Route path={ROUTES.LANDING} element={<Landing />} />
+            <Route path={ROUTES.SIGN_IN} element={<Landing />} />
+            <Route path={ROUTES.SIGN_UP} element={<Landing />} />
+            <Route path={ROUTES.DISPLAY_ONE_LIST} element={<App />} />
+            <Route path={`${ROUTES.HOME}/*`} element={<App />} />
+            <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+            <Route path='*' element={<Navigate to={ROUTES.NOT_FOUND} replace={true} />} />
+          </Routes>
+        </Router>
+      </PopUpProvider>
     </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')

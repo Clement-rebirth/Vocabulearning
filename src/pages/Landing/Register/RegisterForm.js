@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { signUp } from '../../../utils/firebase/authMethods';
 import { emailIsValid } from '../../../utils/emailIsValid';
 import { ROUTES } from '../../../constants';
+import { useNavigate } from 'react-router-dom';
 
-const RegisterForm = ({ history }) => {
+const RegisterForm = () => {
 
   const [registerFormData, setRegisterFormData] = useState({
     email: '',
@@ -13,6 +14,8 @@ const RegisterForm = ({ history }) => {
   });
 
   const [showPassword, setshowPassword] = useState(false);
+
+  const navigate = useNavigate();
   let emailInputRef = useRef(null);
 
   useEffect(() => {
@@ -59,7 +62,12 @@ const RegisterForm = ({ history }) => {
     if (!errors.empty) return;
 
     signUp(email, password, () => {
-      history.replace(ROUTES.HOME, { redirectAfterAuth: true });
+      navigate(ROUTES.HOME, {
+        replace: true,
+        state: {
+          redirectAfterAuth: true
+        }
+      });
     }, error => {
       let emailError = '';
 

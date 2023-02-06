@@ -9,13 +9,13 @@ import AddList from './AddList';
 
 import './ShowAllLists.css';
 
-const ShowAllLists = ({ user, history }) => {
-  
+const ShowAllLists = ({ user, navigate }) => {
+
   const [closeCurrentForm, setCloseCurrentForm] = useState(false);
 
   let { lists } = useContext(ListsContext);
   let { searchMode, disableSearchMode, listsWithMatchingWords, setCurrentList } = useContext(SearchContext);
-  
+
   const userId = user && user.uid;
 
   // close the current form if there is one and set the new one
@@ -24,7 +24,7 @@ const ShowAllLists = ({ user, history }) => {
     setCloseCurrentForm(() => newCloseFunc);
   };
 
-  const openList = slug => history.push(`${ROUTES.HOME}/${slug}`);
+  const openList = slug => navigate(`${ROUTES.HOME}/${slug}`);
 
   useEffect(() => setCurrentList(null), [setCurrentList]);
 
@@ -39,7 +39,7 @@ const ShowAllLists = ({ user, history }) => {
         disableSearchMode={disableSearchMode}
         userId={userId}
       />
-      
+
       <AllLists
         lists={lists}
         listsWithMatchingWords={listsWithMatchingWords}

@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { UserContext } from './providers/UserProvider';
 import { ROUTES } from './constants';
 import { signOut } from './utils/firebase/authMethods';
 
-import { Route } from 'react-router-dom';
 import Menu from './components/Menu/Menu';
 import ShowAllLists from './pages/ShowAllLists/ShowAllLists';
 import ShowOneList from './pages/ShowOneList/ShowOneList';
@@ -18,7 +17,7 @@ const App = () => {
 
   const [showMenu, setShowMenu] = useState(false);
 
-  let history = useHistory();
+  const navigate = useNavigate();
   let { user, setUser } = useContext(UserContext);
 
   let location = useLocation();
@@ -27,7 +26,7 @@ const App = () => {
   const handleSignOut = () => {
     signOut(() => {
       setUser(false);
-      history.replace(ROUTES.LANDING);
+      navigate(ROUTES.LANDING, { replace: true });
     }, error => {
       console.log('logout error : ', error);
     });
@@ -35,7 +34,7 @@ const App = () => {
 
   // if the user is not connected and hasn't just been redirected after loged in
   // meaning that if the user is false because the user just loged in (so it's loading) we don't redirect
-  if (user === false && !redirectAfterAuth) return <Redirect to={ROUTES.LANDING} />;
+  if (user === false && !redirectAfterAuth) return <Navigate to={ROUTES.LANDING} replace={true} />;
 
   return (
     <div className='app'>
@@ -47,19 +46,10 @@ const App = () => {
 
       <ListsProvider>
         <SearchProvider showMenu={() => setShowMenu(true)}>
-          <Route exact path={ROUTES.HOME}>
-            <ShowAllLists
-              history={history}
-              user={user}
-            />
-          </Route>
-
-          <Route exact path={ROUTES.DISPLAY_ONE_LIST}>
-            <ShowOneList
-              user={user}
-              history={history}
-            />
-          </Route>
+          <Routes>
+            <Route path='/' element={<ShowAllLists navigate={navigate} user={user} />} />
+            <Route path={ROUTES.DISPLAY_ONE_LIST} element={<ShowOneList navigate={navigate} user={user} />} />
+          </Routes>
         </SearchProvider>
       </ListsProvider>
     </div>
