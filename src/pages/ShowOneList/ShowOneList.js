@@ -15,7 +15,7 @@ import GoBackHomeArrow from '../../components/GoBackHomeArrow/GoBackHomeArrow';
 
 import './ShowOneList.css';
 
-const ShowOneList = ({ user, history }) => {
+const ShowOneList = ({ user, navigate }) => {
 
   const [showWordForm, setShowWordForm] = useState(false);
   const [wordToShow, setWordToShow] = useState(false);
@@ -52,11 +52,11 @@ const ShowOneList = ({ user, history }) => {
 
     let list = getMatchingListWithSlug(slug, lists);
 
-    if (!list) history.replace(ROUTES.NOT_FOUND);
+    if (!list) navigate(ROUTES.NOT_FOUND, { replace: true });
 
     setList(list);
     setCurrentList(list);
-  }, [history, lists, setCurrentList, slug]);
+  }, [navigate, lists, setCurrentList, slug]);
 
   useEffect(() => {
     // execute the search on page load if there is something to search
@@ -70,7 +70,7 @@ const ShowOneList = ({ user, history }) => {
 
   return (
     <>
-      <GoBackHomeArrow history={history} disableSearchMode={disableSearchMode} />
+      <GoBackHomeArrow navigate={navigate} disableSearchMode={disableSearchMode} />
 
       <List
         openWordForm={openWordForm}

@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { signIn } from '../../../utils/firebase/authMethods';
 import { ROUTES } from '../../../constants';
+import { useNavigate } from 'react-router-dom';
 
-const LoginForm = ({ history }) => {
+const LoginForm = () => {
 
   const [loginFormData, setLoginFormData] = useState({
     email: '',
@@ -10,7 +11,9 @@ const LoginForm = ({ history }) => {
   });
 
   const [showPassword, setshowPassword] = useState(false);
+
   let emailInputRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     emailInputRef.current.focus();
@@ -26,7 +29,12 @@ const LoginForm = ({ history }) => {
     const { email, password } = loginFormData;
 
     signIn(email, password, () => {
-      history.replace(ROUTES.HOME, { redirectAfterAuth: true });
+      navigate(ROUTES.HOME, {
+        replace: true,
+        state: {
+          redirectAfterAuth: true
+        }
+      });
     }, error => {
       console.log('login errors :');
       console.log(error);

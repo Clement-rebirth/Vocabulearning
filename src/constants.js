@@ -4,6 +4,6 @@ export const ROUTES = {
   SIGN_UP: '/signup',
   NOT_FOUND: '/404',
   HOME: '/app',
-  DISPLAY_ONE_LIST: '/app/:slug',
+  DISPLAY_ONE_LIST: '/:slug',
   LEARN: '/app/learn'
 };

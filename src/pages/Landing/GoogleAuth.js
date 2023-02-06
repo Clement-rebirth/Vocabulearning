@@ -1,16 +1,21 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { googleSignIn } from '../../utils/firebase/authMethods';
 
 import { ROUTES } from '../../constants';
 
 const GoogleAuth = ({ text }) => {
 
-  let history = useHistory();
+  const navigate = useNavigate();
 
   const handleGoogleSignIn = () => {
     googleSignIn(() => {
-      history.replace(ROUTES.HOME, { redirectAfterAuth: true });
+      navigate(ROUTES.HOME, {
+        replace: true,
+        state: {
+          redirectAfterAuth: true
+        }
+      });
     }, error => {
       console.log({
         code: error.code,

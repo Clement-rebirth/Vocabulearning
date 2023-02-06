@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import GoogleAuth from '../GoogleAuth';
 import HorizontalBar from '../../../components/HorizontalBar/HorizontalBar';
@@ -8,14 +8,11 @@ import RegisterForm from './RegisterForm';
 import { ROUTES } from '../../../constants';
 
 const Register = () => {
-
-  let history = useHistory();
-
   return (
     <div className='register'>
       <h2 className='underline-title'><span>Inscription</span></h2>
 
-      <RegisterForm history={history} />
+      <RegisterForm />
       <HorizontalBar text='OU' />
       <GoogleAuth text="S'inscrire avec Google" />
 
