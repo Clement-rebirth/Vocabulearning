@@ -1,9 +1,7 @@
-import React from 'react';
-
 const ListHeader = ({ name, nbWords, openWordForm }) => (
   <div className='list-header'>
     <h2>
-      { name } 
+      { name }
       <span className='nb-words'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
     </h2>
 
@@ -13,5 +11,5 @@ const ListHeader = ({ name, nbWords, openWordForm }) => (
     </button>
   </div>
 );
- 
+
 export default ListHeader;

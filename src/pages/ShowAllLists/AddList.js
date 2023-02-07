@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import AddListForm from './AddListForm';
 import ShowAddListFormBtn from './ShowAddListFormBtn';
@@ -6,13 +6,13 @@ import ShowAddListFormBtn from './ShowAddListFormBtn';
 const AddList = ({ existingLists, userId, searchMode, setCloseCurrentFormFunc, disableSearchMode }) => {
 
   const [addFormIsShow, setAddFormIsShow] = useState(false);
-  
+
   const openAddForm = () => {
     disableSearchMode();
     setAddFormIsShow(true);
     setCloseCurrentFormFunc(() => setAddFormIsShow(false));
   }
-  
+
   const closeAddForm = () => {
     setAddFormIsShow(false);
     setCloseCurrentFormFunc(false);
@@ -26,12 +26,12 @@ const AddList = ({ existingLists, userId, searchMode, setCloseCurrentFormFunc, d
         show={addFormIsShow}
         existingLists={existingLists}
         userId={userId}
-        closeForm={closeAddForm} 
+        closeForm={closeAddForm}
       />
-      
+
       <ShowAddListFormBtn openAddForm={openAddForm} addFormIsShow={addFormIsShow} />
     </>
   );
 }
- 
+
 export default AddList;

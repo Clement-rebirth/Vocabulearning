@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ListOptions = props => {
 
   const {
@@ -13,7 +11,7 @@ const ListOptions = props => {
 
   return (
     <div className='options'>
-      <button 
+      <button
         onClick={toggleCurrentListOrder}
         className='order'
       >
@@ -23,7 +21,7 @@ const ListOptions = props => {
         </span>
       </button>
 
-      <button 
+      <button
         onClick={toggleInvertWordWithTrad}
         className='invert-word-with-trad'
       >
@@ -44,5 +42,5 @@ const ListOptions = props => {
     </div>
   );
 }
- 
+
 export default ListOptions;

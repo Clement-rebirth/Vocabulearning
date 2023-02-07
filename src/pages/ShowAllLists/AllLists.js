@@ -1,5 +1,3 @@
-import React from 'react';
-
 import ListContainer from './ListContainer';
 import NoListsToShow from './NoListsToShow';
 
@@ -25,7 +23,7 @@ const AllLists = props => {
         <ListContainer
           key={key}
           existingLists={lists}
-          list={{...listsToShow[key], id: key}} 
+          list={{...listsToShow[key], id: key}}
           openList={openList}
           userId={userId}
           setCloseCurrentFormFunc={setCloseCurrentFormFunc}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import ListInfo from './ListInfo';
 import UpdateListForm from './UpdateListForm';
@@ -14,7 +14,7 @@ const ListContainer = props => {
   } = props;
 
   const [showEditForm, setShowEditForm] = useState(false);
-  
+
   const openEditForm = () => {
     setShowEditForm(true);
     setCloseCurrentFormFunc(() => setShowEditForm(false));

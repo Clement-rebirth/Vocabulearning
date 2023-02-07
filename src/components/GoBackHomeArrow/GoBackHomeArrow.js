@@ -1,4 +1,3 @@
-import React from 'react';
 import { ROUTES } from '../../constants';
 
 import './GoBackHomeArrow.css';

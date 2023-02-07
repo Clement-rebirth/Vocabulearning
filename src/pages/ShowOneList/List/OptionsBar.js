@@ -1,5 +1,3 @@
-import React from 'react';
-
 const OptionsBar = props => {
 
   const {
@@ -12,8 +10,8 @@ const OptionsBar = props => {
 
   return (
     <div className='options-bar'>
-      <button 
-        className={`invert-word-with-trad ${invertWordWithTrad && 'enable'}`} 
+      <button
+        className={`invert-word-with-trad ${invertWordWithTrad && 'enable'}`}
         onClick={toggleInvertWordWithTrad}
       >
         <span className='material-icons-round'>swap_horiz</span>
@@ -23,8 +21,8 @@ const OptionsBar = props => {
         <span className='material-icons-round'>add</span>
       </button>
 
-      <button 
-        className={`hide-right-part ${showRightPart && 'enable'}`} 
+      <button
+        className={`hide-right-part ${showRightPart && 'enable'}`}
         onClick={toggleShowRightPart}
       >
         <span className='material-icons-round'>
@@ -34,5 +32,5 @@ const OptionsBar = props => {
     </div>
   );
 }
- 
+
 export default OptionsBar;

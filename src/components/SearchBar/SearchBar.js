@@ -1,10 +1,8 @@
-import React from 'react';
-
 import './SearchBar.css';
 
 const SearchBar = props => {
-  
-  const { 
+
+  const {
     showMenu,
     search,
     setSearch,
@@ -22,9 +20,9 @@ const SearchBar = props => {
   };
 
   let clearBtn = (
-    <button 
-      className='clear-search' 
-      aria-label='effacer la recherche' 
+    <button
+      className='clear-search'
+      aria-label='effacer la recherche'
       onClick={reset}
     >
       <span className='material-icons-round'>clear</span>
@@ -37,7 +35,7 @@ const SearchBar = props => {
         <button onClick={showMenu} id='open-menu' aria-label='ouvrir le menu'>
           <span className='material-icons-round'>menu</span>
         </button>
-          
+
         <span id='search-icon' className='material-icons-round'>search</span>
 
         <input

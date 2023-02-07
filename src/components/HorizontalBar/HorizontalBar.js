@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './HorizontalBar.css';
 
 const HorizontalBar = ({ text }) => {

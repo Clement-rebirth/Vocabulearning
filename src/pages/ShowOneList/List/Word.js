@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Word = ({ wordObject, openWordCard, invertWordWithTrad, showRightPart }) => {
 
@@ -20,11 +20,11 @@ const Word = ({ wordObject, openWordCard, invertWordWithTrad, showRightPart }) =
     // if the user just toggled showRightPart
     if (!showRightPart) setShow(false);
   }, [showRightPart]);
-  
+
   let showClass = show ? 'show' : '';
 
   return (
-    <div 
+    <div
       className='word-box'
       onClick={handleOpenWordCard}
     >

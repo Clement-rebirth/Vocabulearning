@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { addMultipleWords } from '../../utils/firebase/wordMethods';
 import { generateWordObjectsFromString } from '../../utils/words/generateWordObjectsFromString';
 import { validateWord } from '../../utils/words/validateWord';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import NothingToShow from '../../components/NothingToShow/NothingToShow';
 
 import noResultFoundImg from '../../assets/img/illustrations/undraw-void-dark-yellow.svg';
@@ -13,7 +11,7 @@ const NoListsToShow = ({ noSearchResult, noLists }) => {
       message="Vous n'avez aucune liste"
       src={emptyDataImg}
       alt='empty illustration'
-    /> 
+    />
   );
 
   if (noSearchResult) return (

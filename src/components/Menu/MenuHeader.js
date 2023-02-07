@@ -1,5 +1,3 @@
-import React from 'react';
-
 const MenuHeader = ({ handleClose, title = '' }) => (
   <div className='top'>
     <button className='close-menu' onClick={handleClose}>
@@ -8,5 +6,5 @@ const MenuHeader = ({ handleClose, title = '' }) => (
     <h1><span>{ title }</span></h1>
   </div>
 );
- 
+
 export default MenuHeader;

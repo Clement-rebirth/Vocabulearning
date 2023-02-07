@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTransition, animated } from '@react-spring/web';
 
 const PopUpMessage = ({ status, message, close, timeout = 3000 }) => {

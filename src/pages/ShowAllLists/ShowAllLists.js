@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ROUTES } from '../../constants';
 import { ListsContext } from '../../providers/ListsProvider';
 import { SearchContext } from '../../providers/SearchProvider';

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import Overlay from '../Overlay/Overlay';
 import ModalContent from './ModalContent';
