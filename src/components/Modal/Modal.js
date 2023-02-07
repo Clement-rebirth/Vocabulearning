@@ -13,7 +13,7 @@ const Modal = ({ isShow, close, className, children }) => {
 
   useEffect(() => {
     if (!isShow) return;
-    
+
     document.addEventListener('keydown', handleKeydown);
 
     return () => document.removeEventListener('keydown', handleKeydown);
