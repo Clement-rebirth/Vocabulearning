@@ -37,5 +37,5 @@ const PopUpProvider = ({ children }) => {
     </PopUpContext.Provider>
   );
 }
- 
+
 export default PopUpProvider;

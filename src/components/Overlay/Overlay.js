@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useTransition, animated } from 'react-spring';
+import { useTransition, animated } from '@react-spring/web';
 
 import './Overlay.css';
 
@@ -22,24 +22,22 @@ const Overlay = props => {
     if (e.currentTarget === e.target) onClick();
   }
 
-  const overlayTransitions = useTransition(isShow, null, {
+  const overlayTransitions = useTransition(isShow, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
     config: animationConfig
   });
-  
-  return overlayTransitions.map(({ item, key, props }) =>
-    item && 
+
+  return overlayTransitions((style, item) => item && (
     <animated.div
       onClick={handleOverlayClick}
       className={`overlay custom-scrollbar ${className ? className : ''}`}
-      key={key}
-      style={props} 
+      style={style}
     >
-      { children }
+      {children}
     </animated.div>
-  );
+  ));
 }
- 
+
 export default Overlay;

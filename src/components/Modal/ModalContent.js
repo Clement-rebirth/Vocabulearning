@@ -1,24 +1,23 @@
 import React from 'react';
-import { useTransition, animated } from 'react-spring';
+import { useTransition, animated } from '@react-spring/web';
 
 const ModalContent = ({ close, isShow, className, children }) => {
 
-  const modalTransitions = useTransition(isShow, null, {
+  const modalTransitions = useTransition(isShow, {
     from: { transform: 'translateY(-100px)' },
-    enter: { transform: 'translateY(0)' },
+    enter: { transform: 'translateY(0px)' },
     leave: { transform: 'translateY(-100px)' },
     config: { tension: 500, friction: 35 }
   });
 
-  return modalTransitions.map(({ item, key, props }) =>
-    item &&
-    <animated.div className={`modal ${className ? className : ''}`} key={key} style={props}>
+  return modalTransitions((style, item) => item && (
+    <animated.div className={`modal ${className ? className : ''}`} style={style}>
       <button onClick={close} className='close-modal'>
         <i className='close-icon material-icons-round'>close</i>
       </button>
       { children }
     </animated.div>
-  );
+  ));
 }
- 
+
 export default ModalContent;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTransition, animated } from 'react-spring';
+import { useTransition, animated } from '@react-spring/web';
 
 const PopUpMessage = ({ status, message, close, timeout = 3000 }) => {
 
@@ -18,7 +18,7 @@ const PopUpMessage = ({ status, message, close, timeout = 3000 }) => {
       throw new Error('Invalid status prop value');
   }
 
-  const popUpTransitions = useTransition(isShow, null, {
+  const popUpTransitions = useTransition(isShow, {
     from: { opacity: 0, transform: 'scaleY(0)' },
     enter: { opacity: 1, transform: 'scaleY(1)' },
     leave: { opacity: 0, transform: 'scaleY(0)' },
@@ -27,16 +27,15 @@ const PopUpMessage = ({ status, message, close, timeout = 3000 }) => {
     config: { tension: 360, friction: 50 }
   });
 
-  return popUpTransitions.map(({ item: popUp, props, key }) =>
-    popUp &&
-    <animated.div className={`pop-up-message ${status}`} key={key} style={props}>
+  return popUpTransitions((style, item) => item && (
+    <animated.div className={`pop-up-message ${status}`} style={style}>
       <span className='material-icons-round status'>{ statusIcon }</span>
       <p>{ message }</p>
       <button onClick={() => setIsShow(false)} className='close-pop-up' aria-label='Fermer le message'>
         <span className='material-icons-round'>close</span>
       </button>
     </animated.div>
-  );
+  ));
 }
- 
+
 export default PopUpMessage;

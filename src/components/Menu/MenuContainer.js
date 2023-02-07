@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTransition, animated } from 'react-spring';
+import { useTransition, animated } from '@react-spring/web';
 
 const MenuContainer = props => {
 
@@ -9,19 +9,18 @@ const MenuContainer = props => {
     children
   } = props;
 
-  const menuTransitions = useTransition(isShow, null, {
+  const menuTransitions = useTransition(isShow, {
     from: { transform: 'translateX(-100%)' },
-    enter: { transform: 'translateX(0)' },
+    enter: { transform: 'translateX(0%)' },
     leave: { transform: 'translateX(-100%)' },
     config: animationConfig
   });
 
-  return menuTransitions.map(({ item, key, props }) =>
-    item && 
-    <animated.aside key={key} style={props} className='menu'>
+  return menuTransitions((style, item) => item && (
+    <animated.aside style={style} className='menu'>
       { children }
     </animated.aside>
-  );
+  ));
 }
- 
+
 export default MenuContainer;
