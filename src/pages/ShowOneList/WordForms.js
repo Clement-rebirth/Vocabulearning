@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import AddMultipleWordsForm from './AddMultipleWordsForm';
 import AddWordForm from './AddWordForm';
@@ -37,5 +37,5 @@ const WordForms = ({ listId, userId, wordToUpdate, closeModal, showPopUp }) => {
     />
   );
 }
- 
+
 export default WordForms;

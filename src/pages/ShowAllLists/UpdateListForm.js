@@ -1,4 +1,3 @@
-import React from 'react';
 import { updateList } from '../../utils/firebase/listMethods';
 import { validateList } from '../../utils/lists/validateList';
 import { slugify } from '../../utils/slugify';

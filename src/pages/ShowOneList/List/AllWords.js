@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { SearchContext } from '../../../providers/SearchProvider';
 
 import NoWordsToShow from './NoWordsToShow';
@@ -12,7 +12,7 @@ const AllWords = props => {
     openWordCard,
     showRightPart,
     invertWordWithTrad,
-    className = '' 
+    className = ''
   } = props;
 
   let { matchingWords } = useContext(SearchContext);
@@ -38,5 +38,5 @@ const AllWords = props => {
     </div>
   );
 }
- 
+
 export default AllWords;

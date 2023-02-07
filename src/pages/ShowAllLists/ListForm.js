@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const ListForm = ({ handleSubmit, listNameInitialValue = '', closeForm, show }) => {
 
@@ -39,5 +39,5 @@ const ListForm = ({ handleSubmit, listNameInitialValue = '', closeForm, show }) 
     </form>
   );
 }
- 
+
 export default ListForm;

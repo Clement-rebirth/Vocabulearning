@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './NothingToShow.css';
 
 const NothingToShow = ({ message, src, alt, className = '', children }) => (
@@ -9,5 +7,5 @@ const NothingToShow = ({ message, src, alt, className = '', children }) => (
     { children }
   </div>
 );
- 
+
 export default NothingToShow;

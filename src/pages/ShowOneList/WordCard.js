@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { PopUpContext } from '../../providers/PopUpProvider';
 import { deleteWord } from '../../utils/firebase/wordMethods';
 

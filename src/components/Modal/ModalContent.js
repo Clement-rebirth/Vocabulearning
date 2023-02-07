@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTransition, animated } from '@react-spring/web';
 
 const ModalContent = ({ close, isShow, className, children }) => {

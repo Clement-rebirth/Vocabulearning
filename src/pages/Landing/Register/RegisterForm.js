@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { signUp } from '../../../utils/firebase/authMethods';
 import { emailIsValid } from '../../../utils/emailIsValid';
 import { ROUTES } from '../../../constants';

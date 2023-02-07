@@ -1,5 +1,3 @@
-import React from 'react';
-
 import PopUpMessage from './PopUpMessage';
 
 import './PopUpsContainer.css';
@@ -18,5 +16,5 @@ const PopUpsContainer = ({ popUps }) => (
     }
   </div>
 );
- 
+
 export default PopUpsContainer;

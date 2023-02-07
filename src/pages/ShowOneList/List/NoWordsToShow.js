@@ -1,5 +1,3 @@
-import React from 'react';
-
 import NothingToShow from '../../../components/NothingToShow/NothingToShow';
 
 import noResultFoundImg from '../../../assets/img/illustrations/undraw-void-dark-yellow.svg';
@@ -13,7 +11,7 @@ const NoWordsToShow = ({ noSearchResult, noWordsInList }) => {
       message='Votre liste ne contient aucun mot'
       src={emptyDataImg}
       alt='empty illustration'
-    /> 
+    />
   );
 
   if (noSearchResult) return (
@@ -26,5 +24,5 @@ const NoWordsToShow = ({ noSearchResult, noWordsInList }) => {
 
   return null;
 }
- 
+
 export default NoWordsToShow;

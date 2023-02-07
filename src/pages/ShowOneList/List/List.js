@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { updateList } from '../../../utils/firebase/listMethods';
 
 import OptionsBar from './OptionsBar';

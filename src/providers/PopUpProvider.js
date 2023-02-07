@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
 import PopUpsContainer from '../components/PopUpsContainer/PopUpsContainer';
 

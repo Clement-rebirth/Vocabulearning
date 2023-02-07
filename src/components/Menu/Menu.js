@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Overlay from '../Overlay/Overlay';
 import MenuContainer from './MenuContainer';
 import MenuHeader from './MenuHeader';

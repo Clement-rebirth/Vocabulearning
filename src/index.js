@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
@@ -16,7 +16,9 @@ import { ROUTES } from './constants';
 import './index.css';
 import './assets/icons-css/icomoon.css';
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root'));
+
+root.render(
   <React.StrictMode>
     <UserProvider>
       <PopUpProvider>
@@ -33,8 +35,7 @@ ReactDOM.render(
         </Router>
       </PopUpProvider>
     </UserProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change

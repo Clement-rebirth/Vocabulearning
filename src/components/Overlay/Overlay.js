@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTransition, animated } from '@react-spring/web';
 
 import './Overlay.css';

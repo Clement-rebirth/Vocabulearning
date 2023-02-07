@@ -1,4 +1,3 @@
-import React from 'react';
 import { deleteList } from '../../utils/firebase/listMethods';
 
 const ListInfo = ({ list, openEditForm, openList, userId }) => {
