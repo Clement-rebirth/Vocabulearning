@@ -38,7 +38,7 @@ const UpdateWordForm = ({ wordToUpdate, listId, userId, closeModal, showPopUp })
 
     if (!isErrorsEmpty) return;
 
-    updateWord({ word, translation }, listId, userId, wordToUpdate.id, () => {
+    updateWord({ word, translation }, listId, userId, wordToUpdate.id).then(() => {
       closeModal();
       showPopUp('Le mot a bien été mis à jour');
     });

@@ -1,13 +1,14 @@
 import Manager from './Manager';
 import firebase from './firebase';
+import multiplePush from './multiplePush';
 
 export const addWord = (word, wordListId, userId, onComplete = () => {}) => {
   if (!word.word) throw new Error('word property must be define');
   if (!word.translation) throw new Error('translation property must be define');
-  
-  let wordsManager = new Manager(`wordLists/${userId}/${wordListId}/words`);
 
-  wordsManager.add({
+  const wordsRef = firebase.database().ref(`wordLists/${userId}/${wordListId}/words`);
+
+  wordsRef.push({
     ...word,
     nextRepetition: false,
     lastRepetition: false,
@@ -17,8 +18,6 @@ export const addWord = (word, wordListId, userId, onComplete = () => {}) => {
 };
 
 export const addMultipleWords = (words, wordListId, userId, onComplete = () => {}) => {
-  let wordsManager = new Manager(`wordLists/${userId}/${wordListId}/words`);
-
   words = words.map(word => ({
     ...word,
     nextRepetition: false,
@@ -27,15 +26,16 @@ export const addMultipleWords = (words, wordListId, userId, onComplete = () => {
     addedDate: firebase.database.ServerValue.TIMESTAMP
   }));
 
-  wordsManager.multipleAdd(words, onComplete);
+  const wordsRef = firebase.database().ref(`wordLists/${userId}/${wordListId}/words`);
+  multiplePush(wordsRef, words).then(onComplete);
 };
 
-export const updateWord = (newWord, wordListId, userId, wordId, onComplete = () => {}) => {
-  let wordManager = new Manager(`wordLists/${userId}/${wordListId}/words/${wordId}`);
-  wordManager.update(newWord, onComplete);
+export const updateWord = (newWord, listId, userId, wordId) => {
+  const wordRef = firebase.database().ref(`wordLists/${userId}/${listId}/words/${wordId}`);
+  return wordRef.update(newWord);
 };
 
-export const deleteWord = (wordListId, userId, wordId, onComplete = () => {}) => {
-  let wordManager = new Manager(`wordLists/${userId}/${wordListId}/words/${wordId}`);
-  wordManager.delete(onComplete);
+export const deleteWord = (listId, userId, wordId) => {
+  const wordRef = firebase.database().ref(`wordLists/${userId}/${listId}/words/${wordId}`);
+  return wordRef.remove();
 };

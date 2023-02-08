@@ -32,7 +32,7 @@ const WordCard = props => {
   const handleDelete = () => {
     if (!window.confirm('Êtes-vous sûr de vouloir supprimer ce mot ?')) return;
 
-    deleteWord(listId, userId, wordToShow.id, () => {
+    deleteWord(listId, userId, wordToShow.id).then(() => {
       closeModal();
       showPopUp('Le mot a bien été supprimé');
     });
