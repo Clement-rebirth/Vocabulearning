@@ -1,4 +1,4 @@
-import Manager from './Manager';
+import 'firebase/database';
 import firebase from './firebase';
 import multiplePush from './multiplePush';
 
