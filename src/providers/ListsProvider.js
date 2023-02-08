@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import Manager from '../utils/firebase/Manager';
 import { UserContext } from './UserProvider';
+import firebase from '../utils/firebase/firebase';
 
 export const ListsContext = createContext({
   lists: false
@@ -20,13 +20,13 @@ const ListsProvider = ({ children }) => {
     if (!user) return;
 
     // fetch user's wordLists and add a listener on it
-    let userListsManager = new Manager(`wordLists/${user.uid}`);
-    userListsManager.getAll(snapshot => {
+    const userListsRef = firebase.database().ref(`wordLists/${user.uid}`);
+    const listener = userListsRef.on('value', snapshot => {
       let data = snapshot.val();
       setLists(data);
     });
 
-    return () => userListsManager.close();
+    return () => userListsRef.off('value', listener);
   }, [user]);
 
   return (
