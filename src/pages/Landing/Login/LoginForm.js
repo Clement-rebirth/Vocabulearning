@@ -28,18 +28,20 @@ const LoginForm = () => {
     e.preventDefault();
     const { email, password } = loginFormData;
 
-    signIn(email, password, () => {
-      navigate(ROUTES.HOME, {
-        replace: true,
-        state: {
-          redirectAfterAuth: true
-        }
+    signIn(email, password)
+      .then(() => {
+        navigate(ROUTES.HOME, {
+          replace: true,
+          state: {
+            redirectAfterAuth: true
+          }
+        });
+      })
+      .catch(error => {
+        console.log('login errors :');
+        console.log(error);
+        alert('Email ou mot de passe incorrect');
       });
-    }, error => {
-      console.log('login errors :');
-      console.log(error);
-      alert('Email ou mot de passe incorrect');
-    });
   }
 
   return (

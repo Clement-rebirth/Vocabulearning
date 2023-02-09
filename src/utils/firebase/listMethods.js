@@ -1,28 +1,29 @@
-import 'firebase/database';
-import firebase from './firebase';
-
+import './firebase';
+import { getDatabase, push, ref, remove, update } from 'firebase/database';
 import { slugify } from '../slugify';
 
 export const addList = (wordList, userId) => {
   if (!wordList.name) throw new Error('name property must be defined');
   if (!wordList.words) wordList.words = false;
 
-  const listsRef = firebase.database().ref(`wordLists/${userId}`);
-
-  listsRef.push({
+  const db = getDatabase();
+  const listsRef = ref(db, `wordLists/${userId}`)
+  push(listsRef, {
     ...wordList,
     slug: slugify(wordList.name),
-    addedDate: firebase.database.ServerValue.TIMESTAMP,
+    addedDate: Date.now(),
     order: 'asc'
   });
 };
 
 export const updateList = (propsToUpdate, listId, userId) => {
-  const listRef = firebase.database().ref(`wordLists/${userId}/${listId}`);
-  return listRef.update(propsToUpdate);
+  const db = getDatabase();
+  const listRef = ref(db, `wordLists/${userId}/${listId}`);
+  return update(listRef, propsToUpdate);
 };
 
 export const deleteList = (listId, userId) => {
-  const listRef = firebase.database().ref(`wordLists/${userId}/${listId}`);
-  return listRef.remove();
+  const db = getDatabase();
+  const listRef = ref(db, `wordLists/${userId}/${listId}`);
+  return remove(listRef);
 };

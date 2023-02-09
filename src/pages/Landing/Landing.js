@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../providers/UserProvider';
 import { ROUTES } from '../../constants';
 
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Modal from '../../components/Modal/Modal';
 import Login from './Login/Login';
 import Register from './Register/Register';
@@ -25,7 +25,7 @@ const Home = () => {
 
   const closeModal = () => navigate(ROUTES.LANDING, { replace: true });
 
-  if (user) navigate(ROUTES.HOME, { replace: true });
+  if (user) return <Navigate to={ROUTES.HOME} replace={true} />;
 
   return (
     <>

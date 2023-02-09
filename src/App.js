@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { UserContext } from './providers/UserProvider';
 import { ROUTES } from './constants';
-import { signOut } from './utils/firebase/authMethods';
+import { logOut } from './utils/firebase/authMethods';
 
 import Menu from './components/Menu/Menu';
 import ShowAllLists from './pages/ShowAllLists/ShowAllLists';
@@ -24,12 +24,14 @@ const App = () => {
   let redirectAfterAuth = location.state && location.state.redirectAfterAuth;
 
   const handleSignOut = () => {
-    signOut(() => {
-      setUser(false);
-      navigate(ROUTES.LANDING, { replace: true });
-    }, error => {
-      console.log('logout error : ', error);
-    });
+    logOut()
+      .then(() => {
+        setUser(false);
+        navigate(ROUTES.LANDING, { replace: true });
+      })
+      .catch(error => {
+        console.log('logout error : ', error);
+      });
   };
 
   // if the user is not connected and hasn't just been redirected after loged in

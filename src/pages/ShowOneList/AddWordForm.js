@@ -37,7 +37,7 @@ const AddWordForm = ({ listId, userId, setAddMultipleWordsMode, closeModal, show
 
     if (!isErrorsEmpty) return;
 
-    addWord({ word, translation }, listId, userId, () => {
+    addWord({ word, translation }, listId, userId).then(() => {
       clear();
       wordFieldRef.current.focus();
       closeModal();

@@ -61,30 +61,32 @@ const RegisterForm = () => {
 
     if (!errors.empty) return;
 
-    signUp(email, password, () => {
-      navigate(ROUTES.HOME, {
-        replace: true,
-        state: {
-          redirectAfterAuth: true
+    signUp(email, password)
+      .then(() => {
+        navigate(ROUTES.HOME, {
+          replace: true,
+          state: {
+            redirectAfterAuth: true
+          }
+        });
+      })
+      .catch(error => {
+        let emailError = '';
+
+        if (error.code === 'auth/email-already-in-use') {
+            emailError = 'Cet email est déjà utilisé';
+        } else if (error.code === 'auth/invalid-email') {
+          emailError = 'Email incorrect';
         }
+
+        setRegisterFormData({
+          ...registerFormData,
+          passwordError: '',
+          emailError: emailError
+        });
+
+        console.log(error);
       });
-    }, error => {
-      let emailError = '';
-
-      if (error.code === 'auth/email-already-in-use') {
-          emailError = 'Cet email est déjà utilisé';
-      } else if (error.code === 'auth/invalid-email') {
-        emailError = 'Email incorrect';
-      }
-
-      setRegisterFormData({
-        ...registerFormData,
-        passwordError: '',
-        emailError: emailError
-      });
-
-      console.log(error);
-    });
   }
 
   return (
