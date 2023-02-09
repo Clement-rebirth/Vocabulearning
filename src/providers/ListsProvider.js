@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { UserContext } from './UserProvider';
-import firebase from '../utils/firebase/firebase';
+import '../utils/firebase/firebase';
+import { getDatabase, onValue, ref } from 'firebase/database';
 
 export const ListsContext = createContext({
   lists: false
@@ -19,14 +20,14 @@ const ListsProvider = ({ children }) => {
     // if user hasn't been loaded
     if (!user) return;
 
+    const db = getDatabase();
+    const userListsRef = ref(db, `wordLists/${user.uid}`);
+
     // fetch user's wordLists and add a listener on it
-    const userListsRef = firebase.database().ref(`wordLists/${user.uid}`);
-    const listener = userListsRef.on('value', snapshot => {
+    return onValue(userListsRef, snapshot => {
       let data = snapshot.val();
       setLists(data);
     });
-
-    return () => userListsRef.off('value', listener);
   }, [user]);
 
   return (

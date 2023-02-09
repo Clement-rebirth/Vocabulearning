@@ -1,19 +1,17 @@
-import firebase from 'firebase/app';
-import 'firebase/analytics';
+import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAdW4qD5kwQ4K_n9mb79azzyHcvH0FaraQ",
-  authDomain: "vocabulearning.firebaseapp.com",
-  databaseURL: "https://vocabulearning.firebaseio.com",
-  projectId: "vocabulearning",
-  storageBucket: "vocabulearning.appspot.com",
-  messagingSenderId: "479135033103",
-  appId: "1:479135033103:web:721f44e82b7477d9f1007a",
+  apiKey: "AIzaSyB86Gut7m2jTPlgOAnsB-URXIy_RTjv_ig",
+  authDomain: "vocabulearning-c6b24.firebaseapp.com",
+  databaseURL: "https://vocabulearning-c6b24-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "vocabulearning-c6b24",
+  storageBucket: "vocabulearning-c6b24.appspot.com",
+  messagingSenderId: "752274796927",
+  appId: "1:752274796927:web:2a6a8371e0fddac3432a4a"
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const firebase = initializeApp(firebaseConfig);
 
 export default firebase;

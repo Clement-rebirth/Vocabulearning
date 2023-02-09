@@ -1,40 +1,23 @@
-import firebase from './firebase';
-import 'firebase/auth';
+import './firebase';
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithRedirect, signOut } from 'firebase/auth';
 
-export function signIn(email, password, resolve, reject) {
-  firebase
-  .auth()
-  .signInWithEmailAndPassword(email, password)
-  .then(resolve)
-  .catch(reject);
-}
+export const signIn = (email, password) => {
+  const auth = getAuth();
+  return signInWithEmailAndPassword(auth, email, password);
+};
 
-export function googleSignIn(resolve, reject) {
-  let provider = new firebase.auth.GoogleAuthProvider();
-  
-  firebase
-  .auth()
-  .signInWithRedirect(provider);
-  
-  firebase
-  .auth()
-  .getRedirectResult()
-  .then(resolve)
-  .catch(reject);
-}
+export const googleSignIn = async () => {
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+  await signInWithRedirect(auth, provider);
+};
 
-export function signOut(resolve, reject) {
-  firebase
-  .auth()
-  .signOut()
-  .then(resolve)
-  .catch(reject);
-}
+export const logOut = () => {
+  const auth = getAuth();
+  return signOut(auth);
+};
 
-export function signUp(email, password, resolve, reject) {
-  firebase
-  .auth()
-  .createUserWithEmailAndPassword(email, password)
-  .then(resolve)
-  .catch(reject);
-}
+export const signUp = (email, password) => {
+  const auth = getAuth();
+  return createUserWithEmailAndPassword(auth, email, password);
+};

@@ -1,41 +1,44 @@
-import 'firebase/database';
-import firebase from './firebase';
+import './firebase';
+import { getDatabase, push, ref, remove, update } from 'firebase/database';
 import multiplePush from './multiplePush';
 
-export const addWord = (word, wordListId, userId, onComplete = () => {}) => {
+export const addWord = (word, wordListId, userId) => {
   if (!word.word) throw new Error('word property must be define');
   if (!word.translation) throw new Error('translation property must be define');
 
-  const wordsRef = firebase.database().ref(`wordLists/${userId}/${wordListId}/words`);
-
-  wordsRef.push({
+  const db = getDatabase();
+  const wordsRef = ref(db, `wordLists/${userId}/${wordListId}/words`);
+  return push(wordsRef, {
     ...word,
     nextRepetition: false,
     lastRepetition: false,
     lvl: 0,
-    addedDate: firebase.database.ServerValue.TIMESTAMP
-  }, onComplete);
+    addedDate: Date.now()
+  });
 };
 
-export const addMultipleWords = (words, wordListId, userId, onComplete = () => {}) => {
+export const addMultipleWords = (words, wordListId, userId) => {
   words = words.map(word => ({
     ...word,
     nextRepetition: false,
     lastRepetition: false,
     lvl: 0,
-    addedDate: firebase.database.ServerValue.TIMESTAMP
+    addedDate: Date.now()
   }));
 
-  const wordsRef = firebase.database().ref(`wordLists/${userId}/${wordListId}/words`);
-  multiplePush(wordsRef, words).then(onComplete);
+  const db = getDatabase();
+  const wordsRef = ref(db, `wordLists/${userId}/${wordListId}/words`);
+  return multiplePush(wordsRef, words);
 };
 
 export const updateWord = (newWord, listId, userId, wordId) => {
-  const wordRef = firebase.database().ref(`wordLists/${userId}/${listId}/words/${wordId}`);
-  return wordRef.update(newWord);
+  const db = getDatabase();
+  const wordRef = ref(db, `wordLists/${userId}/${listId}/words/${wordId}`);
+  return update(wordRef, newWord);
 };
 
 export const deleteWord = (listId, userId, wordId) => {
-  const wordRef = firebase.database().ref(`wordLists/${userId}/${listId}/words/${wordId}`);
-  return wordRef.remove();
+  const db = getDatabase();
+  const wordRef = ref(db, `wordLists/${userId}/${listId}/words/${wordId}`);
+  return remove(wordRef);
 };

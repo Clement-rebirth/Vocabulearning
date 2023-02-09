@@ -40,7 +40,7 @@ const AddMultipleWordsForm = ({ listId, userId, closeModal, showPopUp }) => {
       return;
     };
 
-    addMultipleWords(wordObjects, listId, userId, () => {
+    addMultipleWords(wordObjects, listId, userId).then(() => {
       closeModal();
       showPopUp('Tous les mots ont été ajoutés avec succès');
     });
