@@ -146,6 +146,8 @@ button {
   font-size: 1.1rem;
   cursor: pointer;
   color: var(--dark-text-color);
+  padding: 1px 6px;
+  font-weight: var(--text-weight);
 }
 
 .dark-text {
@@ -261,6 +263,7 @@ input.bd-bottom-only {
   border-width: 0 0 2px;
   border-color: var(--third-bg-color);
   transition-duration: 0.3s;
+  border-radius: 0;
 }
 
 input.bd-bottom-only::placeholder {

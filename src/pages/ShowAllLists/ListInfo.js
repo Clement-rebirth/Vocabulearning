@@ -27,11 +27,13 @@ const ListInfo = ({ list, openEditForm, openList, userId }) => {
 
   return (
     <div className='list-info allow-click' onClick={handleOpenList}>
-      <h2 className='name allow-click'>
-        { list.name }
-      </h2>
+      <div className='list-info-and-actions allow-click'>
+        <h2 className='name allow-click'>
+          { list.name }
+        </h2>
 
-      <span className='nb-words allow-click'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
+        <span className='nb-words allow-click'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
+      </div>
 
       <div className='actions'>
         <button
