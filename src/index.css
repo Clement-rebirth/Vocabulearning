@@ -34,7 +34,7 @@ body.dark {
   --tertiary-text-color: rgba(255, 255, 255, 0.38); /* Disabled text */
   --dark-text-color: var(--main-dark-color);
   --light-text-color: #fff;
-  
+
   --invalid-color: #c0392b;
   --danger-color: #c95959;
   --valid-color: #239B56;
@@ -74,7 +74,7 @@ body.dark::-webkit-scrollbar,
 body.dark .custom-scrollbar::-webkit-scrollbar {
   width: 0.8rem;
 }
- 
+
 body.dark::-webkit-scrollbar-track,
 body.dark .custom-scrollbar::-webkit-scrollbar-track {
   background-color: #1c1f22;
@@ -145,6 +145,7 @@ p {
 button {
   font-size: 1.1rem;
   cursor: pointer;
+  color: var(--dark-text-color);
 }
 
 .dark-text {
