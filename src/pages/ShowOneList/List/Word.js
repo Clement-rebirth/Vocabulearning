@@ -6,10 +6,10 @@ const Word = ({ wordObject, openWordCard, invertWordWithTrad, showRightPart }) =
   // and the user click on it or not
   const [show, setShow] = useState(false);
 
-  let { id, word, translation, lastRepetition } = wordObject;
+  let { id, word, translation, lastReview } = wordObject;
 
   const handleOpenWordCard = () => {
-    if (showRightPart) openWordCard({ id, word, translation, lastRepetition });
+    if (showRightPart) openWordCard({ id, word, translation, lastReview });
   };
 
   const handleClick = () => {
