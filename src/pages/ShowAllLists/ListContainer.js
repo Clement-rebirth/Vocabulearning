@@ -6,7 +6,6 @@ import UpdateListForm from './UpdateListForm';
 const ListContainer = props => {
 
   const {
-    existingLists,
     list,
     openList,
     setCloseCurrentFormFunc
@@ -27,7 +26,6 @@ const ListContainer = props => {
   if (showEditForm) return (
     <UpdateListForm
       show={showEditForm}
-      existingLists={existingLists}
       listToUpdate={list}
       closeForm={closeEditForm}
     />

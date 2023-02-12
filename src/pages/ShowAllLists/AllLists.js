@@ -21,7 +21,6 @@ const AllLists = props => {
       {listsToShow && Object.keys(listsToShow).map(key => (
         <ListContainer
           key={key}
-          existingLists={lists}
           list={{...listsToShow[key], id: key}}
           openList={openList}
           setCloseCurrentFormFunc={setCloseCurrentFormFunc}
