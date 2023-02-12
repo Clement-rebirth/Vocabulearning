@@ -1,14 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { addMultipleWords } from '../../utils/firebase/wordMethods';
 import { generateWordObjectsFromString } from '../../utils/words/generateWordObjectsFromString';
 import { validateWord } from '../../utils/words/validateWord';
+import { UserContext } from '../../providers/UserProvider';
+import { PopUpContext } from '../../providers/PopUpProvider';
+import { ListsContext } from '../../providers/ListsProvider';
 
-const AddMultipleWordsForm = ({ listId, userId, closeModal, showPopUp }) => {
+const AddMultipleWordsForm = ({ closeModal }) => {
 
   const [words, setWords] = useState('');
   const [wordsError, setWordsError] = useState(null);
 
   let wordsFieldRef = useRef(null);
+  const { list } = useContext(ListsContext);
+  const { showPopUp } = useContext(PopUpContext);
+  const { user } = useContext(UserContext);
+  const userId = user.uid;
 
   useEffect(() => {
     wordsFieldRef.current.focus();
@@ -40,7 +47,7 @@ const AddMultipleWordsForm = ({ listId, userId, closeModal, showPopUp }) => {
       return;
     };
 
-    addMultipleWords(wordObjects, listId, userId).then(() => {
+    addMultipleWords(wordObjects, list.id, userId).then(() => {
       closeModal();
       showPopUp('Tous les mots ont été ajoutés avec succès');
     });

@@ -52,8 +52,8 @@ const App = () => {
       <ListsProvider>
         <SearchProvider showMenu={() => setShowMenu(true)}>
           <Routes>
-            <Route path='/' element={<ShowAllLists navigate={navigate} user={user} />} />
-            <Route path={ROUTES.DISPLAY_ONE_LIST} element={<ShowOneList navigate={navigate} user={user} />} />
+            <Route path='/' element={<ShowAllLists navigate={navigate} />} />
+            <Route path={ROUTES.DISPLAY_ONE_LIST} element={<ShowOneList navigate={navigate} />} />
           </Routes>
         </SearchProvider>
       </ListsProvider>

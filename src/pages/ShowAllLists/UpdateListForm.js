@@ -1,10 +1,14 @@
+import { useContext } from 'react';
 import { updateList } from '../../utils/firebase/listMethods';
 import { validateList } from '../../utils/lists/validateList';
 import { slugify } from '../../utils/slugify';
+import { UserContext } from '../../providers/UserProvider';
 
 import ListForm from './ListForm';
 
-const UpdateListForm = ({ closeForm, listToUpdate, userId, existingLists, show }) => {
+const UpdateListForm = ({ closeForm, listToUpdate, existingLists, show }) => {
+  const { user } = useContext(UserContext);
+  const userId = user.uid;
 
   const handleSubmit = (e, listName, setListNameError) => {
     e.preventDefault();

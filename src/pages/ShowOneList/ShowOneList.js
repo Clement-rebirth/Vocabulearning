@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { PopUpContext } from '../../providers/PopUpProvider';
 import { SearchContext } from '../../providers/SearchProvider';
 import { ListsContext } from '../../providers/ListsProvider';
 import { ROUTES } from '../../constants';
@@ -15,18 +14,14 @@ import GoBackHomeArrow from '../../components/GoBackHomeArrow/GoBackHomeArrow';
 
 import './ShowOneList.css';
 
-const ShowOneList = ({ user, navigate }) => {
+const ShowOneList = ({ navigate }) => {
 
   const [showWordForm, setShowWordForm] = useState(false);
   const [wordToShow, setWordToShow] = useState(false);
-  const [list, setList] = useState(false);
 
-  const { showPopUp } = useContext(PopUpContext);
-  const { searchMode, disableSearchMode, setCurrentList, handleSearch } = useContext(SearchContext);
-  let { lists, listsLoading } = useContext(ListsContext);
-
+  const { searchMode, disableSearchMode, handleSearch } = useContext(SearchContext);
+  let { lists, listsLoading, list, setList } = useContext(ListsContext);
   let { slug } = useParams();
-  const userId = user && user.uid;
 
   const startLearningMode = () => alert('Coming soon !');
 
@@ -49,13 +44,12 @@ const ShowOneList = ({ user, navigate }) => {
   useEffect(() => {
     if (listsLoading) return;
 
-    let list = getMatchingListWithSlug(slug, lists);
+    let matchingList = getMatchingListWithSlug(slug, lists);
 
-    if (!list) navigate(ROUTES.NOT_FOUND, { replace: true });
+    if (!matchingList) navigate(ROUTES.NOT_FOUND, { replace: true });
 
-    setList(list);
-    setCurrentList(list);
-  }, [navigate, lists, setCurrentList, slug, listsLoading]);
+    setList(matchingList);
+  }, [navigate, lists, slug, setList, listsLoading]);
 
   useEffect(() => {
     // execute the search on page load if there is something to search
@@ -74,8 +68,6 @@ const ShowOneList = ({ user, navigate }) => {
       <List
         openWordForm={openWordForm}
         list={list}
-        userId={userId}
-        searchMode={searchMode}
         openWordCard={openWordCard}
         nbWords={nbWords}
       />
@@ -88,20 +80,13 @@ const ShowOneList = ({ user, navigate }) => {
         <WordCard
           openWordForm={openWordForm}
           listId={list.id}
-          userId={userId}
           wordToShow={wordToShow}
           closeModal={handleClose}
         />
       </Modal>
 
       <Modal isShow={showWordForm} close={handleClose}>
-        <WordForms
-          showPopUp={showPopUp}
-          listId={list.id}
-          userId={userId}
-          wordToUpdate={wordToShow}
-          closeModal={handleClose}
-        />
+        <WordForms wordToUpdate={wordToShow} closeModal={handleClose} />
       </Modal>
     </>
   );

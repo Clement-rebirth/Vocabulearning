@@ -1,9 +1,13 @@
+import { useContext } from 'react';
+import { UserContext } from '../../providers/UserProvider';
 import { addList } from '../../utils/firebase/listMethods';
 import { validateList } from '../../utils/lists/validateList';
 
 import ListForm from './ListForm';
 
-const AddListForm = ({ closeForm, userId, existingLists, show }) => {
+const AddListForm = ({ closeForm, existingLists, show }) => {
+  const { user } = useContext(UserContext);
+  const userId = user.uid;
 
   const handleSubmit = (e, listName, setListNameError) => {
     e.preventDefault();

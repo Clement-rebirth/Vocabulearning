@@ -1,8 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { addWord } from '../../utils/firebase/wordMethods';
 import { validateWord } from '../../utils/words/validateWord';
+import { UserContext } from '../../providers/UserProvider';
+import { PopUpContext } from '../../providers/PopUpProvider';
+import { ListsContext } from '../../providers/ListsProvider';
 
-const AddWordForm = ({ listId, userId, setAddMultipleWordsMode, closeModal, showPopUp }) => {
+const AddWordForm = ({ setAddMultipleWordsMode, closeModal }) => {
 
   const DEFAULT_FORM_DATA = {
     word: '',
@@ -14,6 +17,10 @@ const AddWordForm = ({ listId, userId, setAddMultipleWordsMode, closeModal, show
   const [wordFormData, setWordFormData] = useState(DEFAULT_FORM_DATA);
 
   let wordFieldRef = useRef(null);
+  const { list } = useContext(ListsContext);
+  const { showPopUp } = useContext(PopUpContext);
+  const { user } = useContext(UserContext);
+  const userId = user.uid;
 
   useEffect(() => {
     wordFieldRef.current.focus();
@@ -37,7 +44,7 @@ const AddWordForm = ({ listId, userId, setAddMultipleWordsMode, closeModal, show
 
     if (!isErrorsEmpty) return;
 
-    addWord({ word, translation }, listId, userId).then(() => {
+    addWord({ word, translation }, list.id, userId).then(() => {
       clear();
       wordFieldRef.current.focus();
       closeModal();

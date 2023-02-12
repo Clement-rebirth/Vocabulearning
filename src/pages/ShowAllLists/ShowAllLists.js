@@ -9,14 +9,12 @@ import AddList from './AddList';
 
 import './ShowAllLists.css';
 
-const ShowAllLists = ({ user, navigate }) => {
+const ShowAllLists = ({ navigate }) => {
 
   const [closeCurrentForm, setCloseCurrentForm] = useState(false);
 
-  let { lists, listsLoading } = useContext(ListsContext);
-  let { searchMode, disableSearchMode, listsWithMatchingWords, setCurrentList } = useContext(SearchContext);
-
-  const userId = user && user.uid;
+  let { lists, listsLoading, setList } = useContext(ListsContext);
+  let { searchMode, disableSearchMode, listsWithMatchingWords } = useContext(SearchContext);
 
   // close the current form if there is one and set the new one
   const setCloseCurrentFormFunc = newCloseFunc => {
@@ -26,7 +24,7 @@ const ShowAllLists = ({ user, navigate }) => {
 
   const openList = slug => navigate(`${ROUTES.HOME}/${slug}`);
 
-  useEffect(() => setCurrentList(null), [setCurrentList]);
+  useEffect(() => setList(null), [setList]);
 
   if (listsLoading) return <Loading />;
 
@@ -37,14 +35,12 @@ const ShowAllLists = ({ user, navigate }) => {
         searchMode={searchMode}
         setCloseCurrentFormFunc={setCloseCurrentFormFunc}
         disableSearchMode={disableSearchMode}
-        userId={userId}
       />
 
       <AllLists
         lists={lists}
         listsWithMatchingWords={listsWithMatchingWords}
         openList={openList}
-        userId={userId}
         searchMode={searchMode}
         setCloseCurrentFormFunc={setCloseCurrentFormFunc}
       />

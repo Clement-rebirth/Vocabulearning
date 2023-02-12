@@ -6,11 +6,14 @@ import { getDatabase, onValue, ref } from 'firebase/database';
 export const ListsContext = createContext({
   lists: null,
   listsLoading: true,
+  list: null,
+  setList: () => {},
 });
 
 const ListsProvider = ({ children }) => {
   const [lists, setLists] = useState(null);
   const [listsLoading, setListsLoading] = useState(true);
+  const [list, setList] = useState(null);
 
   let { user } = useContext(UserContext);
 
@@ -30,7 +33,7 @@ const ListsProvider = ({ children }) => {
   }, [user]);
 
   return (
-    <ListsContext.Provider value={{ lists, listsLoading }}>
+    <ListsContext.Provider value={{ lists, listsLoading, list, setList }}>
       { children }
     </ListsContext.Provider>
   );
