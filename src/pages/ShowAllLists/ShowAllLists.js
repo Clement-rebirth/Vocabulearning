@@ -31,7 +31,6 @@ const ShowAllLists = ({ navigate }) => {
   return (
     <div className='all-lists-page'>
       <AddList
-        existingLists={lists}
         searchMode={searchMode}
         setCloseCurrentFormFunc={setCloseCurrentFormFunc}
         disableSearchMode={disableSearchMode}

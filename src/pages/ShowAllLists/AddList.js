@@ -3,7 +3,7 @@ import { useState } from 'react';
 import AddListForm from './AddListForm';
 import ShowAddListFormBtn from './ShowAddListFormBtn';
 
-const AddList = ({ existingLists, searchMode, setCloseCurrentFormFunc, disableSearchMode }) => {
+const AddList = ({ searchMode, setCloseCurrentFormFunc, disableSearchMode }) => {
 
   const [addFormIsShow, setAddFormIsShow] = useState(false);
 
@@ -22,12 +22,7 @@ const AddList = ({ existingLists, searchMode, setCloseCurrentFormFunc, disableSe
 
   return (
     <>
-      <AddListForm
-        show={addFormIsShow}
-        existingLists={existingLists}
-        closeForm={closeAddForm}
-      />
-
+      <AddListForm show={addFormIsShow} closeForm={closeAddForm} />
       <ShowAddListFormBtn openAddForm={openAddForm} addFormIsShow={addFormIsShow} />
     </>
   );

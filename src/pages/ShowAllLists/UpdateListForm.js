@@ -3,10 +3,12 @@ import { updateList } from '../../utils/firebase/listMethods';
 import { validateList } from '../../utils/lists/validateList';
 import { slugify } from '../../utils/slugify';
 import { UserContext } from '../../providers/UserProvider';
+import { ListsContext } from '../../providers/ListsProvider';
 
 import ListForm from './ListForm';
 
-const UpdateListForm = ({ closeForm, listToUpdate, existingLists, show }) => {
+const UpdateListForm = ({ closeForm, listToUpdate, show }) => {
+  const { lists } = useContext(ListsContext);
   const { user } = useContext(UserContext);
   const userId = user.uid;
 
@@ -19,7 +21,7 @@ const UpdateListForm = ({ closeForm, listToUpdate, existingLists, show }) => {
       return;
     }
 
-    let error = validateList(listName, existingLists);
+    let error = validateList(listName, lists);
     setListNameError(error);
 
     if (error) return;
