@@ -13,7 +13,6 @@ const List = props => {
     userId,
     openWordCard,
     nbWords,
-    searchMode,
     openWordForm
   } = props;
 
@@ -49,7 +48,6 @@ const List = props => {
 
       <AllWords
         words={words}
-        searchMode={searchMode}
         openWordCard={openWordCard}
         showRightPart={showRightPart}
         invertWordWithTrad={invertWordWithTrad}

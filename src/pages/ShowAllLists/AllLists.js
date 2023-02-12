@@ -7,7 +7,6 @@ const AllLists = props => {
     lists,
     listsWithMatchingWords,
     openList,
-    userId,
     searchMode,
     setCloseCurrentFormFunc
   } = props;
@@ -25,7 +24,6 @@ const AllLists = props => {
           existingLists={lists}
           list={{...listsToShow[key], id: key}}
           openList={openList}
-          userId={userId}
           setCloseCurrentFormFunc={setCloseCurrentFormFunc}
         />
       ))}

@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { PopUpContext } from '../../providers/PopUpProvider';
 import { deleteWord } from '../../utils/firebase/wordMethods';
+import { UserContext } from '../../providers/UserProvider';
 
 import HorizontalBar from '../../components/HorizontalBar/HorizontalBar';
 
@@ -10,11 +11,12 @@ const WordCard = props => {
     openWordForm,
     listId,
     wordToShow,
-    userId,
     closeModal
   } = props;
 
   let { showPopUp } = useContext(PopUpContext);
+  const { user } = useContext(UserContext);
+  const userId = user.uid;
   let dateStr = null;
 
   if (wordToShow.lastReview) {

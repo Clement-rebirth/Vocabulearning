@@ -8,14 +8,13 @@ const AllWords = props => {
 
   const {
     words,
-    searchMode,
     openWordCard,
     showRightPart,
     invertWordWithTrad,
     className = ''
   } = props;
 
-  let { matchingWords } = useContext(SearchContext);
+  let { matchingWords, searchMode } = useContext(SearchContext);
 
   let noWordsInList = !words && !searchMode;
   let noSearchResult = !matchingWords && searchMode;

@@ -10,7 +10,7 @@ export const SearchContext = createContext({
   listsWithMatchingWords: null,
   searchMode: false,
   disableSearchMode: () => {},
-  setCurrentList: () => {},
+  setlist: () => {},
   handleSearch: () => {},
 });
 
@@ -20,9 +20,8 @@ const SearchProvider = ({ showMenu, children }) => {
   const [matchingWords, setMatchingWords] = useState(null);
   const [listsWithMatchingWords, setListsWithMatchingWords] = useState(null);
   const [searchMode, setSearchMode] = useState(false);
-  const [currentList, setCurrentList] = useState(null);
 
-  let { lists } = useContext(ListsContext);
+  let { lists, list } = useContext(ListsContext);
 
   const disableSearchMode = () => setSearchMode(false);
 
@@ -48,13 +47,13 @@ const SearchProvider = ({ showMenu, children }) => {
   const handleSearch = useCallback(() => {
     setSearchMode(!!search);
 
-    if (currentList) {
-      searchWordInOneList(search, currentList);
+    if (list) {
+      searchWordInOneList(search, list);
       return;
     }
 
     searchWordInAllLists(search, lists);
-  }, [search, currentList, lists]);
+  }, [search, list, lists]);
 
   // execute the search everytime search state update
   useEffect(() => handleSearch(), [search, handleSearch]);
@@ -64,7 +63,6 @@ const SearchProvider = ({ showMenu, children }) => {
     listsWithMatchingWords,
     searchMode,
     disableSearchMode,
-    setCurrentList,
     handleSearch
   };
 

@@ -1,8 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { updateWord } from '../../utils/firebase/wordMethods';
 import { validateWord } from '../../utils/words/validateWord';
+import { UserContext } from '../../providers/UserProvider';
+import { PopUpContext } from '../../providers/PopUpProvider';
+import { ListsContext } from '../../providers/ListsProvider';
 
-const UpdateWordForm = ({ wordToUpdate, listId, userId, closeModal, showPopUp }) => {
+const UpdateWordForm = ({ wordToUpdate, closeModal }) => {
 
   const [wordFormData, setWordFormData] = useState({
     word: wordToUpdate.word,
@@ -12,6 +15,10 @@ const UpdateWordForm = ({ wordToUpdate, listId, userId, closeModal, showPopUp })
   });
 
   let wordFieldRef = useRef(null);
+  const { list } = useContext(ListsContext);
+  const { showPopUp } = useContext(PopUpContext);
+  const { user } = useContext(UserContext);
+  const userId = user.uid;
 
   useEffect(() => {
     wordFieldRef.current.focus();
@@ -38,7 +45,7 @@ const UpdateWordForm = ({ wordToUpdate, listId, userId, closeModal, showPopUp })
 
     if (!isErrorsEmpty) return;
 
-    updateWord({ word, translation }, listId, userId, wordToUpdate.id).then(() => {
+    updateWord({ word, translation }, list.id, userId, wordToUpdate.id).then(() => {
       closeModal();
       showPopUp('Le mot a bien été mis à jour');
     });

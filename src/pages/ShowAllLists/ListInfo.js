@@ -1,6 +1,10 @@
+import { useContext } from 'react';
+import { UserContext } from '../../providers/UserProvider';
 import { deleteList } from '../../utils/firebase/listMethods';
 
-const ListInfo = ({ list, openEditForm, openList, userId }) => {
+const ListInfo = ({ list, openEditForm, openList }) => {
+  const { user } = useContext(UserContext);
+  const userId = user.uid;
 
   const handleDeleteList = () => {
     let text;

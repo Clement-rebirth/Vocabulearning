@@ -3,7 +3,7 @@ import { useState } from 'react';
 import AddListForm from './AddListForm';
 import ShowAddListFormBtn from './ShowAddListFormBtn';
 
-const AddList = ({ existingLists, userId, searchMode, setCloseCurrentFormFunc, disableSearchMode }) => {
+const AddList = ({ existingLists, searchMode, setCloseCurrentFormFunc, disableSearchMode }) => {
 
   const [addFormIsShow, setAddFormIsShow] = useState(false);
 
@@ -25,7 +25,6 @@ const AddList = ({ existingLists, userId, searchMode, setCloseCurrentFormFunc, d
       <AddListForm
         show={addFormIsShow}
         existingLists={existingLists}
-        userId={userId}
         closeForm={closeAddForm}
       />
 

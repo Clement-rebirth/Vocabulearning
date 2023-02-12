@@ -9,7 +9,6 @@ const ListContainer = props => {
     existingLists,
     list,
     openList,
-    userId,
     setCloseCurrentFormFunc
   } = props;
 
@@ -31,7 +30,6 @@ const ListContainer = props => {
       existingLists={existingLists}
       listToUpdate={list}
       closeForm={closeEditForm}
-      userId={userId}
     />
   );
 
@@ -40,7 +38,6 @@ const ListContainer = props => {
       list={list}
       openEditForm={openEditForm}
       openList={openList}
-      userId={userId}
     />
   );
 }
