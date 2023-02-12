@@ -11,7 +11,7 @@ export const addList = (wordList, userId) => {
   push(listsRef, {
     ...wordList,
     slug: slugify(wordList.name),
-    addedDate: Date.now(),
+    createdAt: Date.now(),
     order: 'asc'
   });
 };

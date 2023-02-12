@@ -10,20 +10,20 @@ export const addWord = (word, wordListId, userId) => {
   const wordsRef = ref(db, `wordLists/${userId}/${wordListId}/words`);
   return push(wordsRef, {
     ...word,
-    nextRepetition: false,
-    lastRepetition: false,
+    nextReview: false,
+    lastReview: false,
     lvl: 0,
-    addedDate: Date.now()
+    createdAt: Date.now()
   });
 };
 
 export const addMultipleWords = (words, wordListId, userId) => {
   words = words.map(word => ({
     ...word,
-    nextRepetition: false,
-    lastRepetition: false,
+    nextReview: false,
+    lastReview: false,
     lvl: 0,
-    addedDate: Date.now()
+    createdAt: Date.now()
   }));
 
   const db = getDatabase();

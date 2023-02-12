@@ -17,8 +17,8 @@ const WordCard = props => {
   let { showPopUp } = useContext(PopUpContext);
   let dateStr = null;
 
-  if (wordToShow.lastRepetition) {
-    const date = new Date(wordToShow.lastRepetition);
+  if (wordToShow.lastReview) {
+    const date = new Date(wordToShow.lastReview);
 
     let hours = date.getHours();
     if (hours < 10) hours = '0' + hours;
