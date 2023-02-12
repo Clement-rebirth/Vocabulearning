@@ -23,7 +23,7 @@ const ShowOneList = ({ user, navigate }) => {
 
   const { showPopUp } = useContext(PopUpContext);
   const { searchMode, disableSearchMode, setCurrentList, handleSearch } = useContext(SearchContext);
-  let { lists } = useContext(ListsContext);
+  let { lists, listsLoading } = useContext(ListsContext);
 
   let { slug } = useParams();
   const userId = user && user.uid;
@@ -47,8 +47,7 @@ const ShowOneList = ({ user, navigate }) => {
 
   // to get the list the user wants to see
   useEffect(() => {
-    // if word lists hasn't been loaded
-    if (lists === false) return;
+    if (listsLoading) return;
 
     let list = getMatchingListWithSlug(slug, lists);
 
@@ -56,14 +55,14 @@ const ShowOneList = ({ user, navigate }) => {
 
     setList(list);
     setCurrentList(list);
-  }, [navigate, lists, setCurrentList, slug]);
+  }, [navigate, lists, setCurrentList, slug, listsLoading]);
 
   useEffect(() => {
     // execute the search on page load if there is something to search
     if (searchMode) handleSearch();
   }, [handleSearch, searchMode]);
 
-  if (!list || !userId || !lists) return <Loading />;
+  if (listsLoading || !list) return <Loading />;
 
   let words = list && list.words;
   let nbWords = words ? Object.keys(words).length : 0;

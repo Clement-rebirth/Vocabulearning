@@ -4,15 +4,13 @@ import '../utils/firebase/firebase';
 import { getDatabase, onValue, ref } from 'firebase/database';
 
 export const ListsContext = createContext({
-  lists: false
+  lists: null,
+  listsLoading: true,
 });
 
 const ListsProvider = ({ children }) => {
-
-  // null = user has no list
-  // false = loading
-  // object = lists
-  const [lists, setLists] = useState(false);
+  const [lists, setLists] = useState(null);
+  const [listsLoading, setListsLoading] = useState(true);
 
   let { user } = useContext(UserContext);
 
@@ -27,11 +25,12 @@ const ListsProvider = ({ children }) => {
     return onValue(userListsRef, snapshot => {
       let data = snapshot.val();
       setLists(data);
+      setListsLoading(false);
     });
   }, [user]);
 
   return (
-    <ListsContext.Provider value={{ lists }}>
+    <ListsContext.Provider value={{ lists, listsLoading }}>
       { children }
     </ListsContext.Provider>
   );

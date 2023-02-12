@@ -4,26 +4,26 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 export const UserContext = createContext({
   user: null,
+  userLoading: true,
   setUser: () => {}
 });
 
 const UserProvider = ({ children }) => {
 
-  // null = loading
-  // false = signed out
-  // object = signed in
   const [user, setUser] = useState(null);
+  const [userLoading, setUserLoading] = useState(true);
 
   useEffect(() => {
     const auth = getAuth();
 
     return onAuthStateChanged(auth, userData => {
-      setUser(userData ? userData : false);
+      setUser(userData);
+      setUserLoading(false);
     });
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, userLoading, setUser }}>
       { children }
     </UserContext.Provider>
   );

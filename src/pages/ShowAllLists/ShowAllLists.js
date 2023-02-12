@@ -13,7 +13,7 @@ const ShowAllLists = ({ user, navigate }) => {
 
   const [closeCurrentForm, setCloseCurrentForm] = useState(false);
 
-  let { lists } = useContext(ListsContext);
+  let { lists, listsLoading } = useContext(ListsContext);
   let { searchMode, disableSearchMode, listsWithMatchingWords, setCurrentList } = useContext(SearchContext);
 
   const userId = user && user.uid;
@@ -28,7 +28,7 @@ const ShowAllLists = ({ user, navigate }) => {
 
   useEffect(() => setCurrentList(null), [setCurrentList]);
 
-  if (!user || lists === false) return <Loading />;
+  if (listsLoading) return <Loading />;
 
   return (
     <div className='all-lists-page'>
