@@ -1,3 +1,7 @@
+import { useRef } from 'react';
+
+import ClearBtn from './ClearBtn';
+
 import './SearchBar.css';
 
 const SearchBar = props => {
@@ -9,6 +13,8 @@ const SearchBar = props => {
     disableSearchMode
   } = props;
 
+  const searchInput = useRef(null);
+
   const handleChange = e => {
     let wordToSearch = e.target.value;
     setSearch(wordToSearch);
@@ -19,15 +25,14 @@ const SearchBar = props => {
     disableSearchMode();
   };
 
-  let clearBtn = (
-    <button
-      className='clear-search'
-      aria-label='effacer la recherche'
-      onClick={reset}
-    >
-      <span className='material-icons-round'>clear</span>
-    </button>
-  );
+  const quitSearching = () => {
+    reset();
+    searchInput.current.blur();
+  };
+
+  const handleKeydown = e => {
+    if (e.key === 'Escape') quitSearching();
+  };
 
   return (
     <div className='search-bar-container'>
@@ -46,9 +51,11 @@ const SearchBar = props => {
           aria-label='Chercher un mot'
           value={search}
           onChange={handleChange}
+          onKeyDown={handleKeydown}
+          ref={searchInput}
         />
 
-        { search && clearBtn }
+        { search && <ClearBtn reset={reset} /> }
       </div>
     </div>
   );
