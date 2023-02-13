@@ -9,7 +9,7 @@ import Register from './Register/Register';
 
 import './Landing.css';
 
-const Home = () => {
+const Landing = () => {
 
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
@@ -62,4 +62,4 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default Landing;
