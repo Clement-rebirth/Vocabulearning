@@ -92,28 +92,28 @@
     font-size: 4.2rem;
     margin-top: 0;
   }
-  
+
   .get-started h1 br {
     display: none;
   }
-  
+
   .get-started h1:after {
     width: 60%;
     bottom: 0;
   }
-  
+
   .get-started > p {
     font-size: 1.5rem;
     margin: 36px 0 30px;
     text-align: left;
   }
-  
+
   .get-started .auth {
     flex-direction: row;
     align-items: center;
     margin: 0;
   }
-  
+
   .get-started .register {
     margin-right: 10px;
   }
@@ -121,7 +121,7 @@
   .get-started .login {
     margin: 0;
   }
-  
+
   .get-started .login span {
     display: none;
   }
@@ -133,7 +133,7 @@
     font-size: 1.2rem;
     box-sizing: border-box;
   }
-  
+
   .get-started .login a {
     text-decoration: none;
     border: 1px solid var(--main-color);
@@ -159,7 +159,7 @@
   .get-started h1 {
     font-size: 6rem;
   }
-  
+
   .get-started > p {
     font-size: 1.9rem;
     margin: 46px 0 38px;
@@ -264,15 +264,16 @@ div.show-password input {
 .google-sign-in {
   border: none;
   border-radius: 8px;
-  padding: 9px 10px;
+  padding: 9px 10px 9px 44px;
   background-color: rgba(255, 255, 255, 0.9);
   display: flex;
   align-items: center;
   width: 100%;
   margin: 0 auto;
+  background: rgba(255, 255, 255, 0.9) url('../../assets/img/google-icon-64.png') no-repeat 10px center/23px;
+  transition-duration: 250ms;
 }
 
-.google-sign-in .google-g-icon {
-  font-size: 23px;
-  margin-right: 6px;
+.google-sign-in:hover {
+  background-color: rgba(255, 255, 255, 0.8);
 }
