@@ -16,7 +16,7 @@ const PopUpProvider = ({ children }) => {
 
   const showPopUp = (message = '', status = 'success') => {
 
-    const key = Math.random().toString(36).substr(2, 9);
+    const key = Math.random().toString(36).substring(2, 11);
 
     const popUp = {
       key,
