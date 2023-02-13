@@ -47,6 +47,11 @@ const AddMultipleWordsForm = ({ closeModal }) => {
       return;
     };
 
+    if (wordObjects.length > 500) {
+      setWordsError('Vous pouvez ajouter 500 mots en même temps maximum');
+      return;
+    }
+
     addMultipleWords(wordObjects, list.id, userId).then(() => {
       closeModal();
       showPopUp('Tous les mots ont été ajoutés avec succès');
