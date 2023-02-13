@@ -38,10 +38,10 @@ const SearchBar = props => {
     <div className='search-bar-container'>
       <div className='search-bar'>
         <button onClick={showMenu} id='open-menu' aria-label='ouvrir le menu'>
-          <span className='material-icons-round'>menu</span>
+          <span className='material-symbols-rounded'>menu</span>
         </button>
 
-        <span id='search-icon' className='material-icons-round'>search</span>
+        <span id='search-icon' className='material-symbols-rounded'>search</span>
 
         <input
           name='search'

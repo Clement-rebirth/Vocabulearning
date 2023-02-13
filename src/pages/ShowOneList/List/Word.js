@@ -32,7 +32,7 @@ const Word = ({ wordObject, openWordCard, invertWordWithTrad, showRightPart }) =
         <p>{ invertWordWithTrad ? translation : word }</p>
       </div>
       <div className='separator'>
-        <span className='material-icons-round'>east</span>
+        <span className='material-symbols-rounded'>east</span>
       </div>
       <div className={`translation ${showClass}`}>
         <p onClick={handleClick}>

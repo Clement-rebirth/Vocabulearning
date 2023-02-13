@@ -6,7 +6,7 @@ const ListHeader = ({ name, nbWords, openWordForm }) => (
     </h2>
 
     <button className='btn btn-primary add-word' onClick={openWordForm}>
-      <span className='material-icons-round'>add</span>
+      <span className='material-symbols-rounded'>add</span>
       <span className='btn-text'>Ajouter un mot</span>
     </button>
   </div>

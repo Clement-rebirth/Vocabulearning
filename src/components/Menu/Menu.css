@@ -63,6 +63,6 @@
   text-decoration: underline var(--danger-color);
 }
 
-.menu-item .material-icons-round {
+.menu-item .material-symbols-rounded {
   margin-right: 10px;
 }

@@ -14,18 +14,18 @@ const OptionsBar = props => {
         className={`invert-word-with-trad ${invertWordWithTrad && 'enable'}`}
         onClick={toggleInvertWordWithTrad}
       >
-        <span className='material-icons-round'>swap_horiz</span>
+        <span className='material-symbols-rounded'>swap_horiz</span>
       </button>
 
       <button className='add-word' onClick={openWordForm}>
-        <span className='material-icons-round'>add</span>
+        <span className='material-symbols-rounded'>add</span>
       </button>
 
       <button
         className={`hide-right-part ${showRightPart && 'enable'}`}
         onClick={toggleShowRightPart}
       >
-        <span className='material-icons-round'>
+        <span className='material-symbols-rounded'>
           { showRightPart ? 'visibility' : 'visibility_off' }
         </span>
       </button>

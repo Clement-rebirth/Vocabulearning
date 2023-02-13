@@ -100,7 +100,7 @@ const AddWordForm = ({ setAddMultipleWordsMode, closeModal }) => {
           onClick={() => setAddMultipleWordsMode(true)}
           type='button'
         >
-          <span className='material-icons-round'>system_update_alt</span>
+          <span className='material-symbols-rounded'>system_update_alt</span>
           Importer
         </button>
 

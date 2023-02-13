@@ -3,7 +3,7 @@ const ShowAddListFormBtn = ({ addFormIsShow, openAddForm }) => (
     className={`add-list-btn ${addFormIsShow ? 'd-none' : ''}`}
     onClick={openAddForm}
   >
-    <span className='material-icons-round'>add</span>
+    <span className='material-symbols-rounded'>add</span>
     Ajouter une liste
   </button>
 );

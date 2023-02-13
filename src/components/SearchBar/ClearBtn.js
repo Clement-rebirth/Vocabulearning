@@ -4,7 +4,7 @@ const ClearBtn = ({ reset }) => (
     aria-label='effacer la recherche'
     onClick={reset}
   >
-    <span className='material-icons-round'>clear</span>
+    <span className='material-symbols-rounded'>clear</span>
   </button>
 );
 
