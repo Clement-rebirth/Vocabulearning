@@ -16,10 +16,10 @@ const ShowAllLists = ({ navigate }) => {
   let { lists, listsLoading, setList } = useContext(ListsContext);
   let { searchMode, disableSearchMode, listsWithMatchingWords } = useContext(SearchContext);
 
-  // close the current form if there is one and set the new one
+  // close the current form if there is one and set the new close functionet the new one
   const setCloseCurrentFormFunc = newCloseFunc => {
     if (closeCurrentForm) closeCurrentForm();
-    setCloseCurrentForm(() => newCloseFunc);
+    setCloseCurrentForm(() => newCloseFunc); // we just pass the reference
   };
 
   const openList = slug => navigate(`${ROUTES.HOME}/${slug}`);
