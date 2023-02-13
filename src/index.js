@@ -14,7 +14,6 @@ import PopUpProvider from './providers/PopUpProvider';
 import { ROUTES } from './constants';
 
 import './index.css';
-import './assets/icons-css/icomoon.css';
 
 const root = createRoot(document.getElementById('root'));
 

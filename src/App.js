@@ -12,7 +12,6 @@ import ListsProvider from './providers/ListsProvider';
 import Loading from './components/Loading/Loading';
 
 import './App.css';
-import './assets/icons-css/icofont.min.css';
 
 const App = () => {
 
