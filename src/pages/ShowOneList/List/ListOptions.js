@@ -16,7 +16,7 @@ const ListOptions = props => {
         className='order'
       >
         ordre
-        <span className='material-icons-round'>
+        <span className='material-symbols-rounded'>
           { order === 'asc' ? 'arrow_drop_down' : 'arrow_drop_up' }
         </span>
       </button>
@@ -26,7 +26,7 @@ const ListOptions = props => {
         className='invert-word-with-trad'
       >
         { invertWordWithTrad ? 'fr' : 'en' }
-        <span className='material-icons-round'>swap_horiz</span>
+        <span className='material-symbols-rounded'>swap_horiz</span>
         { invertWordWithTrad ? 'en' : 'fr' }
       </button>
 
@@ -35,7 +35,7 @@ const ListOptions = props => {
         onClick={toggleShowRightPart}
       >
         cacher
-        <span className='material-icons-round'>
+        <span className='material-symbols-rounded'>
           { showRightPart ? 'visibility' : 'visibility_off' }
         </span>
       </button>

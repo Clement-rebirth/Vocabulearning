@@ -12,7 +12,7 @@ const ModalContent = ({ close, isShow, className, children }) => {
   return modalTransitions((style, item) => item && (
     <animated.div className={`modal ${className ? className : ''}`} style={style}>
       <button onClick={close} className='close-modal'>
-        <i className='close-icon material-icons-round'>close</i>
+        <i className='close-icon material-symbols-rounded'>close</i>
       </button>
       { children }
     </animated.div>

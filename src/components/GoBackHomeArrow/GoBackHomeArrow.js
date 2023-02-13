@@ -15,7 +15,7 @@ const GoBackHomeArrow = ({ navigate, disableSearchMode }) => {
       aria-label='retour à la page d&#39;accueil'
       onClick={backHome}
     >
-      <span className='material-icons-round'>arrow_back</span>
+      <span className='material-symbols-rounded'>arrow_back</span>
     </button>
   );
 }

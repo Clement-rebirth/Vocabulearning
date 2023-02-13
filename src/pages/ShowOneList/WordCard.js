@@ -52,11 +52,11 @@ const WordCard = props => {
       <div className='bottom'>
         <button className='edit btn btn-text-primary' onClick={openWordForm}>
           Modifier
-          <span className='material-icons-round'>edit</span>
+          <span className='material-symbols-rounded'>edit</span>
         </button>
         <button onClick={handleDelete} className='delete btn btn-text-danger'>
           Supprimer
-          <span className='material-icons-round'>delete</span>
+          <span className='material-symbols-rounded'>delete</span>
         </button>
       </div>
     </div>

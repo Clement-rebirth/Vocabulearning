@@ -45,14 +45,14 @@ const ListInfo = ({ list, openEditForm, openList }) => {
           className='edit-list'
           onClick={openEditForm}
         >
-          <span className='material-icons-round'>edit</span>
+          <span className='material-symbols-rounded'>edit</span>
         </button>
         <button
           aria-label='supprimer la liste'
           className='delete-list'
           onClick={handleDeleteList}
         >
-          <span className='material-icons-round'>delete_outline</span>
+          <span className='material-symbols-rounded outline'>delete</span>
         </button>
       </div>
     </div>

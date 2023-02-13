@@ -9,10 +9,10 @@ const PopUpMessage = ({ status, message, close, timeout = 3000 }) => {
 
   switch (status) {
     case 'success':
-      statusIcon = 'check_circle_outline';
+      statusIcon = 'check_circle';
       break;
     case 'error':
-      statusIcon = 'error_outline';
+      statusIcon = 'error';
       break;
     default:
       throw new Error('Invalid status prop value');
@@ -29,10 +29,10 @@ const PopUpMessage = ({ status, message, close, timeout = 3000 }) => {
 
   return popUpTransitions((style, item) => item && (
     <animated.div className={`pop-up-message ${status}`} style={style}>
-      <span className='material-icons-round status'>{ statusIcon }</span>
+      <span className='material-symbols-rounded outline status'>{ statusIcon }</span>
       <p>{ message }</p>
       <button onClick={() => setIsShow(false)} className='close-pop-up' aria-label='Fermer le message'>
-        <span className='material-icons-round'>close</span>
+        <span className='material-symbols-rounded'>close</span>
       </button>
     </animated.div>
   ));

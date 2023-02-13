@@ -73,7 +73,7 @@ const LoginForm = () => {
             onClick={() => setshowPassword(!showPassword)}
             className='show-password-btn'
           >
-            <i className='eye-icon material-icons-round'>
+            <i className='eye-icon material-symbols-rounded'>
               { showPassword ? 'visibility' : 'visibility_off' }
             </i>
           </div>
