@@ -37,6 +37,7 @@ const ShowOneList = ({ navigate }) => {
 
   const openWordForm = () => {
     disableSearchMode();
+    setWordToShow(false);
     setShowWordForm(true);
   };
 
