@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { updateList } from '../../../utils/firebase/listMethods';
+import { UserContext } from '../../../providers/UserProvider';
 
 import OptionsBar from './OptionsBar';
 import AllWords from './AllWords';
@@ -10,7 +11,6 @@ const List = props => {
 
   const {
     list,
-    userId,
     openWordCard,
     nbWords,
     openWordForm
@@ -18,6 +18,9 @@ const List = props => {
 
   const [showRightPart, setShowRightPart] = useState(true);
   const [invertWordWithTrad, setInvertWordWithTrad] = useState(false);
+
+  const { user } = useContext(UserContext);
+  const userId = user.uid;
 
   const toggleListOrder = (currentOrder, listId, userId) => {
     let newOrder = currentOrder === 'asc' ? 'desc' : 'asc';
