@@ -8,11 +8,15 @@
 
 .list {
   padding-bottom: 36px;
+  margin-top: 15px;
 }
 
 .list h2 {
   font-size: 1.4rem;
-  margin: 15px 0 15px;
+  margin: 0;
+  line-height: 1.2;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .list h2 .nb-words {
@@ -24,6 +28,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 0;
 }
 
 .list .list-header .add-word {
@@ -32,6 +38,7 @@
   justify-content: center;
   padding: 7px 12px 7px 6px;
   display: none;
+  white-space: nowrap;
 }
 
 .list .list-header .add-word .btn-text {
@@ -45,6 +52,7 @@
   border-radius: 6px;
   background-color: var(--bg-2);
   padding: 4px 5px;
+  margin-top: 15px;
 }
 
 .list .options button {
