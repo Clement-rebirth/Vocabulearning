@@ -7,22 +7,15 @@
 .list-info {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   background-color: var(--bg-2);
   border-radius: 6px;
   margin-bottom: 6px;
   padding: 7px 5px 7px 12px;
   cursor: pointer;
-  overflow: hidden;
 }
 
 .list-info:hover {
   background-color: var(--bg-4);
-}
-
-.info {
-  display: flex;
-  align-items: center;
 }
 
 .list-info .name {
@@ -36,7 +29,7 @@
 
 .list-info .nb-words {
   flex-shrink: 0;
-  margin: 0 0 0 6px;
+  margin: 0 auto 0 6px;
   color: var(--secondary-text-color);
 }
 
