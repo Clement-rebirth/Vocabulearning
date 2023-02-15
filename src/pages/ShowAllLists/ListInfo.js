@@ -19,7 +19,7 @@ const ListInfo = ({ list, openEditForm, openList }) => {
       `);
 
       if (text === null) quit = true; // user cliked "cancel" button
-      if (text === wordToEnter) deleteList(list.id, userId);
+      if (text === wordToEnter) deleteList(userId, list.id);
     } while (!quit && text !== wordToEnter);
   };
 

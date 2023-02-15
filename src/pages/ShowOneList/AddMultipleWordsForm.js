@@ -52,7 +52,7 @@ const AddMultipleWordsForm = ({ closeModal }) => {
       return;
     }
 
-    addMultipleWords(wordObjects, list.id, userId).then(() => {
+    addMultipleWords(wordObjects, userId, list.id).then(() => {
       closeModal();
       showPopUp('Tous les mots ont été ajoutés avec succès');
     });

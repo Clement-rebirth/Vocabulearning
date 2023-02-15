@@ -17,7 +17,7 @@ export const addWord = (word, wordListId, userId) => {
   });
 };
 
-export const addMultipleWords = (words, wordListId, userId) => {
+export const addMultipleWords = (words, userId, wordListId) => {
   words = words.map(word => ({
     ...word,
     nextReview: false,
@@ -31,13 +31,13 @@ export const addMultipleWords = (words, wordListId, userId) => {
   return multiplePush(wordsRef, words);
 };
 
-export const updateWord = (newWord, listId, userId, wordId) => {
+export const updateWord = (newWord, userId, listId, wordId) => {
   const db = getDatabase();
   const wordRef = ref(db, `wordLists/${userId}/${listId}/words/${wordId}`);
   return update(wordRef, newWord);
 };
 
-export const deleteWord = (listId, userId, wordId) => {
+export const deleteWord = (userId, listId, wordId) => {
   const db = getDatabase();
   const wordRef = ref(db, `wordLists/${userId}/${listId}/words/${wordId}`);
   return remove(wordRef);

@@ -24,7 +24,7 @@ const List = props => {
 
   const toggleListOrder = (currentOrder, listId, userId) => {
     let newOrder = currentOrder === 'asc' ? 'desc' : 'asc';
-    updateList({ order: newOrder }, listId, userId);
+    updateList({ order: newOrder }, userId, listId);
   };
 
   const toggleShowRightPart = () => setShowRightPart(!showRightPart);

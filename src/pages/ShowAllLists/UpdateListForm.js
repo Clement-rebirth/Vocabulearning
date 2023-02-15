@@ -4,10 +4,12 @@ import { validateList } from '../../utils/lists/validateList';
 import { slugify } from '../../utils/slugify';
 import { UserContext } from '../../providers/UserProvider';
 import { ListsContext } from '../../providers/ListsProvider';
+import { PopUpContext } from '../../providers/PopUpProvider';
 
 import ListForm from './ListForm';
 
 const UpdateListForm = ({ closeForm, listToUpdate, show }) => {
+  const { showPopUp } = useContext(PopUpContext);
   const { lists } = useContext(ListsContext);
   const { user } = useContext(UserContext);
   const userId = user.uid;
@@ -31,8 +33,9 @@ const UpdateListForm = ({ closeForm, listToUpdate, show }) => {
       slug: slugify(listName)
     };
 
-    updateList(propsToUpdate, listToUpdate.id, userId);
-    closeForm();
+    updateList(propsToUpdate, userId, listToUpdate.id)
+      .then(() => closeForm())
+      .catch(() => showPopUp('Une erreur inconnue est survenue', 'error'));
   };
 
   if (!show) return null;
