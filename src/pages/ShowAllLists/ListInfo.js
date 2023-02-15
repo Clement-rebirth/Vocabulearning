@@ -31,7 +31,7 @@ const ListInfo = ({ list, openEditForm, openList }) => {
 
   return (
     <div className='list-info allow-click' onClick={handleOpenList}>
-      <div className='list-info-and-actions allow-click'>
+      <div className='info allow-click'>
         <h2 className='name allow-click'>
           { list.name }
         </h2>
@@ -42,14 +42,14 @@ const ListInfo = ({ list, openEditForm, openList }) => {
       <div className='actions'>
         <button
           aria-label='modifier la liste'
-          className='edit-list'
+          className='edit-list btn-rounded-icon'
           onClick={openEditForm}
         >
           <span className='material-symbols-rounded'>edit</span>
         </button>
         <button
           aria-label='supprimer la liste'
-          className='delete-list'
+          className='delete-list btn-rounded-icon'
           onClick={handleDeleteList}
         >
           <span className='material-symbols-rounded outline'>delete</span>

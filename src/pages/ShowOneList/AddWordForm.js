@@ -96,7 +96,7 @@ const AddWordForm = ({ setAddMultipleWordsMode, closeModal }) => {
 
       <div className='actions'>
         <button
-          className='import-list bg-transparent text-primary'
+          className='btn btn-text-primary import-list'
           onClick={() => setAddMultipleWordsMode(true)}
           type='button'
         >

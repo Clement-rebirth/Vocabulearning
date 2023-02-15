@@ -43,7 +43,7 @@
   align-items: center;
   justify-content: space-around;
   border-radius: 6px;
-  background-color: var(--second-bg-color);
+  background-color: var(--bg-2);
   padding: 4px 5px;
 }
 
@@ -82,11 +82,15 @@
   justify-content: center;
   align-items: center;
   border-radius: 6px;
-  background-color: var(--second-bg-color);
+  background-color: var(--bg-2);
   margin-bottom: 6px;
   padding: 6px 10px;
   cursor: pointer;
   overflow: auto;
+}
+
+.word-box:hover {
+  background-color: var(--bg-4);
 }
 
 .word-box > * {
@@ -151,8 +155,8 @@
 }
 
 .options-bar .add-word {
-  background-color: var(--main-color-dark, --main-color);
-  color: var(--main-dark-color);
+  background-color: var(--main-color);
+  color: var(--dark-text-color);
   padding: 1px;
   border-radius: 6px;
   margin: 0 20px;
@@ -208,10 +212,15 @@
 
 .word-form .actions .import-list {
   font-size: 1rem;
-  display: flex;
-  align-items: center;
   padding-left: 0;
   margin-right: auto;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid transparent;
+}
+
+.word-form .actions .import-list:hover {
+  border-bottom: 1px solid var(--main-color);
 }
 
 .word-form .actions .import-list span {
@@ -256,7 +265,7 @@
   .list h2 {
     font-size: 2rem;
   }
-  
+
   .list h2 .nb-words {
     font-size: 1.7rem;
   }
@@ -276,12 +285,12 @@
   .word-box {
     padding: 8px 15px;
   }
-  
+
   .word-box .word p,
   .word-box .translation p {
     font-size: var(--text-size);
   }
-  
+
   .word-box .separator {
     flex: 0 0 65px;
   }
