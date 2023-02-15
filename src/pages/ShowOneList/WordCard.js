@@ -34,7 +34,7 @@ const WordCard = props => {
   const handleDelete = () => {
     if (!window.confirm('Êtes-vous sûr de vouloir supprimer ce mot ?')) return;
 
-    deleteWord(listId, userId, wordToShow.id).then(() => {
+    deleteWord(userId, listId, wordToShow.id).then(() => {
       closeModal();
       showPopUp('Le mot a bien été supprimé');
     });
@@ -56,7 +56,7 @@ const WordCard = props => {
         </button>
         <button onClick={handleDelete} className='delete btn btn-text-danger'>
           Supprimer
-          <span className='material-symbols-rounded'>delete</span>
+          <span className='material-symbols-rounded outline'>delete</span>
         </button>
       </div>
     </div>

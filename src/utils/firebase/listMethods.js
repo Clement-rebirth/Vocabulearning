@@ -16,13 +16,13 @@ export const addList = (wordList, userId) => {
   });
 };
 
-export const updateList = (propsToUpdate, listId, userId) => {
+export const updateList = (propsToUpdate, userId, listId) => {
   const db = getDatabase();
   const listRef = ref(db, `wordLists/${userId}/${listId}`);
   return update(listRef, propsToUpdate);
 };
 
-export const deleteList = (listId, userId) => {
+export const deleteList = (userId, listId) => {
   const db = getDatabase();
   const listRef = ref(db, `wordLists/${userId}/${listId}`);
   return remove(listRef);
