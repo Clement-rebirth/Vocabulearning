@@ -5,6 +5,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 0;
+  transition-duration: 250ms;
+  text-decoration: underline transparent 2px;
+}
+
+.back-home:hover {
+  text-decoration: underline var(--main-color) 2px;
 }
 
 .back-home span {

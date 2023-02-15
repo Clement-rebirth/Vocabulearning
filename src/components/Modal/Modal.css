@@ -5,7 +5,7 @@
 
 .modal {
   margin: auto;
-  background-color: var(--main-bg-color);
+  background-color: var(--bg-1);
   box-sizing: border-box;
   padding: 8px 24px 16px;
   border-radius: 6px;
@@ -27,6 +27,11 @@
 .close-modal .close-icon {
   font-size: 32px;
   color: var(--main-text-color);
+  transition-duration: 250ms;
+}
+
+.close-modal:hover .close-icon {
+  color: var(--yellow-550);
 }
 
 @media all and (max-width: 425px) {

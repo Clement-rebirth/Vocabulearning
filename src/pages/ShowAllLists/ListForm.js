@@ -30,10 +30,10 @@ const ListForm = ({ handleSubmit, listNameInitialValue = '', closeForm, show }) 
         </small>
       </div>
 
-      <button type='submit'>
+      <button type='submit' className='btn-rounded-icon'>
         <span className='material-symbols-rounded'>check</span>
       </button>
-      <button className='close-list-form' type='button' onClick={closeForm}>
+      <button className='close-list-form btn-rounded-icon' type='button' onClick={closeForm}>
         <span className='material-symbols-rounded'>close</span>
       </button>
     </form>

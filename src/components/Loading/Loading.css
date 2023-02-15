@@ -1,5 +1,5 @@
 .loading {
-  background-color: var(--main-bg-color);
+  background-color: var(--bg-1);
   position: fixed;
   top: 0;
   bottom: 0;
@@ -22,7 +22,7 @@
 }
 
 .loading .dot {
-  background-color: var(--main-color-dark, --main-color);
+  background-color: var(--main-color);
   border-radius: 50%;
 	width: 18px;
 	height: 18px;
