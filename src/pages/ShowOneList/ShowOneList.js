@@ -17,6 +17,7 @@ import './ShowOneList.css';
 const ShowOneList = ({ navigate }) => {
 
   const [showWordForm, setShowWordForm] = useState(false);
+  const [showWordCard, setShowWordCard] = useState(false);
   const [wordToShow, setWordToShow] = useState(false);
 
   const { searchMode, disableSearchMode, handleSearch } = useContext(SearchContext);
@@ -28,17 +29,19 @@ const ShowOneList = ({ navigate }) => {
   const handleClose = () => {
     setWordToShow(false);
     setShowWordForm(false);
+    setShowWordCard(false);
   };
 
   const openWordCard = word => {
     setWordToShow(word);
     setShowWordForm(false);
+    setShowWordCard(true);
   };
 
   const openWordForm = () => {
     disableSearchMode();
-    setWordToShow(false);
     setShowWordForm(true);
+    setShowWordCard(false);
   };
 
   // to get the list the user wants to see
@@ -77,7 +80,7 @@ const ShowOneList = ({ navigate }) => {
         <i className='icofont-dumbbell' />
       </button>
 
-      <Modal isShow={!!wordToShow} close={handleClose}>
+      <Modal isShow={showWordCard} close={handleClose}>
         <WordCard
           openWordForm={openWordForm}
           listId={list.id}
