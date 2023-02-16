@@ -23,10 +23,10 @@ const UpdateListForm = ({ closeForm, listToUpdate, show }) => {
       return;
     }
 
-    let error = validateList(listName, lists);
-    setListNameError(error);
+    let errors = validateList(listName, lists);
+    setListNameError(errors[0]);
 
-    if (error) return;
+    if (errors.length > 0) return;
 
     let propsToUpdate = {
       name: listName,
