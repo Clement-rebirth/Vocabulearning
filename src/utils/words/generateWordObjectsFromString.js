@@ -1,6 +1,6 @@
 /**
  * creates and returns a collection of word objects from a string list
- * @param {string} wordList 
+ * @param {string} wordList
  * @return {array} word[] collection of word objects
  */
 export const generateWordObjectsFromString = wordList => {
@@ -20,7 +20,11 @@ export const generateWordObjectsFromString = wordList => {
     });
 
     let separatorsRegex = new RegExp(separatorsRegexStr);
-    let [word, translation] = wordStr.split(separatorsRegex);
+    let separatorIndex = wordStr.search(separatorsRegex); // find index of first separator
+    let word = wordStr.substring(0, separatorIndex); // extract word
+    let separatorLength = wordStr.match(separatorsRegex)[0].length; // get length of separator
+    let translation = wordStr.substring(separatorIndex + separatorLength); // extract substring after first separator
+
     word = word.trim();
     translation = translation.trim();
 
