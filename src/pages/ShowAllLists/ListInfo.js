@@ -1,26 +1,18 @@
 import { useContext } from 'react';
 import { UserContext } from '../../providers/UserProvider';
 import { deleteList } from '../../utils/firebase/listMethods';
+import confirm from '../../utils/confirm';
 
 const ListInfo = ({ list, openEditForm, openList }) => {
   const { user } = useContext(UserContext);
   const userId = user.uid;
 
   const handleDeleteList = () => {
-    let text;
-    let quit = false;
     let wordToEnter = 'oui';
+    let text = `Êtes-vous sûr de vouloir supprimer la liste "${list.name}" ? (cette action est irréversible !)\n`
+      + `Écrivez "${wordToEnter}" pour confirmer :`;
 
-    do {
-      text = prompt(`
-        Êtes-vous sûr de vouloir supprimer la liste "${list.name}" ?
-        (cette action est irréversible !)
-        Écrivez "${wordToEnter}" pour confirmer :
-      `);
-
-      if (text === null) quit = true; // user cliked "cancel" button
-      if (text === wordToEnter) deleteList(userId, list.id);
-    } while (!quit && text !== wordToEnter);
+    confirm(text, wordToEnter, () => deleteList(userId, list.id));
   };
 
   const handleOpenList = e => {
