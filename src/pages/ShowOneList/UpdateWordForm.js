@@ -45,10 +45,12 @@ const UpdateWordForm = ({ wordToUpdate, closeModal }) => {
 
     if (!isErrorsEmpty) return;
 
-    updateWord({ word, translation }, userId, list.id, wordToUpdate.id).then(() => {
-      closeModal();
-      showPopUp('Le mot a bien été mis à jour');
-    });
+    updateWord({ word, translation }, userId, list.id, wordToUpdate.id)
+      .then(() => {
+        closeModal();
+        showPopUp('Le mot a bien été mis à jour');
+      })
+      .catch(error => showPopUp('Une erreur inconnue est survenue', 'error'));
   };
 
   return (

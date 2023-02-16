@@ -34,10 +34,12 @@ const WordCard = props => {
   const handleDelete = () => {
     if (!window.confirm('Êtes-vous sûr de vouloir supprimer ce mot ?')) return;
 
-    deleteWord(userId, listId, wordToShow.id).then(() => {
-      closeModal();
-      showPopUp('Le mot a bien été supprimé');
-    });
+    deleteWord(userId, listId, wordToShow.id)
+      .then(() => {
+        closeModal();
+        showPopUp('Le mot a bien été supprimé');
+      })
+      .catch(error => showPopUp('Une erreur inconnue est survenue', 'error'));
   };
 
   return (

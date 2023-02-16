@@ -8,7 +8,7 @@ export const addList = (wordList, userId) => {
 
   const db = getDatabase();
   const listsRef = ref(db, `wordLists/${userId}`)
-  push(listsRef, {
+  return push(listsRef, {
     ...wordList,
     slug: slugify(wordList.name),
     createdAt: Date.now(),

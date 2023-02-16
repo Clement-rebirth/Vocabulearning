@@ -44,12 +44,14 @@ const AddWordForm = ({ setAddMultipleWordsMode, closeModal }) => {
 
     if (!isErrorsEmpty) return;
 
-    addWord({ word, translation }, list.id, userId).then(() => {
-      clear();
-      wordFieldRef.current.focus();
-      closeModal();
-      showPopUp('Le mot a bien été ajouté');
-    });
+    addWord({ word, translation }, list.id, userId)
+      .then(() => {
+        clear();
+        wordFieldRef.current.focus();
+        closeModal();
+        showPopUp('Le mot a bien été ajouté');
+      })
+      .catch(error => showPopUp('Une erreur inconnue est survenue', 'error'));
   };
 
   const handleChange = e => {

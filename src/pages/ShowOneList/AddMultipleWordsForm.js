@@ -67,10 +67,12 @@ const AddMultipleWordsForm = ({ closeModal }) => {
 
     if (!wordObjects) return;
 
-    addMultipleWords(wordObjects, userId, list.id).then(() => {
-      closeModal();
-      showPopUp('Tous les mots ont été ajoutés avec succès');
-    });
+    addMultipleWords(wordObjects, userId, list.id)
+      .then(() => {
+        closeModal();
+        showPopUp('Tous les mots ont été ajoutés avec succès');
+      })
+      .catch(error => showPopUp('Une erreur inconnue est survenue', 'error'));
   };
 
   useEffect(() => {
