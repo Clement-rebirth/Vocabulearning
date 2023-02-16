@@ -6,8 +6,8 @@ import ModalContent from './ModalContent';
 import './Modal.css';
 
 const Modal = ({ isShow, close, className, children }) => {
-  const handleKeydown = useCallback(event => {
-    if (event.key === 'Escape') close();
+  const handleKeydown = useCallback(e => {
+    if (e.key === 'Escape') close();
   }, [close]);
 
   useEffect(() => {
