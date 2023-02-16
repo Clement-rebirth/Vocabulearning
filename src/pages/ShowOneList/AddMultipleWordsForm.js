@@ -111,7 +111,6 @@ const AddMultipleWordsForm = ({ closeModal }) => {
         <ul className='info'>
           <li>les tirets sont acceptés en début de ligne</li>
           <li>plusieurs séparateurs sont acceptés (:, -&#62;, =)</li>
-          <li>Un seul séparateur par ligne</li>
         </ul>
       </div>
 
