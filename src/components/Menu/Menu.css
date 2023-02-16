@@ -47,6 +47,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 6px;
+  padding: 5px;
+}
+
+.close-menu .close-icon {
+  transition-duration: 250ms;
+}
+
+.close-menu:hover .close-icon {
+  color: var(--yellow-550);
+}
+
+.close-menu:focus {
+  outline: var(--yellow-550) solid 1px;
 }
 
 .menu .menu-content {

@@ -22,6 +22,7 @@
   background-color: transparent;
   display: flex;
   margin: 0 -18px 0 auto;
+  border-radius: 6px;
 }
 
 .close-modal .close-icon {
@@ -32,6 +33,10 @@
 
 .close-modal:hover .close-icon {
   color: var(--yellow-550);
+}
+
+.close-modal:focus {
+  outline: var(--yellow-550) solid 1px;
 }
 
 @media all and (max-width: 425px) {
