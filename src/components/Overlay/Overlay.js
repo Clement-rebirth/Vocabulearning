@@ -3,16 +3,7 @@ import { useTransition, animated } from '@react-spring/web';
 
 import './Overlay.css';
 
-const Overlay = props => {
-
-  const {
-    isShow,
-    close,
-    className,
-    animationConfig = { tension: 360, friction: 42 },
-    children,
-  } = props;
-
+const Overlay = ({ isShow, close, className, children }) => {
   const [shouldCloseModal, setShouldCloseModal] = useState(true);
 
   useEffect(() => {
@@ -40,7 +31,7 @@ const Overlay = props => {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
-    config: animationConfig
+    config: { tension: 360, friction: 42 }
   });
 
   return overlayTransitions((style, item) => item && (
