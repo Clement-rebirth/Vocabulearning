@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTransition, animated } from '@react-spring/web';
 
 import './Overlay.css';
@@ -7,20 +7,34 @@ const Overlay = props => {
 
   const {
     isShow,
-    onClick,
+    close,
     className,
     animationConfig = { tension: 360, friction: 42 },
     children,
   } = props;
 
+  const [shouldCloseModal, setShouldCloseModal] = useState(true);
+
   useEffect(() => {
     document.body.style.overflow = isShow ? 'hidden' : 'visible';
   }, [isShow]);
 
-  const handleOverlayClick = e => {
-    // to execute only when we click on the overlay, not its content
-    if (e.currentTarget === e.target) onClick();
-  }
+  const handleMouseUp = e => {
+    const clickIsOnOverlay = e.target === e.currentTarget;
+
+    if (shouldCloseModal && clickIsOnOverlay) {
+      close();
+    }
+
+    setShouldCloseModal(true);
+  };
+
+  const handleMouseDown = e => {
+    // if we click on the modal, not the overlay
+    if (e.currentTarget !== e.target) {
+      setShouldCloseModal(false);
+    }
+  };
 
   const overlayTransitions = useTransition(isShow, {
     from: { opacity: 0 },
@@ -31,7 +45,8 @@ const Overlay = props => {
 
   return overlayTransitions((style, item) => item && (
     <animated.div
-      onClick={handleOverlayClick}
+      onMouseUp={handleMouseUp}
+      onMouseDown={handleMouseDown}
       className={`overlay custom-scrollbar ${className ? className : ''}`}
       style={style}
     >
