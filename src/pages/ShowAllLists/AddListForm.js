@@ -16,10 +16,10 @@ const AddListForm = ({ closeForm, show }) => {
   const handleSubmit = (e, listName, setListNameError) => {
     e.preventDefault();
 
-    let error = validateList(listName, lists);
-    setListNameError(error);
+    let errors = validateList(listName, lists);
+    setListNameError(errors[0]);
 
-    if (error) return;
+    if (errors.length > 0) return;
 
     addList({ name: listName }, userId)
       .then(() => {
