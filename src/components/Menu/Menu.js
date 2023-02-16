@@ -8,7 +8,7 @@ import './Menu.css';
 const Menu = ({ isShow, handleClose, handleSignOut }) => {
 
   return (
-    <Overlay onClick={handleClose} isShow={isShow}>
+    <Overlay close={handleClose} isShow={isShow}>
       <MenuContainer isShow={isShow} menuTitle='VocabuLearning'>
         <MenuHeader title='Vocabulearning' handleClose={handleClose} />
 

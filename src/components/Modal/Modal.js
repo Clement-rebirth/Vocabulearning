@@ -6,7 +6,6 @@ import ModalContent from './ModalContent';
 import './Modal.css';
 
 const Modal = ({ isShow, close, className, children }) => {
-
   const handleKeydown = useCallback(event => {
     if (event.key === 'Escape') close();
   }, [close]);
@@ -20,7 +19,7 @@ const Modal = ({ isShow, close, className, children }) => {
   }, [isShow, handleKeydown]);
 
   return (
-    <Overlay isShow={isShow} onClick={close} className='modal-overlay'>
+    <Overlay isShow={isShow} close={close} className='modal-overlay'>
       <ModalContent close={close} isShow={isShow} className={className}>
         { children }
       </ModalContent>
