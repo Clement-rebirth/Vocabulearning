@@ -1,9 +1,11 @@
 import { useContext } from 'react';
 import { UserContext } from '../../providers/UserProvider';
+import { PopUpContext } from '../../providers/PopUpProvider';
 import { deleteList } from '../../utils/firebase/listMethods';
 import confirm from '../../utils/confirm';
 
 const ListInfo = ({ list, openEditForm, openList }) => {
+  const { showPopUp } = useContext(PopUpContext);
   const { user } = useContext(UserContext);
   const userId = user.uid;
 
@@ -12,7 +14,14 @@ const ListInfo = ({ list, openEditForm, openList }) => {
     let text = `Êtes-vous sûr de vouloir supprimer la liste "${list.name}" ? (cette action est irréversible !)\n`
       + `Écrivez "${wordToEnter}" pour confirmer :`;
 
-    confirm(text, wordToEnter, () => deleteList(userId, list.id));
+    confirm(text, wordToEnter, async () => {
+      try {
+        await deleteList(userId, list.id);
+        showPopUp('La liste a bien été supprimée !');
+      } catch (error) {
+        showPopUp('Une erreur inconnue est survenue', 'error');
+      }
+    });
   };
 
   const handleOpenList = e => {
