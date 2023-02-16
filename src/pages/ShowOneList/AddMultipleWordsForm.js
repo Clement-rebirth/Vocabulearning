@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { addMultipleWords } from '../../utils/firebase/wordMethods';
 import { generateWordObjectsFromString } from '../../utils/words/generateWordObjectsFromString';
 import { validateWord } from '../../utils/words/validateWord';
@@ -10,6 +10,7 @@ const AddMultipleWordsForm = ({ closeModal }) => {
 
   const [words, setWords] = useState('');
   const [wordsError, setWordsError] = useState(null);
+  const [showValidMessage, setShowValidMessage] = useState(false);
 
   let wordsFieldRef = useRef(null);
   const { list } = useContext(ListsContext);
@@ -21,14 +22,15 @@ const AddMultipleWordsForm = ({ closeModal }) => {
     wordsFieldRef.current.focus();
   }, []);
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  // return nothing if there is an error
+  const validateTextAndGenerateWords = useCallback(() => {
     let wordObjects;
 
     try {
       wordObjects = generateWordObjectsFromString(words);
     } catch (error) {
       setWordsError('Format invalide');
+      setShowValidMessage(false);
       return;
     }
 
@@ -44,13 +46,26 @@ const AddMultipleWordsForm = ({ closeModal }) => {
 
     if (!isErrorsEmpty) {
       setWordsError('Les mots et les traductions doivent contenir entre 1 et 1000 caractères');
+      setShowValidMessage(false);
       return;
     };
 
     if (wordObjects.length > 500) {
       setWordsError('Vous pouvez ajouter 500 mots en même temps maximum');
+      setShowValidMessage(false);
       return;
     }
+
+    setShowValidMessage(true);
+    return wordObjects;
+  }, [words]);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    const wordObjects = validateTextAndGenerateWords();
+
+    if (!wordObjects) return;
 
     addMultipleWords(wordObjects, userId, list.id).then(() => {
       closeModal();
@@ -58,8 +73,16 @@ const AddMultipleWordsForm = ({ closeModal }) => {
     });
   };
 
+  useEffect(() => {
+    setWordsError(null);
+
+    if (!words) return;
+
+    validateTextAndGenerateWords();
+  }, [words, validateTextAndGenerateWords]);
+
   return (
-    <form className='word-form' onSubmit={handleSubmit }>
+    <form className='word-form' onSubmit={handleSubmit}>
       <div className='list-field'>
         <label htmlFor='multi-words'>Coller votre liste de mots (1 mot par ligne)</label>
         <textarea
@@ -73,9 +96,17 @@ const AddMultipleWordsForm = ({ closeModal }) => {
           placeholder='mot en anglais : traduction(s)'
         ></textarea>
 
-        <small className={ wordsError ? 'invalid-message' : '' }>
-          { wordsError }
-        </small>
+        { wordsError &&
+          <small className='invalid-message'>
+            { wordsError }
+          </small>
+        }
+
+        { showValidMessage &&
+          <small className='valid-message'>
+            Format valide
+          </small>
+        }
 
         <ul className='info'>
           <li>les tirets sont acceptés en début de ligne</li>
