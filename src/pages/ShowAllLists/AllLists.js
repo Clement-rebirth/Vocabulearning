@@ -1,3 +1,4 @@
+import reverseObject from '../../utils/reverseObjectWithKey';
 import ListContainer from './ListContainer';
 import NoListsToShow from './NoListsToShow';
 
@@ -15,6 +16,9 @@ const AllLists = props => {
   let noSearchResult = !listsWithMatchingWords && searchMode;
 
   let listsToShow = searchMode ? listsWithMatchingWords : lists;
+
+  // reverse if there are lists to show
+  if (listsToShow) listsToShow = reverseObject(listsToShow);
 
   return (
     <div className='lists'>
