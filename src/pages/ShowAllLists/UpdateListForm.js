@@ -30,7 +30,7 @@ const UpdateListForm = ({ closeForm, listToUpdate, show }) => {
 
     let propsToUpdate = {
       name: listName,
-      slug: slugify(listName)
+      slug: slugify(listName) + listToUpdate.id
     };
 
     updateList(propsToUpdate, userId, listToUpdate.id)

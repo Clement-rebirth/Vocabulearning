@@ -1,5 +1,5 @@
 import './firebase';
-import { getDatabase, push, ref, remove, update } from 'firebase/database';
+import { getDatabase, push, ref, remove, set, update } from 'firebase/database';
 import { slugify } from '../slugify';
 
 export const addList = (wordList, userId) => {
@@ -7,10 +7,13 @@ export const addList = (wordList, userId) => {
   if (!wordList.words) wordList.words = false;
 
   const db = getDatabase();
-  const listsRef = ref(db, `wordLists/${userId}`)
-  return push(listsRef, {
+  const listsRef = ref(db, `wordLists/${userId}`);
+  const newListRef = push(listsRef);
+  const newListKey = newListRef.key;
+
+  return set(newListRef, {
     ...wordList,
-    slug: slugify(wordList.name),
+    slug: slugify(wordList.name) + newListKey,
     createdAt: Date.now(),
     order: 'asc'
   });
