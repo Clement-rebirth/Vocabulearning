@@ -1,3 +1,5 @@
+import { removeAccents } from "./removeAccents";
+import replaceSpecialCharsWithDash from "./replaceSpecialCharsWithDash";
 import trim from "./trim";
 
 /**
@@ -10,14 +12,8 @@ export const slugify = str => {
 
   str = trim(str, ' '); // trim spaces
   str = str.toLowerCase();
-
-  // remove accents, swap ñ for n, etc
-  const from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;'";
-  const to   = "aaaaeeeeiiiioooouuuunc-------";
-
-  for (let i = 0, l = from.length; i < l; i++) {
-    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
-  }
+  str = removeAccents(str);
+  str = replaceSpecialCharsWithDash(str);
 
   str = str
     .replace(/[^a-z0-9 -]/g, '') // remove invalid chars
