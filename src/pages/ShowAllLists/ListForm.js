@@ -7,12 +7,16 @@ const ListForm = ({ handleSubmit, listNameInitialValue = '', closeForm, show }) 
 
   let listNameInputRef = useRef(null);
 
+  const handleKeyDown = e => {
+    if (e.key === 'Escape') closeForm();
+  };
+
   useEffect(() => {
     if (show) listNameInputRef.current.focus();
   }, [show]);
 
   return (
-    <form onSubmit={e => handleSubmit(e, listName, setListNameError)}>
+    <form onSubmit={e => handleSubmit(e, listName, setListNameError)} onKeyDown={handleKeyDown}>
       <div>
         <input
           ref={listNameInputRef}
