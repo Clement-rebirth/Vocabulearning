@@ -1,9 +1,11 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { googleSignIn } from '../../utils/firebase/authMethods';
 import { ROUTES } from '../../constants';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { PopUpContext } from '../../providers/PopUpProvider';
 
 const GoogleAuth = ({ text }) => {
+  const { showPopup } = useContext(PopUpContext);
   const navigate = useNavigate();
 
   const handleGoogleSignIn = async () => {
@@ -17,12 +19,7 @@ const GoogleAuth = ({ text }) => {
         }
       });
     } catch (error) {
-      console.error({
-        code: error.code,
-        message: error.message,
-        email: error.customData.email,
-        creadential: GoogleAuthProvider.credentialFromError(error),
-      });
+      showPopup('Une erreur inconnue est survenue lors de la connexion', 'error');
     }
   };
 

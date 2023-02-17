@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { UserContext } from './providers/UserProvider';
+import { PopUpContext } from './providers/PopUpProvider';
 import { ROUTES } from './constants';
 import { logOut } from './utils/firebase/authMethods';
 
@@ -19,6 +20,7 @@ const App = () => {
 
   const navigate = useNavigate();
   let { user, userLoading, setUser } = useContext(UserContext);
+  const { showPopup } = useContext(PopUpContext);
 
   let location = useLocation();
   let redirectAfterAuth = location.state && location.state.redirectAfterAuth;
@@ -30,7 +32,7 @@ const App = () => {
         navigate(ROUTES.LANDING, { replace: true });
       })
       .catch(error => {
-        console.log('logout error : ', error);
+        showPopup('Une erreur inconnue est survenue lors de la déconnexion', 'error');
       });
   };
 
