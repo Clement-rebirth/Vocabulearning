@@ -86,10 +86,6 @@
     background-color: #2c3034;
   }
 
-  .search-bar #open-menu:focus {
-    border: 1px solid transparent;
-  }
-
   .light .search-bar #open-menu {
     color: var(--dark-gray-900);
   }

@@ -35,10 +35,6 @@
   color: var(--yellow-550);
 }
 
-.close-modal:focus {
-  outline: var(--yellow-550) solid 1px;
-}
-
 @media all and (max-width: 425px) {
   .modal-overlay {
     padding: 10px;

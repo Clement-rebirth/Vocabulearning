@@ -170,10 +170,6 @@
   margin: 0 20px;
 }
 
-.options-bar .add-word:focus {
-  outline: auto;
-}
-
 /* .word-card */
 
 .word-card .bottom {
