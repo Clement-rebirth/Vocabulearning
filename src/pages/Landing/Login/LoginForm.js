@@ -38,8 +38,6 @@ const LoginForm = () => {
         });
       })
       .catch(error => {
-        console.log('login errors :');
-        console.log(error);
         alert('Email ou mot de passe incorrect');
       });
   }

@@ -84,8 +84,6 @@ const RegisterForm = () => {
           passwordError: '',
           emailError: emailError
         });
-
-        console.log(error);
       });
   }
 
