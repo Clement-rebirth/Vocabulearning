@@ -152,11 +152,13 @@ p {
 }
 
 button {
+  box-sizing: border-box;
   font-size: 1.1rem;
   cursor: pointer;
   color: var(--dark-text-color);
   padding: 1px 6px;
   font-weight: var(--text-weight);
+  border: 1px solid transparent;
 }
 
 .dark-text {
@@ -201,8 +203,7 @@ b, strong {
   background-color: transparent;
 }
 
-.btn-text-primary:hover,
-.btn-text-primary:focus {
+.btn-text-primary:hover {
   border: 1px solid var(--main-color);
 }
 
@@ -211,8 +212,7 @@ b, strong {
   background-color: transparent;
 }
 
-.btn-text-danger:hover,
-.btn-text-danger:focus {
+.btn-text-danger:hover {
   border: 1px solid var(--danger-color);
 }
 
@@ -278,7 +278,7 @@ b, strong {
   margin-bottom: 0;
 }
 
-input, button, textarea {
+input, textarea {
   box-sizing: border-box;
   outline: none;
   border: 1px solid transparent;

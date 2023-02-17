@@ -85,10 +85,6 @@
   color: var(--main-color);
 }
 
-.add-list-btn:focus {
-  border: 2px dashed var(--main-color);
-}
-
 .add-list-btn .material-symbols-rounded {
   margin-right: 5px;
 }

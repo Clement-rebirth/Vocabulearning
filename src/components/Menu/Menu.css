@@ -59,10 +59,6 @@
   color: var(--yellow-550);
 }
 
-.close-menu:focus {
-  outline: var(--yellow-550) solid 1px;
-}
-
 .menu .menu-content {
   margin-top: 35px;
   padding-left: 20px;
