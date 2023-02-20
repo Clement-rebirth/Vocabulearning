@@ -15,6 +15,7 @@ const ShowAllLists = ({ navigate }) => {
 
   let { lists, listsLoading, setList } = useContext(ListsContext);
   const { searchMode } = useContext(SearchContext);
+  const nbLists = lists ? Object.keys(lists).length : 0;
 
   // close the current form if there is one and set the new close functionet the new one
   const setCloseCurrentFormFunc = newCloseFunc => {
@@ -33,7 +34,7 @@ const ShowAllLists = ({ navigate }) => {
       { !searchMode &&
         <>
           <div className='wrap'>
-            <h1>Mes listes</h1>
+            <h1>Mes listes ({ nbLists })</h1>
           </div>
 
           <AddList setCloseCurrentFormFunc={setCloseCurrentFormFunc} />
