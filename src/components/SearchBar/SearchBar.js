@@ -3,14 +3,16 @@ import { useRef } from 'react';
 import ClearBtn from './ClearBtn';
 
 import './SearchBar.css';
+import MenuButton from '../MenuButton/MenuButton';
 
 const SearchBar = props => {
 
   const {
-    showMenu,
+    openMenu,
     search,
     setSearch,
-    disableSearchMode
+    disableSearchMode,
+    placeholderText,
   } = props;
 
   const searchInput = useRef(null);
@@ -37,9 +39,7 @@ const SearchBar = props => {
   return (
     <div className='search-bar-container'>
       <div className='search-bar'>
-        <button onClick={showMenu} id='open-menu' aria-label='ouvrir le menu'>
-          <span className='material-symbols-rounded'>menu</span>
-        </button>
+        <MenuButton openMenu={openMenu} />
 
         <span id='search-icon' className='material-symbols-rounded'>search</span>
 
@@ -47,8 +47,8 @@ const SearchBar = props => {
           name='search'
           type='text'
           autoComplete='off'
-          placeholder='Chercher un mot'
-          aria-label='Chercher un mot'
+          placeholder={placeholderText}
+          aria-label={placeholderText}
           value={search}
           onChange={handleChange}
           onKeyDown={handleKeydown}

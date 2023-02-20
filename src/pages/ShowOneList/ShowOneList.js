@@ -20,7 +20,7 @@ const ShowOneList = ({ navigate }) => {
   const [showWordCard, setShowWordCard] = useState(false);
   const [wordToShow, setWordToShow] = useState(false);
 
-  const { searchMode, disableSearchMode, handleSearch } = useContext(SearchContext);
+  const { disableSearchMode } = useContext(SearchContext);
   let { lists, listsLoading, list, setList } = useContext(ListsContext);
   let { slug } = useParams();
 
@@ -54,11 +54,6 @@ const ShowOneList = ({ navigate }) => {
 
     setList(matchingList);
   }, [navigate, lists, slug, setList, listsLoading]);
-
-  useEffect(() => {
-    // execute the search on page load if there is something to search
-    if (searchMode) handleSearch();
-  }, [handleSearch, searchMode]);
 
   if (listsLoading || !list) return <Loading />;
 

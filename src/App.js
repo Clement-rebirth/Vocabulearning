@@ -36,6 +36,8 @@ const App = () => {
       });
   };
 
+  const openMenu = () => setShowMenu(true);
+
   if (userLoading) return <Loading />;
 
   // if the user is not connected and hasn't just been redirected after loged in
@@ -51,7 +53,7 @@ const App = () => {
       />
 
       <ListsProvider>
-        <SearchProvider showMenu={() => setShowMenu(true)}>
+        <SearchProvider openMenu={openMenu}>
           <Routes>
             <Route path='/' element={<ShowAllLists navigate={navigate} />} />
             <Route path={ROUTES.DISPLAY_ONE_LIST} element={<ShowOneList navigate={navigate} />} />

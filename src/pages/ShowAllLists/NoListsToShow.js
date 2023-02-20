@@ -3,8 +3,7 @@ import NothingToShow from '../../components/NothingToShow/NothingToShow';
 import noResultFoundImg from '../../assets/img/illustrations/undraw-void-dark-yellow.svg';
 import emptyDataImg from '../../assets/img/illustrations/undraw-empty-dark-yellow.svg';
 
-const NoListsToShow = ({ noSearchResult, noLists }) => {
-
+const NoListsToShow = ({ noSearchResult, noLists, search }) => {
   if (noLists) return (
     <NothingToShow
       className='no-list-to-show'
@@ -16,7 +15,7 @@ const NoListsToShow = ({ noSearchResult, noLists }) => {
 
   if (noSearchResult) return (
     <NothingToShow
-      message='Aucune liste ne contient le mot que vous recherchez'
+      message={`Aucun résultat pour la recherche "${search}"`}
       src={noResultFoundImg}
       alt='void illustration'
     />

@@ -1,21 +1,16 @@
+import { useContext } from 'react';
+import { SearchContext } from '../../providers/SearchProvider';
 import reverseObject from '../../utils/reverseObjectWithKey';
 import ListContainer from './ListContainer';
 import NoListsToShow from './NoListsToShow';
 
-const AllLists = props => {
+const AllLists = ({ lists, openList, setCloseCurrentFormFunc, searchMode }) => {
+  const { matchingLists, search } = useContext(SearchContext);
 
-  const {
-    lists,
-    listsWithMatchingWords,
-    openList,
-    searchMode,
-    setCloseCurrentFormFunc
-  } = props;
+  const noLists = !lists && !searchMode;
+  const noSearchResult = !matchingLists && searchMode;
 
-  let noLists = !lists && !searchMode;
-  let noSearchResult = !listsWithMatchingWords && searchMode;
-
-  let listsToShow = searchMode ? listsWithMatchingWords : lists;
+  let listsToShow = searchMode ? matchingLists : lists;
 
   // reverse if there are lists to show
   if (listsToShow) listsToShow = reverseObject(listsToShow);
@@ -31,7 +26,7 @@ const AllLists = props => {
         />
       ))}
 
-      <NoListsToShow noSearchResult={noSearchResult} noLists={noLists} />
+      <NoListsToShow noSearchResult={noSearchResult} noLists={noLists} search={search} />
     </div>
   );
 }

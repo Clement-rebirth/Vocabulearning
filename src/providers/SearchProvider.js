@@ -1,58 +1,64 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ListsContext } from './ListsProvider';
 import { getMatchingWords } from '../utils/lists/getMatchingWords';
-import { getListsWithMatchingWords } from '../utils/lists/getListsWithMatchingWords';
+import getMatchingLists from '../utils/lists/getMatchingLists';
 
 import SearchBar from '../components/SearchBar/SearchBar';
 
 export const SearchContext = createContext({
   matchingWords: null,
-  listsWithMatchingWords: null,
   searchMode: false,
   disableSearchMode: () => {},
-  setlist: () => {},
   handleSearch: () => {},
 });
 
-const SearchProvider = ({ showMenu, children }) => {
+const SearchProvider = ({ openMenu, children }) => {
 
   const [search, setSearch] = useState('');
   const [matchingWords, setMatchingWords] = useState(null);
-  const [listsWithMatchingWords, setListsWithMatchingWords] = useState(null);
+  const [matchingLists, setMatchingLists] = useState(null);
   const [searchMode, setSearchMode] = useState(false);
 
   let { lists, list } = useContext(ListsContext);
+  const location = useLocation();
+  const placeholderText = list ? 'Chercher un mot' : 'Chercher une liste';
 
   const disableSearchMode = () => setSearchMode(false);
 
-  // if user quit the search (by cleaning, deleting...) the default data are set
-  useEffect(() => {
-    if (!searchMode) {
-      setSearch('');
-      setListsWithMatchingWords(null);
-      setMatchingWords(null);
-    }
-  }, [searchMode]);
-
-  const searchWordInOneList = (wordToSearch, list) => {
-    let matchingWords = getMatchingWords(wordToSearch, list);
-    setMatchingWords(matchingWords);
+  const setDefaultValues = () => {
+    setSearch('');
+    setMatchingWords(null);
+    setMatchingLists(null);
   };
 
-  const searchWordInAllLists = (wordToSearch, lists) => {
-    let matchingLists = getListsWithMatchingWords(wordToSearch, lists);
-    setListsWithMatchingWords(matchingLists);
+  // if user quit the search (by cleaning, deleting...) the default data are set
+  useEffect(() => {
+    if (!searchMode) setDefaultValues();
+  }, [searchMode]);
+
+  // set default values when location changes
+  useEffect(() => {
+    setDefaultValues();
+  }, [location]);
+
+  const searchWordInOneList = (wordToSearch, list) => {
+    let searchResults = getMatchingWords(wordToSearch, list);
+    setMatchingWords(searchResults);
   };
 
   const handleSearch = useCallback(() => {
     setSearchMode(!!search);
 
+    // page with words
     if (list) {
       searchWordInOneList(search, list);
       return;
     }
 
-    searchWordInAllLists(search, lists);
+    // page with lists
+    const searchResults = getMatchingLists(search, lists);
+    setMatchingLists(searchResults);
   }, [search, list, lists]);
 
   // execute the search everytime search state update
@@ -60,10 +66,11 @@ const SearchProvider = ({ showMenu, children }) => {
 
   let providerValue = {
     matchingWords,
-    listsWithMatchingWords,
+    matchingLists,
     searchMode,
     disableSearchMode,
-    handleSearch
+    handleSearch,
+    search,
   };
 
   return (
@@ -72,7 +79,8 @@ const SearchProvider = ({ showMenu, children }) => {
         search={search}
         setSearch={setSearch}
         disableSearchMode={disableSearchMode}
-        showMenu={showMenu}
+        openMenu={openMenu}
+        placeholderText={placeholderText}
       />
 
       { children }
