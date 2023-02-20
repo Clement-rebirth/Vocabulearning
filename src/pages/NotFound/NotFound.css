@@ -18,19 +18,19 @@
   margin-top: 18px;
 }
 
-@media all and (max-width: 1800px) {
+@media (max-width: 1800px) {
   .page-not-found img {
     width: 25%;
   }
 }
 
-@media all and (max-width: 1500px) {
+@media (max-width: 1500px) {
   .page-not-found .nothing-to-show-message {
     font-size: 2rem;
   }
 }
 
-@media all and (max-width: 1300px) {
+@media (max-width: 1300px) {
   .page-not-found img {
     width: 30%;
   }
@@ -40,31 +40,31 @@
   }
 }
 
-@media all and (max-width: 1050px) {
+@media (max-width: 1050px) {
   .page-not-found img {
     width: 35%;
   }
 }
 
-@media all and (max-width: 850px) {
+@media (max-width: 850px) {
   .page-not-found .nothing-to-show-message {
     font-size: 1.5rem;
   }
 }
 
-@media all and (max-width: 600px) {
+@media (max-width: 600px) {
   .page-not-found img {
     width: 45%;
   }
 }
 
-@media all and (max-width: 550px) {
+@media (max-width: 550px) {
   .page-not-found .nothing-to-show-message {
     font-size: 1.3rem;
   }
 }
 
-@media all and (max-width: 500px) {
+@media (max-width: 500px) {
   .page-not-found img {
     width: 50%;
   }
@@ -78,7 +78,7 @@
   }
 }
 
-@media all and (max-width: 400px) {
+@media (max-width: 400px) {
   .page-not-found {
     margin-top: 40px;
   }
@@ -88,7 +88,7 @@
   }
 }
 
-@media all and (max-width: 320px) {
+@media (max-width: 320px) {
   .page-not-found {
     margin-top: 30px;
     padding: 0 15px;

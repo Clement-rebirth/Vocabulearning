@@ -72,13 +72,13 @@
   color: #fff;
 }
 
-@media all and (min-width: 425px) {
+@media (min-width: 425px) {
   .landing {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%), url('../../assets/img/big-ben-1920.jpg') center/cover no-repeat;
   }
 }
 
-@media all and (min-width: 768px) {
+@media (min-width: 768px) {
   .landing {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url('../../assets/img/big-ben-2560.jpg') center/cover no-repeat;
     display: flex;
@@ -154,7 +154,7 @@
   }
 }
 
-@media all and (min-width: 1024px) {
+@media (min-width: 1024px) {
   .get-started {
     max-width: none;
     margin-bottom: 100px;
@@ -180,7 +180,7 @@
   }
 }
 
-@media all and (min-width: 1900px) {
+@media (min-width: 1900px) {
   .get-started h1 {
     font-size: 7rem;
   }

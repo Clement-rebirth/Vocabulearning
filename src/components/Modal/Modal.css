@@ -35,7 +35,7 @@
   color: var(--yellow-550);
 }
 
-@media all and (max-width: 425px) {
+@media (max-width: 425px) {
   .modal-overlay {
     padding: 10px;
   }

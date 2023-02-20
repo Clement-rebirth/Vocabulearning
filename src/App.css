@@ -4,7 +4,7 @@
   margin: 0 auto;
 }
 
-@media all and (min-width: 1024px) {
+@media (min-width: 1024px) {
   .app {
     max-width: 800px;
   }
