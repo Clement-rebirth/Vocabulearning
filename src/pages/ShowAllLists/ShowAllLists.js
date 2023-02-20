@@ -14,7 +14,7 @@ const ShowAllLists = ({ navigate }) => {
   const [closeCurrentForm, setCloseCurrentForm] = useState(false);
 
   let { lists, listsLoading, setList } = useContext(ListsContext);
-  let { searchMode, disableSearchMode, listsWithMatchingWords } = useContext(SearchContext);
+  const { searchMode } = useContext(SearchContext);
 
   // close the current form if there is one and set the new close functionet the new one
   const setCloseCurrentFormFunc = newCloseFunc => {
@@ -30,18 +30,21 @@ const ShowAllLists = ({ navigate }) => {
 
   return (
     <div className='all-lists-page'>
-      <AddList
-        searchMode={searchMode}
-        setCloseCurrentFormFunc={setCloseCurrentFormFunc}
-        disableSearchMode={disableSearchMode}
-      />
+      { !searchMode &&
+        <>
+          <div className='wrap'>
+            <h1>Mes listes</h1>
+          </div>
+
+          <AddList setCloseCurrentFormFunc={setCloseCurrentFormFunc} />
+        </>
+      }
 
       <AllLists
         lists={lists}
-        listsWithMatchingWords={listsWithMatchingWords}
         openList={openList}
-        searchMode={searchMode}
         setCloseCurrentFormFunc={setCloseCurrentFormFunc}
+        searchMode={searchMode}
       />
     </div>
   );
