@@ -9,7 +9,8 @@ const ListInfo = ({ list, openEditForm, openList }) => {
   const { user } = useContext(UserContext);
   const userId = user.uid;
 
-  const handleDeleteList = () => {
+  const handleDeleteList = e => {
+    e.stopPropagation();
     let wordToEnter = 'oui';
     let text = `Êtes-vous sûr de vouloir supprimer la liste "${list.name}" ? (cette action est irréversible !)\n`
       + `Écrivez "${wordToEnter}" pour confirmer :`;
@@ -24,25 +25,24 @@ const ListInfo = ({ list, openEditForm, openList }) => {
     });
   };
 
-  const handleOpenList = e => {
-    if (e.target.classList.contains('allow-click')) openList(list.slug);
-  };
-
   let nbWords = list.words ? Object.keys(list.words).length : 0;
 
   return (
-    <div className='list-info allow-click' onClick={handleOpenList}>
-      <h2 className='name allow-click'>
+    <div className='list-info' onClick={() => openList(list.slug)}>
+      <h2 className='name'>
         { list.name }
       </h2>
 
-      <span className='nb-words allow-click'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
+      <span className='nb-words'> ({ nbWords } mot{ nbWords > 1 && 's' })</span>
 
       <div className='actions'>
         <button
           aria-label='modifier la liste'
           className='edit-list btn-rounded-icon'
-          onClick={openEditForm}
+          onClick={e => {
+            e.stopPropagation();
+            openEditForm();
+          }}
         >
           <span className='material-symbols-rounded'>edit</span>
         </button>
