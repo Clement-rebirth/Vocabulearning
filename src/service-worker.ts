@@ -1,4 +1,4 @@
-/* eslint-disable no-restricted-globals */
+/* eslint-disable */
 /// <reference lib="webworker" />
 
 // This service worker can be customized!

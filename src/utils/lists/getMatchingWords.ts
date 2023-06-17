@@ -9,20 +9,20 @@ export const getMatchingWords = (wordToSearch: string, list: List) => {
   const words = list.words;
   if (!words) return null;
 
-  let matchingWords: Words = {};
+  const matchingWords: Words = {};
 
   Object
     .keys(words)
     .filter(wordKey => {
-      let wordObj = words[wordKey];
+      const wordObj = words[wordKey];
       if (!wordObj) return false;
-      let wordContainsSearch = strContains(wordObj.word, wordToSearch);
-      let translationContainsSearch = strContains(wordObj.translation, wordToSearch);
+      const wordContainsSearch = strContains(wordObj.word, wordToSearch);
+      const translationContainsSearch = strContains(wordObj.translation, wordToSearch);
 
       return wordContainsSearch || translationContainsSearch;
     })
     .forEach(wordKey => {
-      let wordObj = words[wordKey];
+      const wordObj = words[wordKey];
       if (!wordObj) return;
       matchingWords[wordKey] = wordObj;
     });

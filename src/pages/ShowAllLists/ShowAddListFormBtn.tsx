@@ -3,7 +3,7 @@ interface ShowAddListFormBtnProps {
   openAddForm: () => void;
 }
 
-const ShowAddListFormBtn = ({ addFormIsShow, openAddForm }: ShowAddListFormBtnProps) => (
+export const ShowAddListFormBtn = ({ addFormIsShow, openAddForm }: ShowAddListFormBtnProps) => (
   <button
     className={`add-list-btn ${addFormIsShow ? 'd-none' : ''}`}
     onClick={openAddForm}
@@ -12,5 +12,3 @@ const ShowAddListFormBtn = ({ addFormIsShow, openAddForm }: ShowAddListFormBtnPr
     Ajouter une liste
   </button>
 );
-
-export default ShowAddListFormBtn;

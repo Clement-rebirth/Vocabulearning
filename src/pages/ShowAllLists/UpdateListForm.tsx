@@ -5,7 +5,7 @@ import { updateList } from '../../utils/firebase/listMethods';
 import { validateList } from '../../utils/lists/validateList';
 import { slugify } from '../../utils/slugify';
 
-import ListForm from './ListForm';
+import { ListForm } from './ListForm';
 
 interface UpdateListFormProps {
   closeForm: () => void;
@@ -13,13 +13,15 @@ interface UpdateListFormProps {
   show: boolean;
 }
 
-const UpdateListForm = ({ closeForm, listToUpdate, show }: UpdateListFormProps) => {
+export const UpdateListForm = ({ closeForm, listToUpdate, show }: UpdateListFormProps) => {
   const { toast } = useToast();
   const { user } = useUser();
   const userId = user ? user.uid : null;
 
   const handleSubmit = (
-    e: React.FormEvent, listName: string, setListNameError: React.Dispatch<React.SetStateAction<string | null>>,
+    e: React.FormEvent,
+    listName: string,
+    setListNameError: React.Dispatch<React.SetStateAction<string | null>>,
   ) => {
     e.preventDefault();
     if (!userId) return;
@@ -30,14 +32,14 @@ const UpdateListForm = ({ closeForm, listToUpdate, show }: UpdateListFormProps) 
       return;
     }
 
-    let errors = validateList(listName);
+    const errors = validateList(listName);
     setListNameError(errors[0] ?? null);
 
     if (errors.length > 0) return;
 
-    let propsToUpdate = {
+    const propsToUpdate = {
       name: listName,
-      slug: slugify(listName) + listToUpdate.id
+      slug: slugify(listName) + listToUpdate.id,
     };
 
     updateList(propsToUpdate, userId, listToUpdate.id)
@@ -53,9 +55,8 @@ const UpdateListForm = ({ closeForm, listToUpdate, show }: UpdateListFormProps) 
         handleSubmit={handleSubmit}
         listNameInitialValue={listToUpdate.name}
         closeForm={closeForm}
-        show={show} />
+        show={show}
+      />
     </div>
   );
-}
-
-export default UpdateListForm;
+};

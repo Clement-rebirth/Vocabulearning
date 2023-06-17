@@ -1,6 +1,6 @@
 import './HorizontalBar.css';
 
-const HorizontalBar = ({ text }: { text?: string }) => {
+export const HorizontalBar = ({ text }: { text?: string }) => {
   return (
     <div className='bar'>
       <div className='left'></div>
@@ -9,5 +9,3 @@ const HorizontalBar = ({ text }: { text?: string }) => {
     </div>
   );
 };
-
-export default HorizontalBar;

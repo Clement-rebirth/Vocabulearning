@@ -1,12 +1,12 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getMatchingWords } from '../utils/lists/getMatchingWords';
-import getMatchingLists from '../utils/lists/getMatchingLists';
+import { getMatchingLists } from '../utils/lists/getMatchingLists';
 import { useLists } from './ListsContext';
 import { List, Lists } from '../types/list';
 import { Words } from '../types/word';
 
-import SearchBar from '../components/SearchBar/SearchBar';
+import { SearchBar } from '../components/SearchBar/SearchBar';
 
 interface SearchContextValues {
   matchingWords: Words | null;
@@ -25,13 +25,12 @@ interface SearchProviderProps {
 }
 
 export const SearchProvider = ({ openMenu, children }: SearchProviderProps) => {
-
   const [search, setSearch] = useState('');
   const [matchingWords, setMatchingWords] = useState<Words | null>(null);
   const [matchingLists, setMatchingLists] = useState<Lists | null>(null);
   const [searchMode, setSearchMode] = useState(false);
 
-  let { lists, list } = useLists();
+  const { lists, list } = useLists();
   const location = useLocation();
   const placeholderText = list ? 'Chercher un mot' : 'Chercher une liste';
 
@@ -53,8 +52,8 @@ export const SearchProvider = ({ openMenu, children }: SearchProviderProps) => {
     setDefaultValues();
   }, [location]);
 
-  const searchWordInOneList = (wordToSearch: string, list: List) => {
-    let searchResults = getMatchingWords(wordToSearch, list);
+  const searchWordInOneList = (wordToSearch: string, wordList: List) => {
+    const searchResults = getMatchingWords(wordToSearch, wordList);
     setMatchingWords(searchResults);
   };
 
@@ -75,7 +74,7 @@ export const SearchProvider = ({ openMenu, children }: SearchProviderProps) => {
   // execute the search everytime search state update
   useEffect(() => handleSearch(), [search, handleSearch]);
 
-  let providerValue: SearchContextValues = {
+  const providerValue: SearchContextValues = {
     matchingWords,
     matchingLists,
     searchMode,
@@ -97,7 +96,7 @@ export const SearchProvider = ({ openMenu, children }: SearchProviderProps) => {
       { children }
     </SearchContext.Provider>
   );
-}
+};
 
 export const useSearch = () => {
   const context = useContext(SearchContext);

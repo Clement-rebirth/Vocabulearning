@@ -12,8 +12,7 @@ interface AddWordFormProps {
   closeModal: () => void;
 }
 
-const AddWordForm = ({ setAddMultipleWordsMode, closeModal }: AddWordFormProps) => {
-
+export const AddWordForm = ({ setAddMultipleWordsMode, closeModal }: AddWordFormProps) => {
   const DEFAULT_FORM_DATA = {
     word: '',
     translation: '',
@@ -22,7 +21,7 @@ const AddWordForm = ({ setAddMultipleWordsMode, closeModal }: AddWordFormProps) 
   const [wordFormData, setWordFormData] = useState<WordFormData>(DEFAULT_FORM_DATA);
   const [formErrors, setFormErrors] = useState<FormErrors>({});
 
-  let wordFieldRef = useRef<HTMLInputElement | null>(null);
+  const wordFieldRef = useRef<HTMLInputElement | null>(null);
   const { list } = useLists();
   const { toast } = useToast();
   const { user } = useUser();
@@ -40,11 +39,11 @@ const AddWordForm = ({ setAddMultipleWordsMode, closeModal }: AddWordFormProps) 
     e.preventDefault();
     if (!list || !userId) return;
 
-    let { word, translation } = wordFormData;
+    const { word, translation } = wordFormData;
     const errors = validateWord({ word, translation });
     setFormErrors(errors);
 
-    let isErrorsEmpty = Object.keys(errors).length === 0;
+    const isErrorsEmpty = Object.keys(errors).length === 0;
     if (!isErrorsEmpty) return;
 
     addWord({ word, translation }, list.id, userId)
@@ -56,11 +55,11 @@ const AddWordForm = ({ setAddMultipleWordsMode, closeModal }: AddWordFormProps) 
         closeModal();
         toast.success('Le mot a bien été ajouté');
       })
-      .catch(error => toast.error('Une erreur inconnue est survenue'));
+      .catch(() => toast.error('Une erreur inconnue est survenue'));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let { value, name } = e.target;
+    const { value, name } = e.target;
     setWordFormData({ ...wordFormData, [name]: value });
   };
 
@@ -122,6 +121,4 @@ const AddWordForm = ({ setAddMultipleWordsMode, closeModal }: AddWordFormProps) 
       </div>
     </form>
   );
-}
-
-export default AddWordForm;
+};

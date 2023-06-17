@@ -111,13 +111,17 @@
 }
 
 .word-box .word p,
+.word-box .translation button,
 .word-box .translation p {
   /* width: 100px; */
   overflow-wrap: anywhere;
   word-break: break-word;
   display: inline;
   margin: 0;
+  padding: 0;
   font-size: 1rem;
+  background-color: transparent;
+  color: var(--main-text-color);
 }
 
 .word-box .separator {
@@ -129,14 +133,14 @@
   font-size: 20px;
 }
 
-.words.hide-right-part .word-box .translation:not(.show) p {
+.words.hide-right-part .word-box .translation:not(.show) button {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 6px;
   cursor: pointer;
   user-select: none;
 }
 
-.words.hide-right-part .word-box .translation:not(.show) p span {
+.words.hide-right-part .word-box .translation:not(.show) button span {
   opacity: 0;
 }
 

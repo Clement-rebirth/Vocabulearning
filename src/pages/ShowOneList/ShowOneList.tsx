@@ -6,24 +6,23 @@ import { useSearch } from '../../contexts/SearchContext';
 import { useLists } from '../../contexts/ListsContext';
 import { WordWithId } from '../../types/word';
 
-import Modal from '../../components/Modal/Modal';
-import Loading from '../../components/Loading/Loading';
-import List from './List/List';
-import WordCard from './WordCard';
-import WordForms from './WordForms';
-import GoBackHomeArrow from '../../components/GoBackHomeArrow/GoBackHomeArrow';
+import { Modal } from '../../components/Modal/Modal';
+import { Loading } from '../../components/Loading/Loading';
+import { List } from './List/List';
+import { WordCard } from './WordCard';
+import { WordForms } from './WordForms';
+import { GoBackHomeArrow } from '../../components/GoBackHomeArrow/GoBackHomeArrow';
 
 import './ShowOneList.css';
 
-const ShowOneList = ({ navigate }: { navigate: NavigateFunction }) => {
-
+export const ShowOneList = ({ navigate }: { navigate: NavigateFunction }) => {
   const [showWordForm, setShowWordForm] = useState(false);
   const [showWordCard, setShowWordCard] = useState(false);
   const [wordToShow, setWordToShow] = useState<WordWithId | null>(null);
 
   const { disableSearchMode } = useSearch();
-  let { lists, listsLoading, list, setList } = useLists();
-  let { slug } = useParams();
+  const { lists, listsLoading, list, setList } = useLists();
+  const { slug } = useParams();
 
   const startLearningMode = () => alert('Coming soon !');
 
@@ -49,7 +48,7 @@ const ShowOneList = ({ navigate }: { navigate: NavigateFunction }) => {
   useEffect(() => {
     if (listsLoading || !slug || !lists) return;
 
-    let matchingList = getMatchingListWithSlug(slug, lists);
+    const matchingList = getMatchingListWithSlug(slug, lists);
 
     if (!matchingList) navigate(ROUTES.NOT_FOUND, { replace: true });
 
@@ -58,8 +57,8 @@ const ShowOneList = ({ navigate }: { navigate: NavigateFunction }) => {
 
   if (listsLoading || !list) return <Loading />;
 
-  let words = list && list.words;
-  let nbWords = words ? Object.keys(words).length : 0;
+  const words = list && list.words;
+  const nbWords = words ? Object.keys(words).length : 0;
 
   return (
     <>
@@ -92,6 +91,4 @@ const ShowOneList = ({ navigate }: { navigate: NavigateFunction }) => {
       </Modal>
     </>
   );
-}
-
-export default ShowOneList;
+};

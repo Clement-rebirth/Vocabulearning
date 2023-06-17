@@ -3,7 +3,7 @@ import { googleSignIn } from '../../utils/firebase/authMethods';
 import { ROUTES } from '../../constants';
 import { useToast } from '../../contexts/ToastContext';
 
-const GoogleAuth = ({ text }: { text: string }) => {
+export const GoogleAuth = ({ text }: { text: string }) => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -14,8 +14,8 @@ const GoogleAuth = ({ text }: { text: string }) => {
       navigate(ROUTES.HOME, {
         replace: true,
         state: {
-          redirectAfterAuth: true
-        }
+          redirectAfterAuth: true,
+        },
       });
     } catch (error) {
       toast.error('Une erreur inconnue est survenue lors de la connexion');
@@ -30,6 +30,4 @@ const GoogleAuth = ({ text }: { text: string }) => {
       { text }
     </button>
   );
-}
-
-export default GoogleAuth;
+};

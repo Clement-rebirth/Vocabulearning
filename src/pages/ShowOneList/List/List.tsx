@@ -5,10 +5,10 @@ import { useUser } from '../../../contexts/UserContext';
 import { ListOrder, ListWithId } from '../../../types/list';
 import { WordWithId } from '../../../types/word';
 
-import OptionsBar from './OptionsBar';
-import AllWords from './AllWords';
-import ListHeader from './ListHeader';
-import ListOptions from './ListOptions';
+import { OptionsBar } from './OptionsBar';
+import { AllWords } from './AllWords';
+import { ListHeader } from './ListHeader';
+import { ListOptions } from './ListOptions';
 
 interface ListProps {
   list: ListWithId;
@@ -17,13 +17,12 @@ interface ListProps {
   openWordForm: () => void;
 }
 
-const List = (props: ListProps) => {
-
+export const List = (props: ListProps) => {
   const {
     list,
     openWordCard,
     nbWords,
-    openWordForm
+    openWordForm,
   } = props;
 
   const [showRightPart, setShowRightPart] = useState(true);
@@ -33,20 +32,20 @@ const List = (props: ListProps) => {
   const { user } = useUser();
   const userId = user ? user.uid : null;
 
-  const toggleListOrder = (currentOrder: ListOrder, listId: string, userId: string) => {
-    let newOrder: ListOrder = currentOrder === 'asc' ? 'desc' : 'asc';
-    updateList({ order: newOrder }, userId, listId)
-      .catch(error => toast.error('Une erreur inconnue est survenue'));
+  const toggleListOrder = (currentOrder: ListOrder, listId: string, userKey: string) => {
+    const newOrder: ListOrder = currentOrder === 'asc' ? 'desc' : 'asc';
+    updateList({ order: newOrder }, userKey, listId)
+      .catch(() => toast.error('Une erreur inconnue est survenue'));
   };
 
   const toggleShowRightPart = () => setShowRightPart(!showRightPart);
   const toggleInvertWordWithTrad = () => setInvertWordWithTrad(!invertWordWithTrad);
 
-  let { order, name, words = null } = list;
+  const { order, name, words = null } = list;
 
-  let reverseClass = order === 'desc' ? 'reverse' : '';
-  let invertClass = invertWordWithTrad ? 'invert' : '';
-  let hideRightPartClass = showRightPart ? '' : 'hide-right-part';
+  const reverseClass = order === 'desc' ? 'reverse' : '';
+  const invertClass = invertWordWithTrad ? 'invert' : '';
+  const hideRightPartClass = showRightPart ? '' : 'hide-right-part';
 
   return (
     <div className='list'>
@@ -81,7 +80,5 @@ const List = (props: ListProps) => {
         toggleShowRightPart={toggleShowRightPart}
       />
     </div>
-  )
+  );
 };
-
-export default List;

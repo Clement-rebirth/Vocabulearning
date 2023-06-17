@@ -12,8 +12,7 @@ interface UpdateWordFormProps {
   closeModal: () => void;
 }
 
-const UpdateWordForm = ({ wordToUpdate, closeModal }: UpdateWordFormProps) => {
-
+export const UpdateWordForm = ({ wordToUpdate, closeModal }: UpdateWordFormProps) => {
   const [wordFormData, setWordFormData] = useState<WordFormData>({
     word: wordToUpdate.word,
     translation: wordToUpdate.translation,
@@ -21,7 +20,7 @@ const UpdateWordForm = ({ wordToUpdate, closeModal }: UpdateWordFormProps) => {
 
   const [formErrors, setFormErrors] = useState<FormErrors>({});
 
-  let wordFieldRef = useRef<HTMLInputElement | null>(null);
+  const wordFieldRef = useRef<HTMLInputElement | null>(null);
   const { list } = useLists();
   const { toast } = useToast();
   const { user } = useUser();
@@ -34,20 +33,20 @@ const UpdateWordForm = ({ wordToUpdate, closeModal }: UpdateWordFormProps) => {
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let { value, name } = e.target;
+    const { value, name } = e.target;
     setWordFormData({ ...wordFormData, [name]: value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!list || ! userId) return;
+    if (!list || !userId) return;
 
-    let { word, translation } = wordFormData;
+    const { word, translation } = wordFormData;
     const errors = validateWord({ word, translation });
     setFormErrors(errors);
 
-    let isErrorsEmpty = Object.keys(errors).length === 0;
+    const isErrorsEmpty = Object.keys(errors).length === 0;
 
     if (!isErrorsEmpty) return;
 
@@ -56,7 +55,7 @@ const UpdateWordForm = ({ wordToUpdate, closeModal }: UpdateWordFormProps) => {
         closeModal();
         toast.success('Le mot a bien été mis à jour');
       })
-      .catch(error => toast.error('Une erreur inconnue est survenue'));
+      .catch(() => toast.error('Une erreur inconnue est survenue'));
   };
 
   return (
@@ -110,6 +109,4 @@ const UpdateWordForm = ({ wordToUpdate, closeModal }: UpdateWordFormProps) => {
       </div>
     </form>
   );
-}
-
-export default UpdateWordForm;
+};

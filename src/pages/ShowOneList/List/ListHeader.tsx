@@ -4,7 +4,7 @@ interface ListHeaderProps {
   openWordForm: () => void;
 }
 
-const ListHeader = ({ name, nbWords, openWordForm }: ListHeaderProps) => (
+export const ListHeader = ({ name, nbWords, openWordForm }: ListHeaderProps) => (
   <div className='list-header'>
     <h2>
       { name }
@@ -17,5 +17,3 @@ const ListHeader = ({ name, nbWords, openWordForm }: ListHeaderProps) => (
     </button>
   </div>
 );
-
-export default ListHeader;

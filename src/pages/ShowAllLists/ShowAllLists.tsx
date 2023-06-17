@@ -4,17 +4,16 @@ import { useLists } from '../../contexts/ListsContext';
 import { useSearch } from '../../contexts/SearchContext';
 import { NavigateFunction } from 'react-router-dom';
 
-import AllLists from './AllLists';
-import Loading from '../../components/Loading/Loading';
-import AddList from './AddList';
+import { AllLists } from './AllLists';
+import { Loading } from '../../components/Loading/Loading';
+import { AddList } from './AddList';
 
 import './ShowAllLists.css';
 
-const ShowAllLists = ({ navigate }: { navigate: NavigateFunction }) => {
-
+export const ShowAllLists = ({ navigate }: { navigate: NavigateFunction }) => {
   const [closeCurrentForm, setCloseCurrentForm] = useState<(() => void) | false>(false);
 
-  let { lists, listsLoading, setList } = useLists();
+  const { lists, listsLoading, setList } = useLists();
   const { searchMode } = useSearch();
   const nbLists = lists ? Object.keys(lists).length : 0;
 
@@ -32,7 +31,7 @@ const ShowAllLists = ({ navigate }: { navigate: NavigateFunction }) => {
 
   return (
     <div className='all-lists-page'>
-      { !searchMode &&
+      {!searchMode &&
         <>
           <div className='wrap'>
             <h1>Mes listes ({ nbLists })</h1>
@@ -50,6 +49,4 @@ const ShowAllLists = ({ navigate }: { navigate: NavigateFunction }) => {
       />
     </div>
   );
-}
-
-export default ShowAllLists;
+};

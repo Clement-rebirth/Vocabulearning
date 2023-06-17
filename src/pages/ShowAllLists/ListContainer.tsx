@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { ListWithId } from '../../types/list';
 
-import ListInfo from './ListInfo';
-import UpdateListForm from './UpdateListForm';
+import { ListInfo } from './ListInfo';
+import { UpdateListForm } from './UpdateListForm';
 
 interface ListContainerProps {
   list: ListWithId;
@@ -10,12 +10,11 @@ interface ListContainerProps {
   setCloseCurrentFormFunc: (newCloseFunc: (() => void) | false) => void;
 }
 
-const ListContainer = (props: ListContainerProps) => {
-
+export const ListContainer = (props: ListContainerProps) => {
   const {
     list,
     openList,
-    setCloseCurrentFormFunc
+    setCloseCurrentFormFunc,
   } = props;
 
   const [showEditForm, setShowEditForm] = useState(false);
@@ -30,13 +29,15 @@ const ListContainer = (props: ListContainerProps) => {
     setCloseCurrentFormFunc(false);
   };
 
-  if (showEditForm) return (
-    <UpdateListForm
-      show={showEditForm}
-      listToUpdate={list}
-      closeForm={closeEditForm}
-    />
-  );
+  if (showEditForm) {
+    return (
+      <UpdateListForm
+        show={showEditForm}
+        listToUpdate={list}
+        closeForm={closeEditForm}
+      />
+    );
+  }
 
   return (
     <ListInfo
@@ -45,6 +46,4 @@ const ListContainer = (props: ListContainerProps) => {
       openList={openList}
     />
   );
-}
-
-export default ListContainer;
+};

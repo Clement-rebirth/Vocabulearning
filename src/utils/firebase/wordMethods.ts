@@ -1,6 +1,6 @@
 import './firebase';
 import { getDatabase, push, ref, remove, update } from 'firebase/database';
-import multiplePush from './multiplePush';
+import { multiplePush } from './multiplePush';
 import { WordFormData } from '../../types/word';
 
 export const addWord = (word: WordFormData, wordListId: string, userId: string) => {
@@ -14,17 +14,17 @@ export const addWord = (word: WordFormData, wordListId: string, userId: string) 
     nextReview: false,
     lastReview: false,
     lvl: 0,
-    createdAt: Date.now()
+    createdAt: Date.now(),
   });
 };
 
-export const addMultipleWords = (words: WordFormData[], userId: string, wordListId: string) => {
-  words = words.map(word => ({
+export const addMultipleWords = (wordsData: WordFormData[], userId: string, wordListId: string) => {
+  const words = wordsData.map(word => ({
     ...word,
     nextReview: false,
     lastReview: false,
     lvl: 0,
-    createdAt: Date.now()
+    createdAt: Date.now(),
   }));
 
   const db = getDatabase();
@@ -32,7 +32,9 @@ export const addMultipleWords = (words: WordFormData[], userId: string, wordList
   return multiplePush(wordsRef, words);
 };
 
-export const updateWord = (newWord: WordFormData, userId: string, listId: string, wordId: string) => {
+export const updateWord = (
+  newWord: WordFormData, userId: string, listId: string, wordId: string,
+) => {
   const db = getDatabase();
   const wordRef = ref(db, `wordLists/${userId}/${listId}/words/${wordId}`);
   return update(wordRef, newWord);

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { Overlay } from '../Overlay/Overlay';
-import ModalContent from './ModalContent';
+import { ModalContent } from './ModalContent';
 
 import './Modal.css';
 
@@ -12,7 +12,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-const Modal = ({ isShow, close, className, children }: ModalProps) => {
+export const Modal = ({ isShow, close, className, children }: ModalProps) => {
   useEffect(() => {
     const handleKeydown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') close();
@@ -24,7 +24,7 @@ const Modal = ({ isShow, close, className, children }: ModalProps) => {
 
     return () => {
       document.removeEventListener('keydown', handleKeydown);
-    }
+    };
   }, [isShow, close]);
 
   return (
@@ -34,6 +34,4 @@ const Modal = ({ isShow, close, className, children }: ModalProps) => {
       </ModalContent>
     </Overlay>
   );
-}
-
-export default Modal;
+};

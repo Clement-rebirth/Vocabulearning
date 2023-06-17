@@ -5,5 +5,5 @@ export const ROUTES = {
   NOT_FOUND: '/404',
   HOME: '/app',
   DISPLAY_ONE_LIST: '/:slug',
-  LEARN: '/app/learn'
+  LEARN: '/app/learn',
 } as const;

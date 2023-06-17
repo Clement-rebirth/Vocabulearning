@@ -5,7 +5,7 @@ interface MenuContainerProps {
   children: React.ReactNode;
 }
 
-const MenuContainer = ({ isShow, children }: MenuContainerProps) => {
+export const MenuContainer = ({ isShow, children }: MenuContainerProps) => {
   const menuTransitions = useTransition(isShow, {
     from: { transform: 'translateX(-100%)' },
     enter: { transform: 'translateX(0%)' },
@@ -18,6 +18,4 @@ const MenuContainer = ({ isShow, children }: MenuContainerProps) => {
       { children }
     </animated.aside>
   ));
-}
-
-export default MenuContainer;
+};

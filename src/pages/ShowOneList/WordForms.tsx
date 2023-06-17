@@ -1,26 +1,29 @@
 import { useState } from 'react';
 import { WordWithId } from '../../types/word';
 
-import AddMultipleWordsForm from './AddMultipleWordsForm';
-import AddWordForm from './AddWordForm';
-import UpdateWordForm from './UpdateWordForm';
+import { AddMultipleWordsForm } from './AddMultipleWordsForm';
+import { AddWordForm } from './AddWordForm';
+import { UpdateWordForm } from './UpdateWordForm';
 
 interface WordFormsProps {
   wordToUpdate: WordWithId | null;
   closeModal: () => void;
 }
 
-const WordForms = ({ wordToUpdate, closeModal }: WordFormsProps) => {
-
+export const WordForms = ({ wordToUpdate, closeModal }: WordFormsProps) => {
   const [addMultipleWordsMode, setAddMultipleWordsMode] = useState(false);
 
-  if (wordToUpdate) return (
-    <UpdateWordForm wordToUpdate={wordToUpdate} closeModal={closeModal} />
-  );
+  if (wordToUpdate) {
+    return (
+      <UpdateWordForm wordToUpdate={wordToUpdate} closeModal={closeModal} />
+    );
+  }
 
-  if (addMultipleWordsMode) return (
-    <AddMultipleWordsForm closeModal={closeModal} />
-  );
+  if (addMultipleWordsMode) {
+    return (
+      <AddMultipleWordsForm closeModal={closeModal} />
+    );
+  }
 
   return (
     <AddWordForm
@@ -28,6 +31,4 @@ const WordForms = ({ wordToUpdate, closeModal }: WordFormsProps) => {
       closeModal={closeModal}
     />
   );
-}
-
-export default WordForms;
+};

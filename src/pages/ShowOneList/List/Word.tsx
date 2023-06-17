@@ -8,13 +8,14 @@ interface WordProps {
   showRightPart: boolean;
 }
 
-const Word = ({ wordObject, openWordCard, invertWordWithTrad, showRightPart }: WordProps) => {
-
+export const Word = ({
+  wordObject, openWordCard, invertWordWithTrad, showRightPart,
+}: WordProps) => {
   // determine if the translation should be show if showRightPart is false
   // and the user click on it or not
   const [show, setShow] = useState(false);
 
-  let { word, translation } = wordObject;
+  const { word, translation } = wordObject;
 
   const handleOpenWordCard = () => {
     if (showRightPart) openWordCard(wordObject);
@@ -24,17 +25,26 @@ const Word = ({ wordObject, openWordCard, invertWordWithTrad, showRightPart }: W
     if (!showRightPart && !show) setShow(true);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleOpenWordCard();
+    }
+  };
+
   useEffect(() => {
     // if the user just toggled showRightPart
     if (!showRightPart) setShow(false);
   }, [showRightPart]);
 
-  let showClass = show ? 'show' : '';
+  const showClass = show ? 'show' : '';
 
   return (
     <div
       className='word-box'
       onClick={handleOpenWordCard}
+      tabIndex={0}
+      role='button'
+      onKeyDown={handleKeyDown}
     >
       <div className='word'>
         <p>{ invertWordWithTrad ? translation : word }</p>
@@ -43,12 +53,14 @@ const Word = ({ wordObject, openWordCard, invertWordWithTrad, showRightPart }: W
         <span className='material-symbols-rounded'>east</span>
       </div>
       <div className={`translation ${showClass}`}>
-        <p onClick={handleClick}>
-          <span>{ invertWordWithTrad ? word : translation }</span>
-        </p>
+        {showRightPart ? (
+          <p>{ invertWordWithTrad ? word : translation }</p>
+        ) : (
+          <button onClick={handleClick}>
+            <span>{ invertWordWithTrad ? word : translation }</span>
+          </button>
+        )}
       </div>
     </div>
   );
-}
-
-export default Word;
+};

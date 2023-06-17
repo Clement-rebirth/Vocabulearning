@@ -11,7 +11,6 @@ interface UserContextValues {
 const UserContext = createContext<UserContextValues | null>(null);
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-
   const [user, setUser] = useState<User | null>(null);
   const [userLoading, setUserLoading] = useState(true);
 
@@ -29,7 +28,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       { children }
     </UserContext.Provider>
   );
-}
+};
 
 export const useUser = () => {
   const context = useContext(UserContext);

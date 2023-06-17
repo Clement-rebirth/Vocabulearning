@@ -8,8 +8,7 @@ interface GoBackHomeArrowProps {
   disableSearchMode: () => void;
 }
 
-const GoBackHomeArrow = ({ navigate, disableSearchMode }: GoBackHomeArrowProps) => {
-
+export const GoBackHomeArrow = ({ navigate, disableSearchMode }: GoBackHomeArrowProps) => {
   const backHome = () => {
     navigate(ROUTES.HOME, { replace: true });
     disableSearchMode();
@@ -24,6 +23,4 @@ const GoBackHomeArrow = ({ navigate, disableSearchMode }: GoBackHomeArrowProps) 
       <span className='material-symbols-rounded'>arrow_back</span>
     </button>
   );
-}
-
-export default GoBackHomeArrow;
+};

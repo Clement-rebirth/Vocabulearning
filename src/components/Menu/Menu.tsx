@@ -1,6 +1,6 @@
 import { Overlay } from '../Overlay/Overlay';
-import MenuContainer from './MenuContainer';
-import MenuHeader from './MenuHeader';
+import { MenuContainer } from './MenuContainer';
+import { MenuHeader } from './MenuHeader';
 
 import './Menu.css';
 
@@ -10,8 +10,7 @@ interface MenuProps {
   handleSignOut: () => void;
 }
 
-const Menu = ({ isShow, handleClose, handleSignOut }: MenuProps) => {
-
+export const Menu = ({ isShow, handleClose, handleSignOut }: MenuProps) => {
   return (
     <Overlay close={handleClose} isShow={isShow}>
       <MenuContainer isShow={isShow}>
@@ -26,6 +25,4 @@ const Menu = ({ isShow, handleClose, handleSignOut }: MenuProps) => {
       </MenuContainer>
     </Overlay>
   );
-}
-
-export default Menu;
+};

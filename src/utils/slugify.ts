@@ -1,6 +1,6 @@
-import { removeAccents } from "./removeAccents";
-import replaceSpecialCharsWithDash from "./replaceSpecialCharsWithDash";
-import trim from "./trim";
+import { removeAccents } from './removeAccents';
+import { replaceSpecialCharsWithDash } from './replaceSpecialCharsWithDash';
+import { trim } from './trim';
 
 /**
  * slugify a string and return it.

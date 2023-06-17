@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { useTransition, animated } from '@react-spring/web';
 import { Toast as ToastType } from '../../contexts/ToastContext';
 
-const Toast = ({ status, message, close }: ToastType) => {
-
+export const Toast = ({ status, message, close }: ToastType) => {
   const [isShow, setIsShow] = useState(true);
 
   let statusIcon = '';
@@ -25,7 +24,7 @@ const Toast = ({ status, message, close }: ToastType) => {
     leave: { opacity: 0, transform: 'scaleY(0)' },
     onRest: () => setTimeout(() => setIsShow(false), 3000),
     onDestroyed: close,
-    config: { tension: 360, friction: 50 }
+    config: { tension: 360, friction: 50 },
   });
 
   return popUpTransitions((style, item) => item && (
@@ -37,6 +36,4 @@ const Toast = ({ status, message, close }: ToastType) => {
       </button>
     </animated.div>
   ));
-}
-
-export default Toast;
+};

@@ -9,15 +9,14 @@ interface ListOptionsProps {
   showRightPart: boolean;
 }
 
-const ListOptions = (props: ListOptionsProps) => {
-
+export const ListOptions = (props: ListOptionsProps) => {
   const {
     toggleCurrentListOrder,
     order,
     toggleInvertWordWithTrad,
     invertWordWithTrad,
     toggleShowRightPart,
-    showRightPart
+    showRightPart,
   } = props;
 
   return (
@@ -52,6 +51,4 @@ const ListOptions = (props: ListOptionsProps) => {
       </button>
     </div>
   );
-}
-
-export default ListOptions;
+};

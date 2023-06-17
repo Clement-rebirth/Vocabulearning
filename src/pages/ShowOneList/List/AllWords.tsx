@@ -1,8 +1,8 @@
 import { useSearch } from '../../../contexts/SearchContext';
 import { WordWithId, Words } from '../../../types/word';
 
-import NoWordsToShow from './NoWordsToShow';
-import Word from './Word';
+import { NoWordsToShow } from './NoWordsToShow';
+import { Word } from './Word';
 
 interface AllWordsProps {
   words: Words;
@@ -12,22 +12,21 @@ interface AllWordsProps {
   className?: string;
 }
 
-const AllWords = (props: AllWordsProps) => {
-
+export const AllWords = (props: AllWordsProps) => {
   const {
     words,
     openWordCard,
     showRightPart,
     invertWordWithTrad,
-    className = ''
+    className = '',
   } = props;
 
-  let { matchingWords, searchMode } = useSearch();
+  const { matchingWords, searchMode } = useSearch();
 
-  let noWordsInList = !words && !searchMode;
-  let noSearchResult = !matchingWords && searchMode;
+  const noWordsInList = !words && !searchMode;
+  const noSearchResult = !matchingWords && searchMode;
 
-  let wordsToShow = searchMode ? matchingWords : words;
+  const wordsToShow = searchMode ? matchingWords : words;
 
   return (
     <div className={`words ${className}`}>
@@ -49,6 +48,4 @@ const AllWords = (props: AllWordsProps) => {
       <NoWordsToShow noSearchResult={noSearchResult} noWordsInList={noWordsInList} />
     </div>
   );
-}
-
-export default AllWords;
+};

@@ -4,8 +4,8 @@ interface Updates<T> {
   [key: string]: T;
 }
 
-const multiplePush = <T>(ref: DatabaseReference, values: T[]) => {
-  let updates: Updates<T> = {};
+export const multiplePush = <T>(ref: DatabaseReference, values: T[]) => {
+  const updates: Updates<T> = {};
 
   values.forEach(item => {
     const itemKey = push(ref).key;
@@ -19,5 +19,3 @@ const multiplePush = <T>(ref: DatabaseReference, values: T[]) => {
 
   return update(ref, updates);
 };
-
-export default multiplePush;

@@ -3,19 +3,18 @@ import { ROUTES } from '../../constants';
 import { useUser } from '../../contexts/UserContext';
 
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import Modal from '../../components/Modal/Modal';
-import Login from './Login/Login';
-import Register from './Register/Register';
+import { Modal } from '../../components/Modal/Modal';
+import { Login } from './Login/Login';
+import { Register } from './Register/Register';
 
 import './Landing.css';
 
-const Landing = () => {
-
+export const Landing = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
 
-  let { user } = useUser();
-  let { pathname } = useLocation();
+  const { user } = useUser();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,9 +31,9 @@ const Landing = () => {
       <div className='landing'>
         <div className='get-started'>
           <h1>Vocabu<br />Learning</h1>
-          <p>Apprendre du vocabulaire n'a jamais été aussi simple</p>
+          <p>Apprendre du vocabulaire n&apos;a jamais été aussi simple</p>
           <div className='auth'>
-            <Link className='register' to={ROUTES.SIGN_UP}>S'inscrire</Link>
+            <Link className='register' to={ROUTES.SIGN_UP}>S&apos;inscrire</Link>
             <p className='login'>
               <span>Déjà inscrit ? </span>
               <Link to={ROUTES.SIGN_IN}>Se connecter</Link>
@@ -60,6 +59,4 @@ const Landing = () => {
       </Modal>
     </>
   );
-}
-
-export default Landing;
+};

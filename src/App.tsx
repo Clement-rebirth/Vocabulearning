@@ -5,25 +5,24 @@ import { logOut } from './utils/firebase/authMethods';
 import { useUser } from './contexts/UserContext';
 import { useToast } from './contexts/ToastContext';
 
-import Menu from './components/Menu/Menu';
-import ShowAllLists from './pages/ShowAllLists/ShowAllLists';
-import ShowOneList from './pages/ShowOneList/ShowOneList';
-import Loading from './components/Loading/Loading';
+import { Menu } from './components/Menu/Menu';
+import { ShowAllLists } from './pages/ShowAllLists/ShowAllLists';
+import { ShowOneList } from './pages/ShowOneList/ShowOneList';
+import { Loading } from './components/Loading/Loading';
 import { ListsProvider } from './contexts/ListsContext';
 import { SearchProvider } from './contexts/SearchContext';
 
 import './App.css';
 
-const App = () => {
-
+export const App = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const navigate = useNavigate();
-  let { user, userLoading, setUser } = useUser();
+  const { user, userLoading, setUser } = useUser();
   const { toast } = useToast();
 
-  let location = useLocation();
-  let redirectAfterAuth = location.state && location.state.redirectAfterAuth;
+  const location = useLocation();
+  const redirectAfterAuth = location.state && location.state.redirectAfterAuth;
 
   const handleSignOut = () => {
     logOut()
@@ -31,7 +30,7 @@ const App = () => {
         setUser(null);
         navigate(ROUTES.LANDING, { replace: true });
       })
-      .catch(error => {
+      .catch(() => {
         toast.error('Une erreur inconnue est survenue lors de la déconnexion');
       });
   };
@@ -40,8 +39,9 @@ const App = () => {
 
   if (userLoading) return <Loading />;
 
-  // if the user is not connected and hasn't just been redirected after loged in
-  // meaning that if the user is null because the user just loged in (so it's loading) we don't redirect
+  // if the user is not connected and hasn't just been redirected after logged in
+  // meaning that if the user is null because the user just loged in (so it's loading)
+  // we don't redirect
   if (!user && !redirectAfterAuth) return <Navigate to={ROUTES.LANDING} replace={true} />;
 
   return (
@@ -62,6 +62,4 @@ const App = () => {
       </ListsProvider>
     </div>
   );
-}
-
-export default App;
+};

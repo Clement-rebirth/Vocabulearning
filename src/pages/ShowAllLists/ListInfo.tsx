@@ -1,5 +1,5 @@
 import { deleteList } from '../../utils/firebase/listMethods';
-import confirm from '../../utils/confirm';
+import { confirm } from '../../utils/confirm';
 import { useToast } from '../../contexts/ToastContext';
 import { useUser } from '../../contexts/UserContext';
 import { ListWithId } from '../../types/list';
@@ -10,7 +10,7 @@ interface ListInfoProps {
   openList: (slug: string) => void;
 }
 
-const ListInfo = ({ list, openEditForm, openList }: ListInfoProps) => {
+export const ListInfo = ({ list, openEditForm, openList }: ListInfoProps) => {
   const { toast } = useToast();
   const { user } = useUser();
   const userId = user ? user.uid : null;
@@ -19,8 +19,8 @@ const ListInfo = ({ list, openEditForm, openList }: ListInfoProps) => {
     e.stopPropagation();
     if (!userId) return;
 
-    let wordToEnter = 'oui';
-    let text = `Êtes-vous sûr de vouloir supprimer la liste "${list.name}" ? (cette action est irréversible !)\n`
+    const wordToEnter = 'oui';
+    const text = `Êtes-vous sûr de vouloir supprimer la liste "${list.name}" ? (cette action est irréversible !)\n`
       + `Écrivez "${wordToEnter}" pour confirmer :`;
 
     confirm(text, wordToEnter, async () => {
@@ -33,10 +33,16 @@ const ListInfo = ({ list, openEditForm, openList }: ListInfoProps) => {
     });
   };
 
-  let nbWords = list.words ? Object.keys(list.words).length : 0;
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      openList(list.slug);
+    }
+  };
+
+  const nbWords = list.words ? Object.keys(list.words).length : 0;
 
   return (
-    <div className='list-info' onClick={() => openList(list.slug)}>
+    <div className='list-info' tabIndex={0} onClick={() => openList(list.slug)} onKeyDown={handleKeyDown} role='link'>
       <h2 className='name'>
         { list.name }
       </h2>
@@ -64,6 +70,4 @@ const ListInfo = ({ list, openEditForm, openList }: ListInfoProps) => {
       </div>
     </div>
   );
-}
-
-export default ListInfo;
+};

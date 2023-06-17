@@ -10,13 +10,12 @@ interface AddMultipleWordsFormProps {
   closeModal: () => void;
 }
 
-const AddMultipleWordsForm = ({ closeModal }: AddMultipleWordsFormProps) => {
-
+export const AddMultipleWordsForm = ({ closeModal }: AddMultipleWordsFormProps) => {
   const [words, setWords] = useState('');
   const [wordsError, setWordsError] = useState<string | null>(null);
   const [showValidMessage, setShowValidMessage] = useState(false);
 
-  let wordsFieldRef = useRef<HTMLTextAreaElement | null>(null);
+  const wordsFieldRef = useRef<HTMLTextAreaElement | null>(null);
   const { list } = useLists();
   const { toast } = useToast();
   const { user } = useUser();
@@ -37,29 +36,24 @@ const AddMultipleWordsForm = ({ closeModal }: AddMultipleWordsFormProps) => {
     } catch (error) {
       setWordsError('Format invalide');
       setShowValidMessage(false);
-      return;
+      return null;
     }
 
-    let errors, isErrorsEmpty;
+    const allWordsValid = wordObjects.every(word => {
+      const errors = validateWord(word);
+      return Object.keys(errors).length === 0;
+    });
 
-    // for .. of instead of forEach in order to break
-    for (const wordObj of wordObjects) {
-      errors = validateWord(wordObj);
-      isErrorsEmpty = Object.keys(errors).length === 0;
-
-      if (!isErrorsEmpty) break;
-    }
-
-    if (!isErrorsEmpty) {
+    if (!allWordsValid) {
       setWordsError('Les mots et les traductions doivent contenir entre 1 et 1000 caractères');
       setShowValidMessage(false);
-      return;
-    };
+      return null;
+    }
 
     if (wordObjects.length > 500) {
       setWordsError('Vous pouvez ajouter 500 mots en même temps maximum');
       setShowValidMessage(false);
-      return;
+      return null;
     }
 
     setShowValidMessage(true);
@@ -79,7 +73,7 @@ const AddMultipleWordsForm = ({ closeModal }: AddMultipleWordsFormProps) => {
         closeModal();
         toast.success('Tous les mots ont été ajoutés avec succès');
       })
-      .catch(error => toast.error('Une erreur inconnue est survenue'));
+      .catch(() => toast.error('Une erreur inconnue est survenue'));
   };
 
   useEffect(() => {
@@ -133,6 +127,4 @@ const AddMultipleWordsForm = ({ closeModal }: AddMultipleWordsFormProps) => {
       </div>
     </form>
   );
-}
-
-export default AddMultipleWordsForm;
+};

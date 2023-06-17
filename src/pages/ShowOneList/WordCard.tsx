@@ -3,7 +3,7 @@ import { useToast } from '../../contexts/ToastContext';
 import { useUser } from '../../contexts/UserContext';
 import { WordWithId } from '../../types/word';
 
-import HorizontalBar from '../../components/HorizontalBar/HorizontalBar';
+import { HorizontalBar } from '../../components/HorizontalBar/HorizontalBar';
 
 interface WordCardProps {
   openWordForm: () => void;
@@ -12,16 +12,15 @@ interface WordCardProps {
   closeModal: () => void;
 }
 
-const WordCard = (props: WordCardProps) => {
-
+export const WordCard = (props: WordCardProps) => {
   const {
     openWordForm,
     listId,
     wordToShow,
-    closeModal
+    closeModal,
   } = props;
 
-  let { toast } = useToast();
+  const { toast } = useToast();
   const { user } = useUser();
   const userId = user ? user.uid : null;
   let dateStr = null;
@@ -29,10 +28,10 @@ const WordCard = (props: WordCardProps) => {
   if (wordToShow.lastReview) {
     const date = new Date(wordToShow.lastReview);
 
-    let hours = date.getHours();
+    const hours = date.getHours();
     const hoursStr = hours < 10 ? `0${hours}` : hours.toString();
 
-    let minutes = date.getMinutes();
+    const minutes = date.getMinutes();
     const minutesStr = minutes < 10 ? `0${minutes}` : minutes.toString();
 
     dateStr = `Révisé le ${date.toLocaleDateString('fr-FR')} à ${hoursStr}h${minutesStr}`;
@@ -47,7 +46,7 @@ const WordCard = (props: WordCardProps) => {
         closeModal();
         toast.success('Le mot a bien été supprimé');
       })
-      .catch(error => toast.error('Une erreur inconnue est survenue'));
+      .catch(() => toast.error('Une erreur inconnue est survenue'));
   };
 
   return (
@@ -56,7 +55,7 @@ const WordCard = (props: WordCardProps) => {
       <p className='translation'>Français : { wordToShow.translation }</p>
 
       <HorizontalBar />
-      <p className='time'>{ dateStr ? dateStr : 'Pas encore révisé' }</p>
+      <p className='time'>{ dateStr ?? 'Pas encore révisé' }</p>
       <HorizontalBar />
 
       <div className='bottom'>
@@ -71,6 +70,4 @@ const WordCard = (props: WordCardProps) => {
       </div>
     </div>
   );
-}
-
-export default WordCard;
+};

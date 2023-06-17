@@ -1,18 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 
 interface ListFormProps {
-  handleSubmit: (e: React.FormEvent, listName: string, setListNameError: React.Dispatch<React.SetStateAction<string | null>>) => void;
+  handleSubmit: (
+    e: React.FormEvent,
+    listName: string,
+    setListNameError: React.Dispatch<React.SetStateAction<string | null>>,
+  ) => void;
   listNameInitialValue?: string;
   closeForm: () => void;
   show: boolean;
 }
 
-const ListForm = ({ handleSubmit, listNameInitialValue = '', closeForm, show }: ListFormProps) => {
-
+export const ListForm = ({ handleSubmit, listNameInitialValue = '', closeForm, show }: ListFormProps) => {
   const [listName, setListName] = useState(listNameInitialValue);
   const [listNameError, setListNameError] = useState<string | null>(null);
 
-  let listNameInputRef = useRef<HTMLInputElement | null>(null);
+  const listNameInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') closeForm();
@@ -25,7 +28,7 @@ const ListForm = ({ handleSubmit, listNameInitialValue = '', closeForm, show }: 
   }, [show]);
 
   return (
-    <form onSubmit={e => handleSubmit(e, listName, setListNameError)} onKeyDown={handleKeyDown}>
+    <form onSubmit={e => handleSubmit(e, listName, setListNameError)}>
       <div>
         <input
           ref={listNameInputRef}
@@ -37,6 +40,7 @@ const ListForm = ({ handleSubmit, listNameInitialValue = '', closeForm, show }: 
           autoComplete='off'
           required
           type='text'
+          onKeyDown={handleKeyDown}
         />
         <small className={listNameError ? 'invalid-message' : ''}>
           { listNameError }
@@ -51,6 +55,4 @@ const ListForm = ({ handleSubmit, listNameInitialValue = '', closeForm, show }: 
       </button>
     </form>
   );
-}
-
-export default ListForm;
+};

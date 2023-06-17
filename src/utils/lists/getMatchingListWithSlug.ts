@@ -7,15 +7,14 @@ import { ListWithId, Lists } from '../../types/list';
  * @return return either the matching list or null if no list matched
  */
 export const getMatchingListWithSlug = (slug: string, lists: Lists): ListWithId | null => {
-
   if (!lists) return null;
 
-  let matchingListKey = Object
+  const matchingListKey = Object
     .keys(lists)
     .find(key => {
       const list = lists[key];
       if (!list) return false;
-      return list.slug === slug
+      return list.slug === slug;
     });
 
   if (!matchingListKey) return null;

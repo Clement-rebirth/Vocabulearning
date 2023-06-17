@@ -1,15 +1,15 @@
 import { Lists } from '../../types/list';
-import { strContains } from "../strContains";
+import { strContains } from '../strContains';
 
-const getMatchingLists = (search: string, lists: Lists | null) => {
+export const getMatchingLists = (search: string, lists: Lists | null) => {
   if (!lists) return null;
 
-  let matchingLists: Lists = {};
+  const matchingLists: Lists = {};
 
   Object
     .keys(lists)
     .filter(key => {
-      let list = lists[key];
+      const list = lists[key];
       if (!list) return false;
       return strContains(list.name, search);
     })
@@ -22,5 +22,3 @@ const getMatchingLists = (search: string, lists: Lists | null) => {
   if (Object.keys(matchingLists).length === 0) return null;
   return matchingLists;
 };
-
-export default getMatchingLists;

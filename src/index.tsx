@@ -5,9 +5,9 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
-import App from './App';
-import Landing from './pages/Landing/Landing';
-import NotFound from './pages/NotFound/NotFound';
+import { App } from './App';
+import { Landing } from './pages/Landing/Landing';
+import { NotFound } from './pages/NotFound/NotFound';
 import { UserProvider } from './contexts/UserContext';
 import { ToastProvider } from './contexts/ToastContext';
 
@@ -16,7 +16,7 @@ import { ROUTES } from './constants';
 import './index.css';
 
 const root = createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement,
 );
 
 root.render(
@@ -36,7 +36,7 @@ root.render(
         </Router>
       </ToastProvider>
     </UserProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -3,16 +3,15 @@ import { signIn } from '../../../utils/firebase/authMethods';
 import { ROUTES } from '../../../constants';
 import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
-
+export const LoginForm = () => {
   const [loginFormData, setLoginFormData] = useState({
     email: '',
-    password: ''
+    password: '',
   });
 
   const [showPassword, setshowPassword] = useState(false);
 
-  let emailInputRef = useRef<HTMLInputElement | null>(null);
+  const emailInputRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,7 +23,7 @@ const LoginForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setLoginFormData({ ...loginFormData, [name]: value });
-  }
+  };
 
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,14 +34,14 @@ const LoginForm = () => {
         navigate(ROUTES.HOME, {
           replace: true,
           state: {
-            redirectAfterAuth: true
-          }
+            redirectAfterAuth: true,
+          },
         });
       })
-      .catch(error => {
+      .catch(() => {
         alert('Email ou mot de passe incorrect');
       });
-  }
+  };
 
   return (
     <form onSubmit={handleSignIn}>
@@ -69,19 +68,18 @@ const LoginForm = () => {
             name='password'
             type={ showPassword ? 'text' : 'password' }
             onChange={handleChange} />
-          <div
+          <button
             onClick={() => setshowPassword(!showPassword)}
             className='show-password-btn'
+            type='button'
           >
             <i className='eye-icon material-symbols-rounded'>
               { showPassword ? 'visibility' : 'visibility_off' }
             </i>
-          </div>
+          </button>
         </div>
       </div>
       <button>Se connecter</button>
     </form>
   );
-}
-
-export default LoginForm;
+};

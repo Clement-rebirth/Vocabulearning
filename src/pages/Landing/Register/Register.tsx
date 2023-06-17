@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-import GoogleAuth from '../GoogleAuth';
-import HorizontalBar from '../../../components/HorizontalBar/HorizontalBar';
-import RegisterForm from './RegisterForm';
+import { GoogleAuth } from '../GoogleAuth';
+import { HorizontalBar } from '../../../components/HorizontalBar/HorizontalBar';
+import { RegisterForm } from './RegisterForm';
 
 import { ROUTES } from '../../../constants';
 
-const Register = () => {
+export const Register = () => {
   return (
     <div className='register'>
       <h2 className='underline-title'><span>Inscription</span></h2>
@@ -20,6 +20,4 @@ const Register = () => {
       </p>
     </div>
   );
-}
-
-export default Register;
+};

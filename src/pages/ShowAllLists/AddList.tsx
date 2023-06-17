@@ -1,20 +1,19 @@
 import { useState } from 'react';
 
-import AddListForm from './AddListForm';
-import ShowAddListFormBtn from './ShowAddListFormBtn';
+import { AddListForm } from './AddListForm';
+import { ShowAddListFormBtn } from './ShowAddListFormBtn';
 
 interface AddListProps {
   setCloseCurrentFormFunc: (newCloseFunc: (() => void) | false) => void;
 }
 
-const AddList = ({ setCloseCurrentFormFunc }: AddListProps) => {
-
+export const AddList = ({ setCloseCurrentFormFunc }: AddListProps) => {
   const [addFormIsShow, setAddFormIsShow] = useState(false);
 
   const openAddForm = () => {
     setAddFormIsShow(true);
     setCloseCurrentFormFunc(() => setAddFormIsShow(false));
-  }
+  };
 
   const closeAddForm = () => {
     setAddFormIsShow(false);
@@ -27,6 +26,4 @@ const AddList = ({ setCloseCurrentFormFunc }: AddListProps) => {
       <ShowAddListFormBtn openAddForm={openAddForm} addFormIsShow={addFormIsShow} />
     </>
   );
-}
-
-export default AddList;
+};

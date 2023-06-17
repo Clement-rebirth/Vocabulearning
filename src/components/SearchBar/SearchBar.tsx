@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
-import ClearBtn from './ClearBtn';
-import MenuButton from '../MenuButton/MenuButton';
+import { ClearBtn } from './ClearBtn';
+import { MenuButton } from '../MenuButton/MenuButton';
 
 import './SearchBar.css';
 
@@ -13,8 +13,7 @@ interface SearchBarProps {
   placeholderText: string;
 }
 
-const SearchBar = (props: SearchBarProps) => {
-
+export const SearchBar = (props: SearchBarProps) => {
   const {
     openMenu,
     search,
@@ -26,7 +25,7 @@ const SearchBar = (props: SearchBarProps) => {
   const searchInput = useRef<HTMLInputElement | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let wordToSearch = e.target.value;
+    const wordToSearch = e.target.value;
     setSearch(wordToSearch);
   };
 
@@ -68,6 +67,4 @@ const SearchBar = (props: SearchBarProps) => {
       </div>
     </div>
   );
-}
-
-export default SearchBar;
+};

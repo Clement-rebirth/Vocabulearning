@@ -22,14 +22,14 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     // if user hasn't been loaded
-    if (!user) return;
+    if (!user) return undefined;
 
     const db = getDatabase();
     const userListsRef = ref(db, `wordLists/${user.uid}`);
 
     // fetch user's wordLists and add a listener on it
     return onValue(userListsRef, snapshot => {
-      let data = snapshot.val();
+      const data = snapshot.val();
       setLists(data);
       setListsLoading(false);
     });
@@ -40,7 +40,7 @@ export const ListsProvider = ({ children }: { children: React.ReactNode }) => {
       { children }
     </ListsContext.Provider>
   );
-}
+};
 
 export const useLists = () => {
   const context = useContext(ListsContext);

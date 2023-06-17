@@ -2,8 +2,8 @@ import { useSearch } from '../../contexts/SearchContext';
 import { Lists } from '../../types/list';
 import { reverseObject } from '../../utils/reverseObject';
 
-import ListContainer from './ListContainer';
-import NoListsToShow from './NoListsToShow';
+import { ListContainer } from './ListContainer';
+import { NoListsToShow } from './NoListsToShow';
 
 interface AllListsProps {
   lists: Lists | null;
@@ -12,7 +12,9 @@ interface AllListsProps {
   searchMode: boolean;
 }
 
-const AllLists = ({ lists, openList, setCloseCurrentFormFunc, searchMode }: AllListsProps) => {
+export const AllLists = ({
+  lists, openList, setCloseCurrentFormFunc, searchMode,
+}: AllListsProps) => {
   const { matchingLists, search } = useSearch();
 
   const noLists = !lists && !searchMode;
@@ -31,7 +33,7 @@ const AllLists = ({ lists, openList, setCloseCurrentFormFunc, searchMode }: AllL
         return (
           <ListContainer
             key={key}
-            list={{...list, id: key}}
+            list={{ ...list, id: key }}
             openList={openList}
             setCloseCurrentFormFunc={setCloseCurrentFormFunc}
           />
@@ -41,6 +43,4 @@ const AllLists = ({ lists, openList, setCloseCurrentFormFunc, searchMode }: AllL
       <NoListsToShow noSearchResult={noSearchResult} noLists={noLists} search={search} />
     </div>
   );
-}
-
-export default AllLists;
+};

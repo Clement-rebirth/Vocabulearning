@@ -1,12 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 
-import Toasts from '../components/Toasts/Toasts';
-
-interface ToastContextValues {
-  setToasts: React.Dispatch<React.SetStateAction<Toast[]>>;
-}
-
-const ToastContext = createContext<ToastContextValues | null>(null);
+import { Toasts } from '../components/Toasts/Toasts';
 
 type Status = 'success' | 'error';
 
@@ -17,6 +11,12 @@ export interface Toast {
   close: () => void;
 }
 
+interface ToastContextValues {
+  setToasts: React.Dispatch<React.SetStateAction<Toast[]>>;
+}
+
+const ToastContext = createContext<ToastContextValues | null>(null);
+
 export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
@@ -26,7 +26,7 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
       <Toasts toasts={toasts} />
     </ToastContext.Provider>
   );
-}
+};
 
 export const useToast = () => {
   const context = useContext(ToastContext);

@@ -6,14 +6,13 @@ interface OptionsBarProps {
   toggleShowRightPart: () => void;
 }
 
-const OptionsBar = (props: OptionsBarProps) => {
-
+export const OptionsBar = (props: OptionsBarProps) => {
   const {
     invertWordWithTrad,
     toggleInvertWordWithTrad,
     openWordForm,
     showRightPart,
-    toggleShowRightPart
+    toggleShowRightPart,
   } = props;
 
   return (
@@ -39,6 +38,4 @@ const OptionsBar = (props: OptionsBarProps) => {
       </button>
     </div>
   );
-}
-
-export default OptionsBar;
+};
